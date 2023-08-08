@@ -11,7 +11,7 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
     return <>
         <Header />
-        <main className={literata.className}>
+        <main className={`${literata.className} h-screen`}>
             {children}
             </main>
     </>

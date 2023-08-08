@@ -10,7 +10,8 @@ const config: Config = {
     screens: {
       sm: '480px',
       md: '768px',
-      lg: '1280px',
+      lg: '1000px',
+      xl: '1440px',
     },
     container: {
       center: true,
@@ -24,8 +25,10 @@ const config: Config = {
       colors: {
         brand: '#ef820f',
         current: 'currentColor',
+        error: '#f25137',
         transparent: 'transparent',
         white: '#ffffff',
+        semiPale: '#3c4959',
       },
       fontFamily: {
         literata: ['literata'],

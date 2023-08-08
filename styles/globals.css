@@ -19,7 +19,3 @@
 body {
   color: rgb(var(--foreground-rgb));
 }
-
-header {
-  font-family: var(--literata);
-}
