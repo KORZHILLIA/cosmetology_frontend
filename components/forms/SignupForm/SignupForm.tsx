@@ -1,9 +1,14 @@
 import { useForm } from 'react-hook-form';
 
+import useAppDispatch from '@/hooks/useAppDispatch';
+
+import { emailRegexp, passwordRegexp } from '@/constants/regexp';
+import { signupNewUser } from '@/redux/auth/auth-operations';
+
 import Input from '@/components/shared/Input/Input';
 import Button from '@/components/shared/Button/Button';
 
-interface SignupFormInputs {
+export interface SignupFormInputs {
     name: string;
     email: string;
     password: string;
@@ -11,13 +16,19 @@ interface SignupFormInputs {
 
 export default function SignupForm() {
 
+    const dispatch = useAppDispatch();
+
+    const formSubmit = async (formData: SignupFormInputs) => {
+        dispatch(signupNewUser(formData));
+    };
+
     const {handleSubmit, register, formState: {errors}} = useForm<SignupFormInputs>({mode: 'onSubmit'});
-    return (<form className='max-w-[414px] mx-auto pt-6 flex flex-col gap-y-1'>
+    return (<form className='max-w-[414px] mx-auto pt-6 flex flex-col gap-y-1' onSubmit={handleSubmit(formSubmit)}>
         <Input label='Name' type='text' register={register('name', {
             required: 'Required',
             validate: {
                 testValue: (value: string) => {
-                    const regexp = /[a-fA-Fа-яА-Я0-9]{5,20}/;
+                    const regexp = /[a-zA-Zа-яА-Я0-9]{4,20}/;
                     return regexp.test(value) || 'Please follow format';
                 }
             }
@@ -26,16 +37,16 @@ export default function SignupForm() {
             required: 'Required',
             validate: {
                 testValue: (value: string) => {
-                    const regexp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+                    const regexp = emailRegexp;
                     return regexp.test(value) || 'Please follow format';
                 }
             }
         })} error={errors.email?.message} />
-        <Input label='Password' type='text' register={register('password', {
+        <Input label='Password' type='password' register={register('password', {
             required: 'Required',
             validate: {
                 testValue: (value: string) => {
-                    const regexp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}$/;
+                    const regexp = passwordRegexp;
                     return regexp.test(value) || 'Please follow format';
                 }
             }
