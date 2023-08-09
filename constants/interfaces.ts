@@ -9,3 +9,9 @@ export interface ReduxUserState {
   loading: boolean;
   error: null | string;
 }
+
+export interface AxiosErrorResponseData {
+  error: string;
+  message: string;
+  statusCode: number;
+}

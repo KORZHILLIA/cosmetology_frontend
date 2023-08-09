@@ -9,7 +9,7 @@ interface AuthLayoutProps {
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
     return <div className="container py-6 md:flex items-center gap-x-14 lg:gap-x-20 xl:gap-x-32">
-        <div className="hidden md:block relative w-1/2 h-[560px]">
+        <div className="hidden md:block relative w-1/2 h-[560px] rounded-lg overflow-hidden">
             <Image className="object-cover" src={authImg} fill sizes='100vw' priority alt='' />
         </div>
         <div>

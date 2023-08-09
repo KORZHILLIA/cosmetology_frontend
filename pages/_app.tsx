@@ -1,16 +1,13 @@
 import { Provider } from 'react-redux';
-
 import type { AppProps } from 'next/app';
-// import { wrapper } from '@/redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
-import { store } from '@/redux/store';
+import { store, persistor } from '@/redux/store';
 
 import RootLayout from '@/components/layouts/RootLayout/RootLayout';
 
 import '@/styles/globals.css';
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Provider store={store}><RootLayout><Component {...pageProps} /></RootLayout></Provider>
+  return <Provider store={store}><PersistGate loading={null} persistor={persistor}><RootLayout><Component {...pageProps} /></RootLayout></PersistGate></Provider>
 };
-
-// export default wrapper.withRedux(App);
