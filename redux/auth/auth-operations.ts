@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
-import extractAxiosErrorMessage from '@/helpers/extractAxiosErrorMessage';
-import { signup, signin } from '@/service/externalApi';
+import extractAxiosError from '@/helpers/extractAxiosError';
+import { signup, signin, getCurrent } from '@/service/externalApi';
 
 import { SignupFormInputs } from '@/components/forms/SignupForm/SignupForm';
 import { SigninFormInputs } from '@/components/forms/SigninForm/SigninForm';
@@ -14,10 +14,10 @@ export const signupNewUser = createAsyncThunk(
       const { data, status } = await signup(userData);
       alert(data.message);
       return status === 201;
-    } catch (error: any) {
+    } catch (error) {
       const axiosError = error as AxiosError;
-      const errorMessage = extractAxiosErrorMessage(axiosError);
-      return rejectWithValue(errorMessage);
+      const { status, message } = extractAxiosError(axiosError);
+      return rejectWithValue({ status, message });
     }
   }
 );
@@ -31,8 +31,26 @@ export const signinUser = createAsyncThunk(
       return data;
     } catch (error) {
       const axiosError = error as AxiosError;
-      const errorMessage = extractAxiosErrorMessage(axiosError);
-      return rejectWithValue(errorMessage);
+      if (axiosError.response?.status === 400) {
+        alert('Wrong password');
+      }
+      const { status, message } = extractAxiosError(axiosError);
+      return rejectWithValue({ status, message });
+    }
+  }
+);
+
+export const getCurrentUser = createAsyncThunk(
+  'auth/getCurrent',
+
+  async (accessToken: string, { rejectWithValue }) => {
+    try {
+      const data = await getCurrent(accessToken);
+      return data;
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      const { status, message } = extractAxiosError(axiosError);
+      return rejectWithValue({ status, message });
     }
   }
 );

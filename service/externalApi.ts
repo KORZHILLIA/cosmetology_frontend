@@ -26,8 +26,8 @@ export const signin = async (userData: SigninFormInputs) => {
   return data;
 };
 
-export const getCurrent = async () => {
-  console.log('haha');
+export const getCurrent = async (accessToken: string) => {
+  setToken(accessToken);
   const { data } = await instance('/users/current');
   return data;
 };

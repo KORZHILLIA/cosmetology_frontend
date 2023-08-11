@@ -1,3 +1,14 @@
+import { ReactNode } from 'react';
+
+export interface LayoutProps {
+  children: ReactNode;
+}
+
+export interface ExtractedAxiosError {
+  status: number;
+  message: string;
+}
+
 export interface ReduxUserState {
   name: string;
   email: string;
@@ -7,7 +18,7 @@ export interface ReduxUserState {
   futureVisitDates: number[];
   pastVisitDates: number[];
   loading: boolean;
-  error: null | string;
+  error: null | ExtractedAxiosError;
 }
 
 export interface AxiosErrorResponseData {

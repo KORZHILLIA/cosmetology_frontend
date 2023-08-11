@@ -1,13 +1,11 @@
 import { ReactNode } from "react";
 import Image from "next/image";
 
+import type { LayoutProps } from "@/constants/interfaces";
+
 import authImg from '@/public/assets/img/authImg.jpg';
 
-interface AuthLayoutProps {
-    children: ReactNode;
-}
-
-export default function AuthLayout({ children }: AuthLayoutProps) {
+export default function AuthLayout({ children }: LayoutProps) {
     return <div className="container py-6 md:flex items-center gap-x-14 lg:gap-x-20 xl:gap-x-32">
         <div className="hidden md:block relative w-1/2 h-[560px] rounded-lg overflow-hidden">
             <Image className="object-cover" src={authImg} fill sizes='100vw' priority alt='' />

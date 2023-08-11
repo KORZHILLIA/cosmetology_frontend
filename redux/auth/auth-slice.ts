@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
 
-import { signupNewUser, signinUser } from './auth-operations';
+import { signupNewUser, signinUser, getCurrentUser } from './auth-operations';
 
-import { ReduxUserState } from '@/constants/interfaces';
+import { ReduxUserState, ExtractedAxiosError } from '@/constants/interfaces';
 
 const initialState: ReduxUserState = {
   accessToken: '',
@@ -36,7 +36,7 @@ const authSlice = createSlice({
       })
       .addCase(signupNewUser.rejected, (state, { payload }) => {
         state.loading = false;
-        state.error = payload as string;
+        state.error = payload as ExtractedAxiosError;
       })
       .addCase(signinUser.pending, state => {
         state.loading = true;
@@ -50,6 +50,28 @@ const authSlice = createSlice({
         state.futureVisitDates = futureVisitDates;
         state.pastVisitDates = pastVisitDates;
         state.accessToken = accessToken;
+      })
+      .addCase(signinUser.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload as ExtractedAxiosError;
+      })
+      .addCase(getCurrentUser.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
+        const { name, email, isVerified, accessToken, futureVisitDates, pastVisitDates } = payload;
+        state.loading = false;
+        state.name = name;
+        state.email = email;
+        state.isVerified = isVerified;
+        state.futureVisitDates = futureVisitDates;
+        state.pastVisitDates = pastVisitDates;
+        state.accessToken = accessToken;
+      })
+      .addCase(getCurrentUser.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload as ExtractedAxiosError;
       });
   },
 });
