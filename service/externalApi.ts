@@ -5,6 +5,7 @@ import { SigninFormInputs } from '@/components/forms/SigninForm/SigninForm';
 
 export const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  withCredentials: true,
 });
 
 const setToken = (token: string) => {
@@ -22,5 +23,11 @@ export const signup = async (userData: SignupFormInputs) => {
 
 export const signin = async (userData: SigninFormInputs) => {
   const { data } = await instance.post('/users/signin', { ...userData });
+  return data;
+};
+
+export const getCurrent = async () => {
+  console.log('haha');
+  const { data } = await instance('/users/current');
   return data;
 };
