@@ -50,6 +50,6 @@ export default function SigninForm() {
         <Input label='Password' type='password' register={register('password', {
             required: 'Required',
         })} error={errors.password?.message} />
-        <Button type='submit' text='Sign in' />
+        <Button type='submit' text='Sign in' styles='py-[14px] px-[12px] font-semibold text-white text-sm' />
     </form>);
 }

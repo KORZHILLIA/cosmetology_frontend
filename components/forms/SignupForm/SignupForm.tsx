@@ -50,6 +50,6 @@ export default function SignupForm() {
                 }
             }
         })} error={errors.password?.message} />
-        <Button type='submit' text='Sign up' />
+        <Button type='submit' text='Sign up' styles='py-[14px] px-[12px] font-semibold text-white text-sm' />
     </form>);
 }

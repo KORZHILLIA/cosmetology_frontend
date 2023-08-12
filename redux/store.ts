@@ -7,24 +7,24 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-  persistReducer,
+  // persistReducer,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+// import storage from 'redux-persist/lib/storage';
 
 // import { authSlice } from './auth/auth-slice';
 import rootReducer from './rootReducer';
 
-const persistConfig = {
-  key: 'root',
-  storage,
-};
+// const persistConfig = {
+//   key: 'root',
+//   storage,
+// };
 
 // const authReducer = authSlice.reducer;
-const persistedRootReducer = persistReducer(persistConfig, rootReducer);
+// const persistedRootReducer = persistReducer(persistConfig, rootReducer);
 
 const makeStore = () =>
   configureStore({
-    reducer: persistedRootReducer,
+    reducer: rootReducer,
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware({
         serializableCheck: {

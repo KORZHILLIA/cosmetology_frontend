@@ -1,9 +1,9 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import { authReducer } from './auth/auth-slice';
+import { authPersistReducer } from './auth/auth-slice';
 
 const rootReducer = combineReducers({
-  auth: authReducer,
+  auth: authPersistReducer,
 });
 
 export default rootReducer;

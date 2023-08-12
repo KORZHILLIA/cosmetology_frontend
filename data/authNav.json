@@ -1,0 +1,8 @@
+{
+    "authBtns": [
+        {"id": "signup", "text": "Signup",
+    "address": "signup"},
+    {"id": "signin", "text": "Signin",
+    "address": "signin"}
+    ]
+}

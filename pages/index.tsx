@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 
 import useAppDispatch from '@/hooks/useAppDispatch';
 import useAppSelector from '@/hooks/useAppSelector';
@@ -9,22 +8,16 @@ import { getCurrentUser } from '@/redux/auth/auth-operations';
 
 export default function Home() {
 
-  const {accessToken, error} = useAppSelector(getAuth);
+  const {isSigned, accessToken} = useAppSelector(getAuth);
   const dispatch = useAppDispatch();
-  const router = useRouter();
 
   useEffect(() => {
-    if (!accessToken) {
+    if (!accessToken || isSigned) {
       return;
     }
     dispatch(getCurrentUser(accessToken));
-    if (error?.status === 401) {
-      router.push('/auth/login');
-      return;
-    }
-    router.push('/cabinet');
-  }, [error]);
-  
+  }, []);
+
   return (
       <p>Home page</p>
   )

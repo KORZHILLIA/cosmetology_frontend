@@ -2,16 +2,17 @@ interface ButtonProps {
   type: 'button' | 'submit';
   text: string;
     centered?: boolean;
-    bgColor?: string;
+  bgColor?: string;
+  styles: string;
   onClick?: () => void;
 };
 
-export default function Button({type, text, centered, bgColor, onClick}: ButtonProps) {
+export default function Button({type, text, centered, bgColor, styles, onClick}: ButtonProps) {
     return (
     <button
       type={type}
       onClick={onClick}
-      className={`${centered ? 'mx-auto' : ''} min-w-[178px] border-0 flex justify-center items-center py-[14px] px-[12px] bg-${bgColor ? bgColor : 'brand'} transition-all rounded-lg font-semibold text-white text-xl leading-none}`}
+      className={`${centered ? 'mx-auto' : ''} min-w-[70px] border-0 flex justify-center items-center bg-${bgColor ? bgColor : 'brand'} transition-all rounded-lg leading-none ${styles}}`}
     >
       {text}
     </button>

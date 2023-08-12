@@ -9,11 +9,15 @@ export interface ExtractedAxiosError {
   message: string;
 }
 
+export type Role = null | 'user' | 'admin';
+
 export interface ReduxUserState {
+  role: Role;
   name: string;
   email: string;
   isEmailSent: boolean;
   isVerified: boolean;
+  isSigned: boolean;
   accessToken: string;
   futureVisitDates: number[];
   pastVisitDates: number[];
