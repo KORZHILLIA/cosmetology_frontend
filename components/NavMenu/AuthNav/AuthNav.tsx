@@ -22,7 +22,7 @@ export default function AuthNav({ onClick, btnArr }: AuthNavProps) {
     const {isSigned} = useAppSelector(getAuth);
     const router = useRouter();
     const btns = btnArr.map((btn) => <li key={btn.id}><Button type='button' text={btn.text} onClick={() => { onClick(); router.push(`/auth/${btn.address}`) }} styles="py-3 px-2 text-sm text-white font-semibold" /></li>);
-    const elements = <Link href='/cabinet'>Cabinet</Link>
+    const elements = <Button type='button' text='My Cabinet' onClick={() => { onClick();  router.push('/cabinet')}} styles="py-3 px-2 text-base text-semiPale font-semibold" />
     return (
         <ul className='flex flex-col md:flex-row justify-start md:justify-center items-start md:items-center gap-y-6 md:gap-y-0 md:gap-x-8 text-base md:text-2xl'>
             {!isSigned ? btns : elements}
