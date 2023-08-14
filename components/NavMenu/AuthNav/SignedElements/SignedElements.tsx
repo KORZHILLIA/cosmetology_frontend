@@ -22,7 +22,7 @@ export default function SignedElements({ onClick }: SignedElementsProps) {
     const linkText = role === 'user' ? 'My cabinet' : 'Control room';
 
     return (<li>
-        <Button type='button' text='My Cabinet' onClick={() => { onClick(); router.push('/cabinet') }} styles="md:hidden py-3 px-2 text-base text-semiPale font-semibold" />
+        <Button type='button' text={linkText} onClick={() => { onClick(); router.push('/cabinet') }} styles="md:hidden py-3 px-2 text-base text-semiPale font-semibold" />
         <div className="hidden md:block md:p-3 md:flex md:gap-x-2 md:bg-slate-400 rounded-lg text-white">
             <UserNameAndSignout userName={name} userEmail={email} />
             <Link href={linkAddress}>{linkText}</Link>

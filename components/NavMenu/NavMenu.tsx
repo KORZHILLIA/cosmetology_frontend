@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import AuthNav from './AuthNav/AuthNav';
-import Button from '../shared/Button/Button';
 
 import authNav from '@/data/authNav.json';
 
