@@ -10,6 +10,7 @@ import { getAuth } from '@/redux/auth/auth-selectors';
 
 import SigninPage from '@/pages/auth/signin';
 import { CabinetPage } from '@/pages/cabinet';
+import Spinner from '@/components/shared/Spinner/Spinner';
 
 function withAdminAuth (Component: NextComponentType) {
     const WithAdminAuth = () => {
@@ -26,11 +27,6 @@ function withAdminAuth (Component: NextComponentType) {
             if (isSigned && isAdmin) {
                 return;
             }
-            if (isSigned && isUser) {
-                router.replace('/cabinet');
-                return;
-            } 
-            
             dispatch(getCurrentUser(accessToken));
             
             if (loading) {
@@ -48,7 +44,7 @@ function withAdminAuth (Component: NextComponentType) {
             }
         }, [loading]);
 
-        return (isSigned && isAdmin ? <Component /> : (isSigned && isUser ?  <CabinetPage /> : (!isSigned && loading ? <p>Loading...</p> : <SigninPage />)));
+        return (isSigned && isAdmin ? <Component /> : (isSigned && isUser ?  <CabinetPage /> : (!isSigned && loading ? <Spinner /> : <SigninPage />)));
     }
     return WithAdminAuth;
 };

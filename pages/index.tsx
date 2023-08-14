@@ -6,9 +6,11 @@ import useAppSelector from '@/hooks/useAppSelector';
 import { getAuth } from '@/redux/auth/auth-selectors';
 import { getCurrentUser } from '@/redux/auth/auth-operations';
 
+import Spinner from '@/components/shared/Spinner/Spinner';
+
 export default function Home() {
 
-  const {isSigned, accessToken} = useAppSelector(getAuth);
+  const {isSigned, accessToken, loading} = useAppSelector(getAuth);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -19,6 +21,6 @@ export default function Home() {
   }, []);
 
   return (
-      <p>Home page</p>
+      loading ? <Spinner /> : <p>Home page</p>
   )
 }

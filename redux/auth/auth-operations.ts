@@ -2,10 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 import extractAxiosError from '@/helpers/extractAxiosError';
-import { signup, signin, getCurrent } from '@/service/externalApi';
+import { signup, signin, getCurrent, signout } from '@/service/externalApi';
 
-import { SignupFormInputs } from '@/components/forms/SignupForm/SignupForm';
-import { SigninFormInputs } from '@/components/forms/SigninForm/SigninForm';
+import type { SignupFormInputs } from '@/components/forms/SignupForm/SignupForm';
+import type { SigninFormInputs } from '@/components/forms/SigninForm/SigninForm';
+import type { SignoutBody } from '@/constants/interfaces';
 
 export const signupNewUser = createAsyncThunk(
   'auth/signup',
@@ -47,6 +48,21 @@ export const getCurrentUser = createAsyncThunk(
     try {
       const data = await getCurrent(accessToken);
       return data;
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      const { status, message } = extractAxiosError(axiosError);
+      return rejectWithValue({ status, message });
+    }
+  }
+);
+
+export const signoutUser = createAsyncThunk(
+  'auth/signout',
+
+  async (emailData: SignoutBody, { rejectWithValue }) => {
+    try {
+      const data = await signout(emailData);
+      return data.status === 201;
     } catch (error) {
       const axiosError = error as AxiosError;
       const { status, message } = extractAxiosError(axiosError);

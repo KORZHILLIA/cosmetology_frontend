@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-import { SignupFormInputs } from '@/components/forms/SignupForm/SignupForm';
-import { SigninFormInputs } from '@/components/forms/SigninForm/SigninForm';
+import type { SignupFormInputs } from '@/components/forms/SignupForm/SignupForm';
+import type { SigninFormInputs } from '@/components/forms/SigninForm/SigninForm';
+import type { SignoutBody } from '@/constants/interfaces';
 
 export const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -30,4 +31,9 @@ export const getCurrent = async (accessToken: string) => {
   setToken(accessToken);
   const { data } = await instance('/users/current');
   return data;
+};
+
+export const signout = async (email: SignoutBody) => {
+  const result = await instance.post('/users/signout', { ...email });
+  return result;
 };

@@ -3,7 +3,7 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { HYDRATE } from 'next-redux-wrapper';
 
-import { signupNewUser, signinUser, getCurrentUser } from './auth-operations';
+import { signupNewUser, signinUser, getCurrentUser, signoutUser } from './auth-operations';
 
 import { ReduxUserState, ExtractedAxiosError } from '@/constants/interfaces';
 
@@ -57,6 +57,8 @@ const authSlice = createSlice({
           futureVisitDates,
           pastVisitDates,
         } = payload;
+        state.loading = false;
+        state.error = null;
         state.role = role;
         state.name = name;
         state.email = email;
@@ -85,8 +87,9 @@ const authSlice = createSlice({
           futureVisitDates,
           pastVisitDates,
         } = payload;
-        state.role = role;
         state.loading = false;
+        state.error = null;
+        state.role = role;
         state.name = name;
         state.email = email;
         state.isVerified = isVerified;
@@ -96,6 +99,17 @@ const authSlice = createSlice({
         state.accessToken = accessToken;
       })
       .addCase(getCurrentUser.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload as ExtractedAxiosError;
+      })
+      .addCase(signoutUser.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(signoutUser.fulfilled, () => {
+        return initialState;
+      })
+      .addCase(signoutUser.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload as ExtractedAxiosError;
       });

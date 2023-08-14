@@ -9,7 +9,8 @@ import { getCurrentUser } from '@/redux/auth/auth-operations';
 import { getAuth } from '@/redux/auth/auth-selectors';
 
 import SigninPage from '@/pages/auth/signin';
-import {AdminPage} from '@/pages/ctrlroom';
+import { AdminPage } from '@/pages/ctrlroom';
+import Spinner from '@/components/shared/Spinner/Spinner';
 
 function withUserAuth (Component: NextComponentType) {
     const WithUserAuth = () => {
@@ -41,9 +42,9 @@ function withUserAuth (Component: NextComponentType) {
                 router.replace('/auth/signin');
                 return;
             }
-        }, []);
+        }, [loading]);
 
-        return (isSigned && isUser ? <Component /> : (isSigned && isAdmin ?  <AdminPage /> : (!isSigned && loading ? <p>Loading...</p> : <SigninPage />)));
+        return (isSigned && isUser ? <Component /> : (isSigned && isAdmin ?  <AdminPage /> : (!isSigned && loading ? <Spinner /> : <SigninPage />)));
     }
     return WithUserAuth;
 };
