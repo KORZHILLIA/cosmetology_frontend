@@ -25,6 +25,12 @@ export interface ReduxUserState {
   error: null | ExtractedAxiosError;
 }
 
+export interface ReduxDatesState {
+  availableVisitDates: number[];
+  loading: boolean;
+  error: null | ExtractedAxiosError;
+}
+
 export interface AxiosErrorResponseData {
   error: string;
   message: string;
@@ -33,4 +39,9 @@ export interface AxiosErrorResponseData {
 
 export interface SignoutBody {
   email: string;
+}
+
+export interface NewDatesByAdminBody {
+  role: Role;
+  dates: number[];
 }
