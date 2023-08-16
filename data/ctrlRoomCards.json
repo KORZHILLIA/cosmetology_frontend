@@ -1,0 +1,16 @@
+{
+    "cards": [
+        {"headerText": "Calendar",
+        "icon": "calendar",
+    "infoText": "Choose the visit dates and times for your lovely clients!",
+    "linkLabel": "Choose visit dates",
+    "linkAddress": "/ctrlroom/calendar"
+    },
+     {"headerText": "All about visits",
+     "icon": "visits",
+    "infoText": "See all the visits dates and times, approve them, filter or remove it",
+    "linkLabel": "See visits",
+    "linkAddress": "/ctrlroom/visits"
+    }
+    ]
+}

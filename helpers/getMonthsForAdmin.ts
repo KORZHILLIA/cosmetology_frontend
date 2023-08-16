@@ -5,7 +5,7 @@ const getMonthsForAdmin = () => {
   const nextMonth = now.getMonth() + 1;
   const fromMonth = new Date(currentYear, currentMonth);
   const toMonth = new Date(currentYear, nextMonth);
-  return { fromMonth, toMonth };
+  return { now, fromMonth, toMonth };
 };
 
 export default getMonthsForAdmin;

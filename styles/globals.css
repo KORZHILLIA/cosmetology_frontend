@@ -18,4 +18,5 @@
 
 body {
   color: rgb(var(--foreground-rgb));
+  background-image: linear-gradient(180deg, #e6f6fe 0%, rgba(230, 246, 254, 0) 73.73%);
 }

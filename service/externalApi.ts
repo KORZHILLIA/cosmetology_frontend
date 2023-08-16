@@ -46,3 +46,9 @@ export const addNewDates = async (newDatesData: NewDatesByAdminBody) => {
   setToken(data?.accessToken);
   return data?.newVisitDates;
 };
+
+export const getAllDates = async () => {
+  const { data } = await instance('/dates/all');
+  setToken(data?.accessToken);
+  return data?.allAvailableVisitDates;
+};

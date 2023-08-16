@@ -25,8 +25,18 @@ export interface ReduxUserState {
   error: null | ExtractedAxiosError;
 }
 
+export interface AvailableVisitDate {
+  _id: string;
+  client: null | string;
+  isConfirmed: boolean;
+  visitDate: Date;
+  createdAt: Date;
+  updatedAt: Date;
+  expireAt: Date;
+}
+
 export interface ReduxDatesState {
-  availableVisitDates: number[];
+  availableVisitDates: AvailableVisitDate[];
   loading: boolean;
   error: null | ExtractedAxiosError;
 }

@@ -5,7 +5,10 @@ import useAppSelector from "@/hooks/useAppSelector";
 
 import { addNewDatesByAdmin } from "@/redux/dates/dates-operations";
 import { getAuth } from "@/redux/auth/auth-selectors";
+import { getAvailableDates } from "@/redux/dates/dates-selectors";
+import prepareVisitTimesToAdd from "@/helpers/prepareVisitTimesToAdd";
 import prepareVisitDatesToAdd from "@/helpers/prepareVisitDatesToAdd";
+import defineMatchingTimes from "@/helpers/defineMatchingTimes";
 
 import Button from "@/components/shared/Button/Button";
 
@@ -18,18 +21,14 @@ export default function VisitDatesToAdd({ date, closeFunc }: VisitDatesToAddProp
     const [times, setTimes] = useState<string[]>([]);
 
     const { role } = useAppSelector(getAuth);
+    const dates = useAppSelector(getAvailableDates);
     const dispatch = useAppDispatch();
 
     const initialHour = date?.getHours();
 
-    const finalVisitDatesArr = [];
+    const finalVisitDatesArr = prepareVisitTimesToAdd(initialHour as number);
 
-    for (let i = 10; i <= 19; i += 1) {
-        const id = i;
-        const time = initialHour as number + i;
-        const el = { id, time: time.toString() + ':00'};
-        finalVisitDatesArr.push(el);
-    };
+    const matchingTimes = defineMatchingTimes(dates, date as Date);
 
     const onTimeBtnClick = (time: string) => {
         const isIdxInState = times.includes(time);
@@ -55,7 +54,11 @@ export default function VisitDatesToAdd({ date, closeFunc }: VisitDatesToAddProp
         setTimes([]);
         closeFunc();
     }
-    const elements = finalVisitDatesArr.map(visit => <li key={visit.id} className={`w-[80px] p-2 flex justify-center items-center rounded-lg ${times.includes(visit.time) ? 'bg-zinc-600' : 'bg-neutral-400'} text-white cursor-pointer`} onClick={() => onTimeBtnClick(visit.time)}><span className="text-sm leading-none">{visit.time}</span></li>)
+    const elements = finalVisitDatesArr.map(visit => {
+        const isVisitTimeAlreadyBooked = matchingTimes.includes(visit.time);
+        const isVisitTimeAlreadyInState = times.includes(visit.time);
+        return <li key={visit.id} className={`w-[80px] p-2 flex justify-center items-center rounded-lg ${isVisitTimeAlreadyInState ? 'bg-zinc-600' : 'bg-neutral-400'} ${isVisitTimeAlreadyBooked && 'cursor-default pointer-events-none bg-zinc-900'} text-white cursor-pointer`} onClick={() => onTimeBtnClick(visit.time)}><span className="text-sm leading-none">{visit.time}</span></li>
+    });
     return (<div>
         <h2 className="text-center text-lg font-semibold">Choose the time</h2>
         <ul className="w-full pt-2 mb-2 flex justify-center flex-wrap gap-2">{elements}</ul>
