@@ -12,9 +12,9 @@ export default function Button({type, text, centered, bgColor, styles, onClick}:
     <button
       type={type}
       onClick={onClick}
-      className={`${centered ? 'mx-auto' : ''} min-w-[70px] border-0 flex justify-center items-center ${bgColor ? bgColor : 'bg-brand'} transition-all rounded-lg leading-none ${styles}`}
+      className={`block ${centered ? 'mx-auto' : ''} min-w-[70px] border-0 flex justify-center items-center ${bgColor ? bgColor : 'bg-brand'} transition-all rounded-lg leading-none ${styles}`}
     >
-      {text}
+      <div className="flex justify-center items-center">{text}</div>
     </button>
   );
 }

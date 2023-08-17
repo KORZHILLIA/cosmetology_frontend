@@ -1,3 +1,6 @@
 import type { RootState } from '../store';
 
-export const getAvailableDates = (state: RootState) => state.dates.availableVisitDates;
+export const getDates = (state: RootState) => {
+  const { availableVisitDates, loading, error } = state.dates;
+  return { availableVisitDates, loading, error };
+};

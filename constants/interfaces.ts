@@ -60,3 +60,8 @@ export interface DeleteDateByAdminBody {
   role: Role;
   dateID: string;
 }
+
+export interface ReserveDateByUser {
+  role: Role;
+  dateID: string;
+}

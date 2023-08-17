@@ -7,7 +7,7 @@ import useAppDispatch from "@/hooks/useAppDispatch";
 import useAppSelector from "@/hooks/useAppSelector";
 
 import { getAllAvailableVisitDates } from "@/redux/dates/dates-operations";
-import {getAvailableDates } from '@/redux/dates/dates-selectors';
+import {getDates } from '@/redux/dates/dates-selectors';
 import getMonthsForAdmin from "@/helpers/getMonthsForAdmin";
 import defineMatchingDates from "@/helpers/defineMatchingDates";
 
@@ -19,7 +19,7 @@ import 'react-day-picker/dist/style.css';
 export default function AdminCalendar() {
     const [selected, setSelected] = useState<Date | undefined>();
     const [isPopoverVisible, setIsPopoverVisible] = useState<boolean>(false);
-    const bookedDaysInRedux = useAppSelector(getAvailableDates);
+    const {availableVisitDates: bookedDaysInRedux} = useAppSelector(getDates);
     
     const dispatch = useAppDispatch();
 

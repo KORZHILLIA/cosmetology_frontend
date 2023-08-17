@@ -7,14 +7,16 @@ import useAppDispatch from '@/hooks/useAppDispatch';
 
 import { getCurrentUser } from '@/redux/auth/auth-operations';
 import { getAuth } from '@/redux/auth/auth-selectors';
+import { getDates } from '@/redux/dates/dates-selectors';
 
 import SigninPage from '@/pages/auth/signin';
 import { AdminPage } from '@/pages/ctrlroom';
 import Spinner from '@/components/shared/Spinner/Spinner';
 
-function withUserAuth (Component: NextComponentType) {
+export function withUserAuth (Component: NextComponentType) {
     const WithUserAuth = () => {
-        const { accessToken, isSigned, role, loading } = useAppSelector(getAuth);
+        const { accessToken, isSigned, role, loading: userLoading, error: userError } = useAppSelector(getAuth);
+        const { loading: datesLoading, error: datesError } = useAppSelector(getDates);
         
         const dispatch = useAppDispatch();
         const router = useRouter();
@@ -27,9 +29,13 @@ function withUserAuth (Component: NextComponentType) {
             if (isSigned && isUser) {
                 return;
             }
+            if (userError?.status === 401 || datesError?.status === 401 || !accessToken) {
+                router.replace('/auth/signin');
+                return;
+            }
             dispatch(getCurrentUser(accessToken));
 
-            if (loading) {
+            if (userLoading || datesLoading) {
                 firstRenderRef.current = false;
                 return;
             }
@@ -38,15 +44,13 @@ function withUserAuth (Component: NextComponentType) {
                 router.replace('/ctrlroom');
                 return;
             } 
-            if (!isSigned && !loading && !firstRenderRef.current) {
+            if (!isSigned && !userLoading && !firstRenderRef.current) {
                 router.replace('/auth/signin');
                 return;
             }
-        }, [loading]);
+        }, [userLoading, datesLoading]);
 
-        return (isSigned && isUser ? <Component /> : (isSigned && isAdmin ?  <AdminPage /> : (!isSigned && loading ? <Spinner /> : <SigninPage />)));
+        return (isSigned && isUser ? <Component /> : (isSigned && isAdmin ?  <AdminPage /> : (!isSigned && userLoading ? <Spinner /> : <SigninPage />)));
     }
     return WithUserAuth;
 };
-
-export default withUserAuth;

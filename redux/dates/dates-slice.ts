@@ -7,6 +7,7 @@ import {
   addNewDatesByAdmin,
   getAllAvailableVisitDates,
   deleteVisitDateByAdmin,
+  reserveVisitDateByUser,
 } from './dates-operations';
 
 import { ReduxDatesState, ExtractedAxiosError } from '@/constants/interfaces';
@@ -63,6 +64,23 @@ const datesSlice = createSlice({
         return state;
       })
       .addCase(deleteVisitDateByAdmin.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload as ExtractedAxiosError;
+      })
+      .addCase(reserveVisitDateByUser.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(reserveVisitDateByUser.fulfilled, (state, { payload }) => {
+        const { userId, reservedVisitDateID } = payload;
+        const requiredIdx = state.availableVisitDates.findIndex(
+          visit => visit._id === reservedVisitDateID
+        );
+        state.availableVisitDates[requiredIdx].client = userId;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(reserveVisitDateByUser.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload as ExtractedAxiosError;
       });

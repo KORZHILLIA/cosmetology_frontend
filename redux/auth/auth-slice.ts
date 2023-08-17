@@ -110,6 +110,10 @@ const authSlice = createSlice({
         return initialState;
       })
       .addCase(signoutUser.rejected, (state, { payload }) => {
+        const { status, message } = payload as ExtractedAxiosError;
+        if (status === 401) {
+          return { ...initialState, error: { status, message } };
+        }
         state.loading = false;
         state.error = payload as ExtractedAxiosError;
       });

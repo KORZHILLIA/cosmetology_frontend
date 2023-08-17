@@ -6,6 +6,7 @@ import type {
   SignoutBody,
   NewDatesByAdminBody,
   DeleteDateByAdminBody,
+  ReserveDateByUser,
 } from '@/constants/interfaces';
 
 export const instance = axios.create({
@@ -60,6 +61,13 @@ export const getAllDates = async () => {
 export const deleteDate = async (dateInfo: DeleteDateByAdminBody) => {
   const { dateID, role } = dateInfo;
   const { data } = await instance.delete(`/dates/delete/${dateID}`, { data: { role } });
+  setToken(data?.accessToken);
+  return data;
+};
+
+export const reserveDate = async (dateInfo: ReserveDateByUser) => {
+  const { dateID, role } = dateInfo;
+  const { data } = await instance.post(`/dates/reserve/${dateID}`, { role });
   setToken(data?.accessToken);
   return data;
 };

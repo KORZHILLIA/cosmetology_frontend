@@ -14,18 +14,21 @@ import Spinner from '@/components/shared/Spinner/Spinner';
 
 export function withAdminAuth (Component: NextComponentType) {
     const WithAdminAuth = () => {
-        console.log('haha');
-        const { accessToken, isSigned, role, loading } = useAppSelector(getAuth);
+        const { accessToken, isSigned, role, loading, error } = useAppSelector(getAuth);
         
         const dispatch = useAppDispatch();
         const router = useRouter();
         const firstRenderRef = useRef(true);
-
+        
         const isUser = role === 'user';
         const isAdmin = role === 'admin';
         
         useEffect(() => {
             if (isSigned && isAdmin) {
+                return;
+            }
+            if (error?.status === 401 || !accessToken) {
+                router.replace('/auth/signin');
                 return;
             }
             dispatch(getCurrentUser(accessToken));

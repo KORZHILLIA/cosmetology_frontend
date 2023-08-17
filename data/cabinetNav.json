@@ -1,0 +1,16 @@
+{
+    "links": [
+        {
+            "linkText": "All available dates",
+            "linkAddress": "/cabinet/allvisits"
+        },
+        {
+            "linkText": "My future dates",
+            "linkAddress": "/cabinet/myfuturevisits"
+        },
+        {
+            "linkText": "My previous dates",
+            "linkAddress": "/cabinet/mypastvisits"
+        }
+    ]
+}
