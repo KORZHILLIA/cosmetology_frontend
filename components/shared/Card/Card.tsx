@@ -16,10 +16,10 @@ export default function Card({headerText, infoText, Icon, linkLabel, linkAddress
             <Icon className='w-[48px] h-[48px] fill-brand' />
         </div>
         <h2 className='mb-[14px] text-2xl text-center font-medium'>{headerText}</h2>
-        <p className='mb-4 text-lg text-center'>{infoText}</p>
+        <p className='mb-4 text-lg text-center text-semiPale'>{infoText}</p>
         <div className='flex items-center gap-x-[10px]'>
             <Link className='flex items-center gap-x-2' href={linkAddress}>
-            <span className='text-base font-medium underline-offset-2 decoration-1'>{linkLabel}</span>
+            <span className='text-base font-medium underline underline-offset-2 decoration-[0.5px]'>{linkLabel}</span>
                 <ArrowRight className='w-[24px] h-[24px]' />
                 </Link>
         </div>

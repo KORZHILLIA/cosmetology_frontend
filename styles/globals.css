@@ -20,3 +20,27 @@ body {
   color: rgb(var(--foreground-rgb));
   background-image: linear-gradient(180deg, #e6f6fe 0%, rgba(230, 246, 254, 0) 73.73%);
 }
+
+.rdp {
+  --rdp-accent-color: #ef820f !important;
+  @media screen and (min-width: 768px) {
+    --rdp-cell-size: 60px !important;
+  }
+}
+
+.rdp-months {
+  justify-content: center;
+}
+
+.rdp-caption_label {
+  text-transform: capitalize;
+  @media screen and (min-width: 768px) {
+    font-size: 30px !important;
+  }
+}
+
+.rdp-cell {
+  @media screen and (min-width: 768px) {
+    font-size: 22px !important;
+  }
+}

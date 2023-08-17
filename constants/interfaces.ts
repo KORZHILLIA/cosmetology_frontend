@@ -55,3 +55,8 @@ export interface NewDatesByAdminBody {
   role: Role;
   dates: number[];
 }
+
+export interface DeleteDateByAdminBody {
+  role: Role;
+  dateID: string;
+}

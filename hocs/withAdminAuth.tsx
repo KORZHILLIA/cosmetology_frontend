@@ -12,8 +12,9 @@ import SigninPage from '@/pages/auth/signin';
 import { CabinetPage } from '@/pages/cabinet';
 import Spinner from '@/components/shared/Spinner/Spinner';
 
-function withAdminAuth (Component: NextComponentType) {
+export function withAdminAuth (Component: NextComponentType) {
     const WithAdminAuth = () => {
+        console.log('haha');
         const { accessToken, isSigned, role, loading } = useAppSelector(getAuth);
         
         const dispatch = useAppDispatch();
@@ -48,5 +49,3 @@ function withAdminAuth (Component: NextComponentType) {
     }
     return WithAdminAuth;
 };
-
-export default withAdminAuth;

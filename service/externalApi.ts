@@ -2,7 +2,11 @@ import axios from 'axios';
 
 import type { SignupFormInputs } from '@/components/forms/SignupForm/SignupForm';
 import type { SigninFormInputs } from '@/components/forms/SigninForm/SigninForm';
-import type { SignoutBody, NewDatesByAdminBody } from '@/constants/interfaces';
+import type {
+  SignoutBody,
+  NewDatesByAdminBody,
+  DeleteDateByAdminBody,
+} from '@/constants/interfaces';
 
 export const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -51,4 +55,11 @@ export const getAllDates = async () => {
   const { data } = await instance('/dates/all');
   setToken(data?.accessToken);
   return data?.allAvailableVisitDates;
+};
+
+export const deleteDate = async (dateInfo: DeleteDateByAdminBody) => {
+  const { dateID, role } = dateInfo;
+  const { data } = await instance.delete(`/dates/delete/${dateID}`, { data: { role } });
+  setToken(data?.accessToken);
+  return data;
 };
