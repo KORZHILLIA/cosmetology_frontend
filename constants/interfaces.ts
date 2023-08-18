@@ -11,19 +11,15 @@ export interface ExtractedAxiosError {
 
 export type Role = null | 'user' | 'admin';
 
-export interface ReduxUserState {
-  role: Role;
-  name: string;
-  email: string;
-  isEmailSent: boolean;
-  isVerified: boolean;
-  isSigned: boolean;
-  accessToken: string;
-  futureVisitDates: number[];
-  pastVisitDates: number[];
-  loading: boolean;
-  error: null | ExtractedAxiosError;
-}
+export type FutureVisitDate = {
+  _id: string;
+  visitDate: Date;
+  client: string;
+  isConfirmed: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  expireAt: Date;
+};
 
 export interface AvailableVisitDate {
   _id: string;
@@ -35,10 +31,19 @@ export interface AvailableVisitDate {
   expireAt: Date;
 }
 
-export interface ReduxDatesState {
-  availableVisitDates: AvailableVisitDate[];
+export interface ReduxUserState {
+  role: Role;
+  name: string;
+  email: string;
+  isEmailSent: boolean;
+  isVerified: boolean;
+  isSigned: boolean;
+  accessToken: string;
+  futureVisitDates: FutureVisitDate[];
+  pastVisitDates: number[];
   loading: boolean;
   error: null | ExtractedAxiosError;
+  availableVisitDates: AvailableVisitDate[];
 }
 
 export interface AxiosErrorResponseData {
@@ -61,7 +66,12 @@ export interface DeleteDateByAdminBody {
   dateID: string;
 }
 
-export interface ReserveDateByUser {
+export interface ReserveDateByUserBody {
+  role: Role;
+  dateID: string;
+}
+
+export interface RefuseDateByUserBody {
   role: Role;
   dateID: string;
 }

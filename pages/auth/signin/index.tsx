@@ -7,7 +7,6 @@ import { getAuth } from '@/redux/auth/auth-selectors';
 import AuthLayout from '@/components/layouts/AuthLayout/AuthLayout';
 import SigninForm from '@/components/forms/SigninForm/SigninForm';
 
-
 export default function SigninPage() {
     const { isSigned, role} = useAppSelector(getAuth);
     const router = useRouter();

@@ -7,7 +7,6 @@ import useAppDispatch from '@/hooks/useAppDispatch';
 
 import { getCurrentUser } from '@/redux/auth/auth-operations';
 import { getAuth } from '@/redux/auth/auth-selectors';
-import { getDates } from '@/redux/dates/dates-selectors';
 
 import SigninPage from '@/pages/auth/signin';
 import { AdminPage } from '@/pages/ctrlroom';
@@ -15,8 +14,7 @@ import Spinner from '@/components/shared/Spinner/Spinner';
 
 export function withUserAuth (Component: NextComponentType) {
     const WithUserAuth = () => {
-        const { accessToken, isSigned, role, loading: userLoading, error: userError } = useAppSelector(getAuth);
-        const { loading: datesLoading, error: datesError } = useAppSelector(getDates);
+        const { accessToken, isSigned, role, loading, error } = useAppSelector(getAuth);
         
         const dispatch = useAppDispatch();
         const router = useRouter();
@@ -29,13 +27,14 @@ export function withUserAuth (Component: NextComponentType) {
             if (isSigned && isUser) {
                 return;
             }
-            if (userError?.status === 401 || datesError?.status === 401 || !accessToken) {
+            if (error?.status === 401 || !accessToken) {
+                console.log('withUser works');
                 router.replace('/auth/signin');
                 return;
             }
             dispatch(getCurrentUser(accessToken));
-
-            if (userLoading || datesLoading) {
+            
+            if (loading) {
                 firstRenderRef.current = false;
                 return;
             }
@@ -44,13 +43,37 @@ export function withUserAuth (Component: NextComponentType) {
                 router.replace('/ctrlroom');
                 return;
             } 
-            if (!isSigned && !userLoading && !firstRenderRef.current) {
+            if (!isSigned && !loading && !firstRenderRef.current) {
                 router.replace('/auth/signin');
                 return;
             }
-        }, [userLoading, datesLoading]);
+        }, [loading]);
+        
+        // useEffect(() => {
+        //     console.log('start');
+        //     if (isSigned && isUser) {
+        //         console.log('user, ok');
+        //         return;
+        //     }
+        //     if (userError?.status === 401 || datesError?.status === 401 || !accessToken) {
+        //         console.log('no autorized');
+        //         router.replace('/auth/signin');
+        //         return;
+        //     }
 
-        return (isSigned && isUser ? <Component /> : (isSigned && isAdmin ?  <AdminPage /> : (!isSigned && userLoading ? <Spinner /> : <SigninPage />)));
+        //     dispatch(getCurrentUser(accessToken));
+
+        //     if (isSigned && isAdmin) {
+        //         console.log('admin');
+        //         router.replace('/ctrlroom');
+        //         return;
+        //     }
+        //     console.log(isSigned);
+        //     router.replace('/auth/signin');
+        // }, []);
+
+        return (isSigned && isUser ? <Component /> : (isSigned && isAdmin ?  <AdminPage /> : (!isSigned && loading ? <Spinner /> : <SigninPage />)));
+        // return (isSigned && isUser ? <Component /> : (isSigned && isAdmin ?  <AdminPage /> : <SigninPage />));
     }
     return WithUserAuth;
 };

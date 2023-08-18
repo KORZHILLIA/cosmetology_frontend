@@ -1,20 +1,23 @@
+import { useEffect } from 'react';
+
 import useAppDispatch from "@/hooks/useAppDispatch";
 import useAppSelector from "@/hooks/useAppSelector";
 
-import { getDates } from "@/redux/dates/dates-selectors";
 import { getAuth } from '@/redux/auth/auth-selectors';
-import { deleteVisitDateByAdmin } from '@/redux/dates/dates-operations';
+import { deleteVisitDateByAdmin, getAllAvailableVisitDates } from '@/redux/dates/dates-operations';
 
 import { Role } from "@/constants/interfaces";
 
 import Button from "@/components/shared/Button/Button";
 
 export default function AdminVisits() {
-    const {availableVisitDates: allVisits} = useAppSelector(getDates);
+    const {role, availableVisitDates: allVisits} = useAppSelector(getAuth);
 
     const dispatch = useAppDispatch();
 
-    const { role } = useAppSelector(getAuth)
+    useEffect(() => {
+        dispatch(getAllAvailableVisitDates());
+    }, []);
 
     const onRemoveBtnClick = (dateID: string, role: Role) => {
         dispatch(deleteVisitDateByAdmin({role, dateID}));

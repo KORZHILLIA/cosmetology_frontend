@@ -7,7 +7,7 @@ import { addNewDates, getAllDates, deleteDate, reserveDate } from '@/service/ext
 import type {
   NewDatesByAdminBody,
   DeleteDateByAdminBody,
-  ReserveDateByUser,
+  ReserveDateByUserBody,
 } from '@/constants/interfaces';
 
 export const addNewDatesByAdmin = createAsyncThunk(
@@ -55,11 +55,11 @@ export const deleteVisitDateByAdmin = createAsyncThunk(
 
 export const reserveVisitDateByUser = createAsyncThunk(
   'dates/reserve',
-  async (dateInfo: ReserveDateByUser, { rejectWithValue }) => {
+  async (dateInfo: ReserveDateByUserBody, { rejectWithValue }) => {
     try {
-      const { userId, reservedVisitDateID } = await reserveDate(dateInfo);
+      const { userId, reservedVisitDateID, futureVisitDates } = await reserveDate(dateInfo);
       alert('Successfully reserved. Wait for confirmation');
-      return { userId, reservedVisitDateID };
+      return { userId, reservedVisitDateID, futureVisitDates };
     } catch (error) {
       const axiosError = error as AxiosError;
       const { status, message } = extractAxiosError(axiosError);

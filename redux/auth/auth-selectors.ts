@@ -1,6 +1,9 @@
+import { createSelector } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
-export const getAuth = (state: RootState) => {
+const selectAuth = (state: RootState) => state.auth;
+
+export const getAuth = createSelector([selectAuth], auth => {
   const {
     role,
     name,
@@ -11,7 +14,8 @@ export const getAuth = (state: RootState) => {
     isSigned,
     error,
     loading,
-  } = state.auth;
+    availableVisitDates,
+  } = auth;
   return {
     role,
     name,
@@ -22,5 +26,6 @@ export const getAuth = (state: RootState) => {
     isSigned,
     error,
     loading,
+    availableVisitDates,
   };
-};
+});

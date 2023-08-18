@@ -2,11 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 import extractAxiosError from '@/helpers/extractAxiosError';
-import { signup, signin, getCurrent, signout } from '@/service/externalApi';
+import { signup, signin, getCurrent, signout, refuseDate } from '@/service/externalApi';
 
 import type { SignupFormInputs } from '@/components/forms/SignupForm/SignupForm';
 import type { SigninFormInputs } from '@/components/forms/SigninForm/SigninForm';
-import type { SignoutBody } from '@/constants/interfaces';
+import type { SignoutBody, RefuseDateByUserBody } from '@/constants/interfaces';
 
 export const signupNewUser = createAsyncThunk(
   'auth/signup',
@@ -63,6 +63,21 @@ export const signoutUser = createAsyncThunk(
     try {
       const data = await signout(emailData);
       return data.status === 201;
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      const { status, message } = extractAxiosError(axiosError);
+      return rejectWithValue({ status, message });
+    }
+  }
+);
+
+export const refuseDateByUser = createAsyncThunk(
+  'auth/refuseDate',
+
+  async (dateInfo: RefuseDateByUserBody, { rejectWithValue }) => {
+    try {
+      const data = await refuseDate(dateInfo);
+      return data.futureVisitDates;
     } catch (error) {
       const axiosError = error as AxiosError;
       const { status, message } = extractAxiosError(axiosError);
