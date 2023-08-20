@@ -1,10 +1,10 @@
+import extractDateParameters from './extractDateParameters';
+
 import { AvailableVisitDate } from '@/constants/interfaces';
 
 const defineMatchingDates = (datesFromRedux: AvailableVisitDate[]) => {
   const matchingDates = datesFromRedux.map(date => {
-    const year = new Date(date.visitDate).getFullYear();
-    const month = new Date(date.visitDate).getMonth();
-    const day = new Date(date.visitDate).getDate();
+    const { year, month, day } = extractDateParameters(date.visitDate);
     return new Date(year, month, day);
   });
   return matchingDates;

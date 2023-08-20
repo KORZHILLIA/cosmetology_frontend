@@ -11,6 +11,13 @@ export interface ExtractedAxiosError {
 
 export type Role = null | 'user' | 'admin';
 
+export type VisitCardType = 'admin' | 'clientGeneral' | 'clientPersonal';
+
+type Client = {
+  _id: string;
+  name: string;
+};
+
 export type FutureVisitDate = {
   _id: string;
   visitDate: Date;
@@ -23,7 +30,7 @@ export type FutureVisitDate = {
 
 export interface AvailableVisitDate {
   _id: string;
-  client: null | string;
+  client: null | Client;
   isConfirmed: boolean;
   visitDate: Date;
   createdAt: Date;
@@ -72,6 +79,11 @@ export interface ReserveDateByUserBody {
 }
 
 export interface RefuseDateByUserBody {
+  role: Role;
+  dateID: string;
+}
+
+export interface ConfirmDateByAdminBody {
   role: Role;
   dateID: string;
 }

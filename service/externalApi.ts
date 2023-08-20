@@ -8,6 +8,7 @@ import type {
   DeleteDateByAdminBody,
   ReserveDateByUserBody,
   RefuseDateByUserBody,
+  ConfirmDateByAdminBody,
 } from '@/constants/interfaces';
 
 export const instance = axios.create({
@@ -78,4 +79,12 @@ export const refuseDate = async (dateInfo: RefuseDateByUserBody) => {
   const { data } = await instance.post(`/dates/refuse/${dateID}`, { role });
   setToken(data?.accessToken);
   return data;
+};
+
+export const confirmDate = async (dateInfo: ConfirmDateByAdminBody) => {
+  const { dateID, role } = dateInfo;
+  const { data, status } = await instance.post(`dates/confirm/${dateID}`, { role });
+  setToken(data?.accessToken);
+  console.log(data);
+  return { data, status };
 };

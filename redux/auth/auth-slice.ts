@@ -16,6 +16,7 @@ import {
   getAllAvailableVisitDates,
   deleteVisitDateByAdmin,
   reserveVisitDateByUser,
+  confirmVisitDateByAdmin,
 } from '@/redux/dates/dates-operations';
 
 import { ReduxUserState, ExtractedAxiosError } from '@/constants/interfaces';
@@ -211,6 +212,22 @@ const authSlice = createSlice({
         if (status === 401) {
           return { ...initialState, error: { status, message } };
         }
+        state.loading = false;
+        state.error = payload as ExtractedAxiosError;
+      })
+      .addCase(confirmVisitDateByAdmin.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(confirmVisitDateByAdmin.fulfilled, (state, { payload }) => {
+        const { status, dateId } = payload;
+        const requiredIdx = state.availableVisitDates.findIndex(visit => visit._id === dateId);
+        const isConfirmed = status === 201;
+        state.availableVisitDates[requiredIdx].isConfirmed = isConfirmed;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(confirmVisitDateByAdmin.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload as ExtractedAxiosError;
       });

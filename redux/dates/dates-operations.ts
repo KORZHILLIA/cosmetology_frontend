@@ -2,12 +2,19 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 import extractAxiosError from '@/helpers/extractAxiosError';
-import { addNewDates, getAllDates, deleteDate, reserveDate } from '@/service/externalApi';
+import {
+  addNewDates,
+  getAllDates,
+  deleteDate,
+  reserveDate,
+  confirmDate,
+} from '@/service/externalApi';
 
 import type {
   NewDatesByAdminBody,
   DeleteDateByAdminBody,
   ReserveDateByUserBody,
+  ConfirmDateByAdminBody,
 } from '@/constants/interfaces';
 
 export const addNewDatesByAdmin = createAsyncThunk(
@@ -60,6 +67,22 @@ export const reserveVisitDateByUser = createAsyncThunk(
       const { userId, reservedVisitDateID, futureVisitDates } = await reserveDate(dateInfo);
       alert('Successfully reserved. Wait for confirmation');
       return { userId, reservedVisitDateID, futureVisitDates };
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      const { status, message } = extractAxiosError(axiosError);
+      return rejectWithValue({ status, message });
+    }
+  }
+);
+
+export const confirmVisitDateByAdmin = createAsyncThunk(
+  'dates/confirm',
+  async (dateInfo: ConfirmDateByAdminBody, { rejectWithValue }) => {
+    try {
+      const { data, status } = await confirmDate(dateInfo);
+      const { dateId, message } = data;
+      alert(message);
+      return { status, dateId };
     } catch (error) {
       const axiosError = error as AxiosError;
       const { status, message } = extractAxiosError(axiosError);
