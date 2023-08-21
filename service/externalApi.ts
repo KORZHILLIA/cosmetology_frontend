@@ -9,6 +9,7 @@ import type {
   ReserveDateByUserBody,
   RefuseDateByUserBody,
   ConfirmDateByAdminBody,
+  Role,
 } from '@/constants/interfaces';
 
 export const instance = axios.create({
@@ -85,6 +86,20 @@ export const confirmDate = async (dateInfo: ConfirmDateByAdminBody) => {
   const { dateID, role } = dateInfo;
   const { data, status } = await instance.post(`dates/confirm/${dateID}`, { role });
   setToken(data?.accessToken);
-  console.log(data);
   return { data, status };
+};
+
+export const getClients = async (role: Role) => {
+  const { data } = await instance('/users/all', { params: { role } });
+  setToken(data?.accessToken);
+  return data.users;
+};
+
+export const postConfirm = async (role: Role, userEmail: string, date: string) => {
+  const { data } = await instance.post(`/users/postconfirm/${userEmail}`, {
+    role,
+    visitDate: date,
+  });
+  setToken(data?.accessToken);
+  return data;
 };

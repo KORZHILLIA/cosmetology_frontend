@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import AuthNav from './AuthNav/AuthNav';
@@ -13,9 +12,6 @@ interface NavMenuProps {
 };
 
 export default function NavMenu({ isVisible, toggleFunc }: NavMenuProps) {
-
-    const router = useRouter();
-
     return (
         <nav className={`${isVisible ? 'right-0' : '-right-[100%]'} fixed md:static top-0 w-screen md:w-auto h-screen md:h-auto flex justify-end md:justify-center md:items-center z-10 md:z-0 transition-all duration-200 md:transition-none`}>
             <div onClick={toggleFunc} className='w-1/2 h-screen backdrop-blur-sm md:hidden'></div>

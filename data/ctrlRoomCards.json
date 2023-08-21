@@ -11,6 +11,13 @@
     "infoText": "See all the visits dates and times, approve them, filter or remove it",
     "linkLabel": "See visits",
     "linkAddress": "/ctrlroom/visits"
+    },
+        {"headerText": "All the clients",
+     "icon": "clients",
+    "infoText": "Look info of all your lovely clents",
+    "linkLabel": "Go to clients",
+    "linkAddress": "/ctrlroom/clients"
     }
+
     ]
 }

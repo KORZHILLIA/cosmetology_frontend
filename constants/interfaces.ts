@@ -18,6 +18,13 @@ type Client = {
   name: string;
 };
 
+export type ClientInfo = {
+  id: string;
+  name: string;
+  email: string;
+  pastVisitDates: PastVisitDate[];
+};
+
 export type FutureVisitDate = {
   _id: string;
   visitDate: Date;
@@ -26,6 +33,11 @@ export type FutureVisitDate = {
   createdAt: Date;
   updatedAt: Date;
   expireAt: Date;
+};
+
+export type PastVisitDate = {
+  date: string;
+  postConfirmed: boolean;
 };
 
 export interface AvailableVisitDate {
