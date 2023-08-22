@@ -76,8 +76,8 @@ export const refuseDateByUser = createAsyncThunk(
 
   async (dateInfo: RefuseDateByUserBody, { rejectWithValue }) => {
     try {
-      const data = await refuseDate(dateInfo);
-      return data.futureVisitDates;
+      const { futureVisitDates, pastVisitDates } = await refuseDate(dateInfo);
+      return { futureVisitDates, pastVisitDates };
     } catch (error) {
       const axiosError = error as AxiosError;
       const { status, message } = extractAxiosError(axiosError);

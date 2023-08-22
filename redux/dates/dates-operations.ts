@@ -64,9 +64,9 @@ export const reserveVisitDateByUser = createAsyncThunk(
   'dates/reserve',
   async (dateInfo: ReserveDateByUserBody, { rejectWithValue }) => {
     try {
-      const { userId, reservedVisitDateID, futureVisitDates } = await reserveDate(dateInfo);
+      const { userId, reservedVisitDateID, futureVisitDates, pastVisitDates } = await reserveDate(dateInfo);
       alert('Successfully reserved. Wait for confirmation');
-      return { userId, reservedVisitDateID, futureVisitDates };
+      return { userId, reservedVisitDateID, futureVisitDates, pastVisitDates };
     } catch (error) {
       const axiosError = error as AxiosError;
       const { status, message } = extractAxiosError(axiosError);

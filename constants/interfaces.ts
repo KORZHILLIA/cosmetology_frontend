@@ -36,7 +36,7 @@ export type FutureVisitDate = {
 };
 
 export type PastVisitDate = {
-  date: string;
+  date: Date;
   postConfirmed: boolean;
 };
 
@@ -59,7 +59,7 @@ export interface ReduxUserState {
   isSigned: boolean;
   accessToken: string;
   futureVisitDates: FutureVisitDate[];
-  pastVisitDates: number[];
+  pastVisitDates: PastVisitDate[];
   loading: boolean;
   error: null | ExtractedAxiosError;
   availableVisitDates: AvailableVisitDate[];

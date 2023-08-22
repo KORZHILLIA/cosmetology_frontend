@@ -95,11 +95,11 @@ export const getClients = async (role: Role) => {
   return data.users;
 };
 
-export const postConfirm = async (role: Role, userEmail: string, date: string) => {
-  const { data } = await instance.post(`/users/postconfirm/${userEmail}`, {
+export const postConfirm = async (role: Role, userEmail: string, date: Date) => {
+  const { data, status } = await instance.post(`/users/postconfirm/${userEmail}`, {
     role,
     visitDate: date,
   });
   setToken(data?.accessToken);
-  return data;
+  return status;
 };

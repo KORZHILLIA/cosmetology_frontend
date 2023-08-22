@@ -137,7 +137,9 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(refuseDateByUser.fulfilled, (state, { payload }) => {
-        state.futureVisitDates = payload;
+        const { futureVisitDates, pastVisitDates } = payload;
+        state.futureVisitDates = futureVisitDates;
+        state.pastVisitDates = pastVisitDates;
         state.loading = false;
         state.error = null;
       })
@@ -198,12 +200,13 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(reserveVisitDateByUser.fulfilled, (state, { payload }) => {
-        const { userId, reservedVisitDateID, futureVisitDates } = payload;
+        const { userId, reservedVisitDateID, futureVisitDates, pastVisitDates } = payload;
         const requiredIdx = state.availableVisitDates.findIndex(
           visit => visit._id === reservedVisitDateID
         );
         state.availableVisitDates[requiredIdx].client = userId;
         state.futureVisitDates = futureVisitDates;
+        state.pastVisitDates = pastVisitDates;
         state.loading = false;
         state.error = null;
       })
