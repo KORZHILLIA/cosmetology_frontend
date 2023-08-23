@@ -11,14 +11,14 @@ const config: Config = {
       sm: '480px',
       md: '768px',
       lg: '1000px',
-      xl: '1440px',
+      xl: '1280px',
     },
     container: {
       center: true,
       padding: {
         DEFAULT: '20px',
         md: '32px',
-        lg: '64px',
+        xl: '64px',
       },
     },
     extend: {
