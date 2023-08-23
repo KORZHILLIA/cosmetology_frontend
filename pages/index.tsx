@@ -8,6 +8,7 @@ import { getCurrentUser } from '@/redux/auth/auth-operations';
 
 import About from '@/sections/About/About';
 import Technologies from '@/sections/Technologies/Technologies';
+import Welcome from '@/sections/Welcome/Welcome';
 import Spinner from '@/components/shared/Spinner/Spinner';
 
 export default function Home() {
@@ -26,6 +27,7 @@ export default function Home() {
     <>
       <About />
       <Technologies />
+      <Welcome />
       {loading && <Spinner />}
     </>);
 }

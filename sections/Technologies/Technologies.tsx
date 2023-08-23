@@ -29,7 +29,7 @@ export default function Technologies() {
                     <div className="md:hidden">
                         <Slider><TechnologyCards /></Slider>
                     </div>
-                    <div className="hidden md:grid md:grid-rows-3 xl:grid-cols-3 xl:grid-rows-1 md:max-w-[600px] xl:max-w-full md:mx-auto">
+                    <div className="hidden md:grid md:gap-2 lg:gap-3 md:grid-rows-3 xl:grid-cols-3 xl:grid-rows-1 md:max-w-[600px] xl:max-w-full md:mx-auto">
                         <TechnologyCards />
                     </div>
                 </div>

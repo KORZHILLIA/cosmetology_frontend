@@ -18,7 +18,7 @@ export default function TechnologyCards() {
         }
     };
 
-    const elements = technologyCards.cards.map(card => <div key={card.headerText} className="keen-slider__slide p-3 xl:flex"><Card key={card.headerText} Icon={getIcon(card.icon)} headerText={card.headerText} infoText={card.infoText} linkLabel={card.linkLabel} linkAddress={card.linkAddress} /></div>);
+    const elements = technologyCards.cards.map(card => <div key={card.headerText} className="keen-slider__slide flex"><Card key={card.headerText} Icon={getIcon(card.icon)} headerText={card.headerText} infoText={card.infoText} linkLabel={card.linkLabel} linkAddress={card.linkAddress} /></div>);
 
     return elements;
 }
