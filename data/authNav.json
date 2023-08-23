@@ -1,8 +1,59 @@
 {
     "authBtns": [
-        {"id": "signup", "text": "Signup",
-    "address": "signup"},
-    {"id": "signin", "text": "Signin",
-    "address": "signin"}
+        {
+            "id": "signup",
+            "text": "Signup",
+            "address": "/auth/signup"
+        },
+        {
+            "id": "signin",
+            "text": "Signin",
+            "address": "/auth/signin"
+        }
+    ],
+    "adminNav": [
+        {
+            "id": "ctrlroom",
+            "text": "Control Room",
+            "address": "/ctrlroom"
+        },
+        {
+            "id": "calendar",
+            "text": "Calendar",
+            "address": "/ctrlroom/calendar"
+        },
+        {
+            "id": "clients",
+            "text": "Clients",
+            "address": "/ctrlroom/clients"
+        },
+        {
+            "id": "visits",
+            "text": "Visits",
+            "address": "/ctrlroom/visits"
+        }
+    ],
+    "userNav": [
+        {
+            "id": "cabinet",
+            "text": "Cabinet",
+            "address": "/cabinet"
+        },
+        {
+            "id": "allvisits",
+            "text": "Reserve visit",
+            "address": "/cabinet/allvisits"
+        },
+        {
+            "id": "myfuturevisits",
+            "text": "Future Visits",
+            "address": "/cabinet/myfuturevisits"
+        },
+        {
+            "id": "mypastvisits",
+            "text": "Previous Visits",
+            "address": "/cabinet/mypastvisits"
+        }
     ]
+
 }

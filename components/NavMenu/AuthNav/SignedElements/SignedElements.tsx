@@ -8,24 +8,44 @@ import { getAuth } from "@/redux/auth/auth-selectors";
 import Button from "@/components/shared/Button/Button";
 import UserNameAndSignout from "./UserNameAndSignout/UserNameAndSignout";
 
+interface NavInstance {
+    id: string;
+    text: string;
+    address: string;
+}
+
 interface SignedElementsProps {
     onClick: () => void;
+    adminArr: NavInstance[];
+    userArr: NavInstance[];
 }
 
 
-export default function SignedElements({ onClick }: SignedElementsProps) { 
+export default function SignedElements({ onClick, adminArr, userArr }: SignedElementsProps) { 
     const router = useRouter();
+    const pathName = router.pathname;
 
     const { name, email, role } = useAppSelector(getAuth);
+
+    const requiredArr = role === 'admin' ? adminArr : userArr;
     
     const linkAddress = role === 'user' ? '/cabinet' : '/ctrlroom';
     const linkText = role === 'user' ? 'My cabinet' : 'Control room';
 
-    return (<li>
-        <Button type='button' text={linkText} onClick={() => { onClick(); router.push(linkAddress) }} styles="md:hidden py-3 px-2 text-base text-semiPale font-semibold" />
-        <div className="hidden md:block md:p-3 md:flex md:gap-x-2 md:bg-slate-400 rounded-lg text-white">
+    const elements = requiredArr.map(instance => {
+        const isPathEqualToAdress = pathName === instance.address;
+        return (
+            <li key={instance.id} className={`md:hidden w-full py-3 px-2 ${isPathEqualToAdress ? 'text-brand bg-orange-50 border-l-2 border-l-brand' : 'bg-transparent'} cursor-pointer`}
+                onClick={() => { onClick();  router.push(instance.address)}}>
+                <p>{instance.text}</p>
+            </li>
+        );
+    });
+
+    return <ul className='pb-6 md:pb-0 flex flex-col md:flex-row justify-start md:justify-center items-start md:items-center gap-y-6 md:gap-y-0 md:gap-x-8 border-b md:border-b-0 border-b-zinc-400 text-base md:text-2xl'>
+        <li>
             <UserNameAndSignout userName={name} userEmail={email} />
-            <Link href={linkAddress}>{linkText}</Link>
-        </div>
-    </li>);
+        </li>
+        {elements}
+        </ul>;
 }

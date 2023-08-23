@@ -35,12 +35,14 @@ export default function UserNameAndSignout({ userName, userEmail }: UserNameAndS
         dispatch(signoutUser({email: userEmail}));
     }
 
-    return (<div className="relative pr-2 border-r border-r-zinc-800">
-        <div className="flex items-center gap-x-3 cursor-pointer" onClick={onSelectorClick}>
-            <p>{userName}</p>
-            <Selector className="w-[20px] h-[20px] translate-y-[3px] fill-white" />
+    return (<div className="mb-3 md:mb-0 p-2 md:p-3 bg-orange-50 md:bg-slate-400">
+        <div className="flex items-center md:gap-x-3 md:cursor-pointer" onClick={onSelectorClick}>
+            <p className='pr-2 md:pr-0 border-r border-r-zinc-800 md:border-0'>{userName}</p>
+                <span className='md:hidden block pl-2 text-brand' onClick={onSignoutClick}>Signout</span>
+            <Selector className="hidden md:block md:w-[20px] md:h-[20px] md:translate-y-[3px] fill-white" />
+            <p className='hidden md:block md:pl-3 md:border-l border-l-zinc-800'>Cabinet</p>
         </div>
-        <Popover id={id} open={open} anchorEl={anchorEl} onClose={handleClose}
+        <Popover className='hidden md:block' id={id} open={open} anchorEl={anchorEl} onClose={handleClose}
         transformOrigin={{vertical: 'top', horizontal: 'left'}} anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}>
             <p className={`p-2 flex items-center gap-x-3  ${literata.className} bg-slate-400 rounded-lg cursor-pointer`} onClick={onSignoutClick}>
                 <Signout className="w-[32px] h-[32px] fill-white" />

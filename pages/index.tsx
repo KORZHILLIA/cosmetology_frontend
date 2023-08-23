@@ -6,6 +6,7 @@ import useAppSelector from '@/hooks/useAppSelector';
 import { getAuth } from '@/redux/auth/auth-selectors';
 import { getCurrentUser } from '@/redux/auth/auth-operations';
 
+import About from '@/sections/About/About';
 import Spinner from '@/components/shared/Spinner/Spinner';
 
 export default function Home() {
@@ -21,6 +22,8 @@ export default function Home() {
   }, []);
 
   return (
-      loading ? <Spinner /> : <p>Home page</p>
-  )
+    <>
+      <About />
+      {loading && <Spinner />}
+    </>);
 }

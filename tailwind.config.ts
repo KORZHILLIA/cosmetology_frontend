@@ -29,6 +29,7 @@ const config: Config = {
         transparent: 'transparent',
         white: '#ffffff',
         semiPale: '#3c4959',
+        header: '#011632',
       },
       fontFamily: {
         literata: ['literata'],
