@@ -3,6 +3,8 @@ import Image from "next/image";
 import SectionHeader from "@/components/shared/SectionHeader/SectionHeader";
 import SectionSubheader from "@/components/shared/SectionSubheader/SectionSubheader";
 import Paragraph from "@/components/shared/Paragraph/Paragraph";
+import Slider from "@/components/shared/Slider/Slider";
+import TechnologyCards from "@/components/TechnologyCards/TechnologyCards";
 
 import technologyImg from '@/public/assets/img/technologyImg.jpg';
 
@@ -16,11 +18,19 @@ export default function Technologies() {
                     <div className="relative w-full lg:w-[340px] xl:w-[400px] h-[362px] lg:h-[396px] mb-[40px] lg:mb-0 ">
                         <Image className="object-cover" src={technologyImg} fill sizes='100vw' priority alt='' />
                     </div>
-                    <div className="lg:w-[60%]">
+                    <div className="pb-[60px] lg:w-[60%]">
                         <SectionSubheader text="The Future of Dentistry is Digital:" />
                         <Paragraph text="Dentists today already utilize software to capture insights in clinical decision-making. These practices will continue to develop to integrate AI algorithms that enable clinicians to find the best modalities for their patients." />
                         <Paragraph text="In the 21st century, digital radiographs and 3D imaging have become the standard of dental care. Using an intraoral scanner with digitized data for 3D dental impressions (vs. polyvinyl siloxane and rubber base impressions) for a dental crown is now commonplace." />
                         <Paragraph text="Artificial intelligence is laying the groundwork for the future of the dental industry. Dental robots can now perform functions such as filling cavities and cleaning or extracting teeth." />
+                    </div>
+                </div>                
+                <div className="p-[30px] bg-header rounded-lg">
+                    <div className="md:hidden">
+                        <Slider><TechnologyCards /></Slider>
+                    </div>
+                    <div className="hidden md:grid md:grid-rows-3 xl:grid-cols-3 xl:grid-rows-1 md:max-w-[600px] xl:max-w-full md:mx-auto">
+                        <TechnologyCards />
                     </div>
                 </div>
             </div>
