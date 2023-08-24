@@ -5,7 +5,6 @@ import useAppSelector from "@/hooks/useAppSelector";
 
 import { addNewDatesByAdmin } from "@/redux/dates/dates-operations";
 import { getAuth } from "@/redux/auth/auth-selectors";
-// import { getDates } from "@/redux/dates/dates-selectors";
 import prepareVisitTimesToAdd from "@/helpers/prepareVisitTimesToAdd";
 import prepareVisitDatesToAdd from "@/helpers/prepareVisitDatesToAdd";
 import defineMatchingTimes from "@/helpers/defineMatchingTimes";
@@ -25,6 +24,7 @@ export default function VisitDatesToAdd({ date, closeFunc }: VisitDatesToAddProp
     const dispatch = useAppDispatch();
 
     const initialHour = date?.getHours();
+    console.log({ date, initialHour });
 
     const finalVisitDatesArr = prepareVisitTimesToAdd(initialHour as number);
 
@@ -49,7 +49,9 @@ export default function VisitDatesToAdd({ date, closeFunc }: VisitDatesToAddProp
     const onOKBtnClick = () => {
         if (times.length) {
             const dates = prepareVisitDatesToAdd(date as Date, times);
-            dispatch(addNewDatesByAdmin({role, dates}));
+            console.log(dates);
+            return;
+            // dispatch(addNewDatesByAdmin({role, dates}));
         }
         setTimes([]);
         closeFunc();
