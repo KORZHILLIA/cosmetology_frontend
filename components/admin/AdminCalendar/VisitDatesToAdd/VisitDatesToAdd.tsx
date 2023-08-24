@@ -24,7 +24,6 @@ export default function VisitDatesToAdd({ date, closeFunc }: VisitDatesToAddProp
     const dispatch = useAppDispatch();
 
     const initialHour = date?.getHours();
-    console.log({ date, initialHour });
 
     const finalVisitDatesArr = prepareVisitTimesToAdd(initialHour as number);
 
