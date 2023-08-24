@@ -49,9 +49,7 @@ export default function VisitDatesToAdd({ date, closeFunc }: VisitDatesToAddProp
     const onOKBtnClick = () => {
         if (times.length) {
             const dates = prepareVisitDatesToAdd(date as Date, times);
-            console.log(dates);
-            return;
-            // dispatch(addNewDatesByAdmin({role, dates}));
+            dispatch(addNewDatesByAdmin({role, dates}));
         }
         setTimes([]);
         closeFunc();
