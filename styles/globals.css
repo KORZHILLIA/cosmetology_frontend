@@ -47,6 +47,7 @@ body {
 
 .rdp-caption_label {
   text-transform: capitalize;
+  z-index: 0 !important;
   @media screen and (min-width: 768px) {
     font-size: 30px !important;
   }

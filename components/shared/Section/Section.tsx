@@ -1,13 +1,14 @@
 import { LayoutProps } from "@/constants/interfaces";
 
 interface SectionProps {
-    styles?: string; 
+    styles?: string;
+    containerStyles?: string;
 }
 
-export default function Section({children, styles}: LayoutProps & SectionProps) {
+export default function Section({children, styles, containerStyles}: LayoutProps & SectionProps) {
     return (
         <section className={styles}>
-            <div className="container">
+            <div className={`container ${containerStyles}`}>
                 {children}
             </div>
         </section>

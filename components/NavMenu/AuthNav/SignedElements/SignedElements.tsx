@@ -44,7 +44,7 @@ export default function SignedElements({ onClick, adminArr, userArr }: SignedEle
 
     return <ul className='pb-6 md:pb-0 flex flex-col md:flex-row justify-start md:justify-center items-start md:items-center gap-y-1 md:gap-y-0 md:gap-x-8 border-b md:border-b-0 border-b-zinc-400 text-base md:text-2xl'>
         <li>
-            <UserNameAndSignout userName={name} userEmail={email} linkAddress={linkAddress} linkLabel={linkLabel} />
+            <UserNameAndSignout userName={name} userEmail={email} linkAddress={linkAddress} linkLabel={linkLabel} onClick={onClick} />
         </li>
         {elements}
         </ul>;

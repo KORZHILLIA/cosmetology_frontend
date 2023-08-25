@@ -35,15 +35,19 @@ export default function AdminCalendar() {
         setIsPopoverVisible(true);
     };
 
-    const closePopover = () => setIsPopoverVisible(false);
+    const closePopover = () => {
+        setIsPopoverVisible(false);
+        setSelected(undefined);
+    };
 
     const { now, toMonth } = getMonthsForAdmin();
+    
     const footer = <p className="mt-3 text-xl">{selected ? `You selected ${format(selected, 'PP')}` : 'Please select the day'}</p>
     
-    return <div className="relative w-full">
+    return <div className="relative w-full md:max-w-[600px] xl:max-w-[800px] mx-auto">
         <DayPicker mode="single" selected={selected} footer={footer} onSelect={onDayClick} fromDate={now}
             toMonth={toMonth} locale={uk} modifiers={{booked: matchingDates}} modifiersStyles={{booked: bookedStyles}} />
-        <div className={`absolute ${isPopoverVisible && selected ? 'scale-y-100 scale-x-100' : 'scale-y-0 scale-x-0'} top-0 left-0 w-[70%] md:w-[50%] h-[90%] p-2 border rounded-lg backdrop-blur-sm origin-top-left transition-all duration-[200ms] z-10`}>
+        <div className={`absolute ${isPopoverVisible && selected ? 'scale-y-100 scale-x-100' : 'scale-y-0 scale-x-0'} top-0 left-0 w-[70%] md:w-[80%] h-[90%] p-2 border rounded-lg backdrop-blur-sm origin-top-left transition-all duration-[200ms]`}>
             <VisitDatesToAdd date={selected} closeFunc={closePopover} />
         </div>
         </div>

@@ -48,19 +48,29 @@ export default function VisitDatesToAdd({ date, closeFunc }: VisitDatesToAddProp
     const onOKBtnClick = () => {
         if (times.length) {
             const dates = prepareVisitDatesToAdd(date as Date, times);
-            dispatch(addNewDatesByAdmin({role, dates}));
+            dispatch(addNewDatesByAdmin({ role, dates }));
         }
         setTimes([]);
         closeFunc();
-    }
+    };
+
+    const onCancelBtnClick = () => {
+        setTimes([]);
+        closeFunc();
+    };
+
     const elements = finalVisitDatesArr.map(visit => {
         const isVisitTimeAlreadyBooked = matchingTimes.includes(visit.time);
         const isVisitTimeAlreadyInState = times.includes(visit.time);
         return <li key={visit.id} className={`w-[80px] md:w-[100px] p-2 md:p-2 flex justify-center items-center rounded-lg ${isVisitTimeAlreadyInState ? 'bg-zinc-600' : 'bg-neutral-400'} ${isVisitTimeAlreadyBooked && 'cursor-default pointer-events-none bg-zinc-900'} text-white cursor-pointer`} onClick={() => onTimeBtnClick(visit.time)}><span className="text-sm md:text-xl leading-none">{visit.time}</span></li>
     });
+
     return (<div>
         <h2 className="text-center text-lg sm:text-2xl md:text-4xl font-semibold">Choose the time</h2>
-        <ul className="w-full pt-2 md:pt-6 mb-2 md:mb-4 flex justify-center flex-wrap gap-2">{elements}</ul>
-        <Button type='button' text='OK' centered styles="md:w-[100px] p-2 md:text-xl" onClick={onOKBtnClick} />
+        <ul className="w-full pt-2 md:pt-10 md:pt-6 mb-4 md:mb-6 flex justify-center flex-wrap gap-2">{elements}</ul>
+        <div className="flex justify-center gap-x-4">
+            <Button type='button' text='OK' styles="md:w-[100px] p-2 md:text-xl" onClick={onOKBtnClick} />
+            <Button type='button' text='Cancel' styles="md:w-[100px] p-2 md:text-xl" onClick={onCancelBtnClick} />
+        </div>
     </div>);
  }

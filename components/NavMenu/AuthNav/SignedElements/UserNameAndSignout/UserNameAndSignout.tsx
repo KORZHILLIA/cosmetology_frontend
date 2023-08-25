@@ -16,9 +16,10 @@ interface UserNameAndSignoutProps {
     userEmail: string;
     linkAddress: string;
     linkLabel: string;
+    onClick: () => void;
 }
 
-export default function UserNameAndSignout({ userName, userEmail, linkAddress, linkLabel}: UserNameAndSignoutProps) {
+export default function UserNameAndSignout({ userName, userEmail, linkAddress, linkLabel, onClick}: UserNameAndSignoutProps) {
     const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
 
     const onSelectorClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -39,6 +40,7 @@ export default function UserNameAndSignout({ userName, userEmail, linkAddress, l
 
     const onSignoutClick = () => {
         dispatch(signoutUser({ email: userEmail }));
+        onClick();
     };
 
         return (<div className="flex items-center md:gap-x-3 mb-3 md:mb-0 p-2 md:p-3 translate-x-[8px] md:translate-x-0 bg-orange-50">
