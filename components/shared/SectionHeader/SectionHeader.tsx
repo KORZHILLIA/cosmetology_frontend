@@ -2,7 +2,6 @@ import Underline from '@/public/assets/svg/underline.svg';
 
 interface SectionHeaderProps {
     text: string;
-    // isCentered?: boolean;
     isUnderline?: boolean;
     styles?: string;
 }

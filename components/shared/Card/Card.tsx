@@ -8,10 +8,11 @@ interface CardProps {
     Icon: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
     linkLabel: string;
     linkAddress: string;
+    styles?: string;
 }
 
-export default function Card({headerText, infoText, Icon, linkLabel, linkAddress}: CardProps) {
-    return <li className='py-4 px-8 flex flex-col items-center border bg-white rounded-lg'>
+export default function Card({headerText, infoText, Icon, linkLabel, linkAddress, styles}: CardProps) {
+    return <li className={`py-4 px-8 flex flex-col items-center border bg-white rounded-lg ${styles}`}>
         <div className='mb-5 p-4 flex justify-center items-center bg-slate-100 rounded-full'>
             <Icon className='w-[48px] h-[48px] fill-brand' />
         </div>

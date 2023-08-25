@@ -1,5 +1,7 @@
 import Image from "next/image";
+import { useMediaQuery } from "@mui/material";
 
+import Section from "@/components/shared/Section/Section";
 import SectionHeader from "@/components/shared/SectionHeader/SectionHeader";
 import SectionSubheader from "@/components/shared/SectionSubheader/SectionSubheader";
 import Paragraph from "@/components/shared/Paragraph/Paragraph";
@@ -9,9 +11,10 @@ import TechnologyCards from "@/components/TechnologyCards/TechnologyCards";
 import technologyImg from '@/public/assets/img/technologyImg.jpg';
 
 export default function Technologies() {
+    const isTablet = useMediaQuery('(min-width: 768px)');
+    
     return (
-        <section className="py-3 bg-white">
-            <div className="container">
+        <Section styles="py-3 bg-white">
                 <SectionHeader text="Latest Technology" styles='md:text-center' />
                 <Paragraph styles="md:text-center lg:mx-auto lg:mb-[60px] lg:max-w-[700px]" text="Thanks to major technological advancements, dentistry allows treating the most complex cases with less time and more efficiency." />
                 <div className="lg:flex lg:justify-between">
@@ -26,14 +29,11 @@ export default function Technologies() {
                     </div>
                 </div>                
                 <div className="p-[30px] bg-header rounded-lg">
-                    <div className="md:hidden">
-                        <Slider><TechnologyCards /></Slider>
-                    </div>
-                    <div className="hidden md:grid md:gap-2 lg:gap-3 md:grid-rows-3 xl:grid-cols-3 xl:grid-rows-1 md:max-w-[600px] xl:max-w-full md:mx-auto">
+                    {isTablet ? (<div className="grid md:gap-2 lg:gap-3 md:grid-rows-3 xl:grid-cols-3 xl:grid-rows-1 md:max-w-[600px] xl:max-w-full md:mx-auto">
                         <TechnologyCards />
-                    </div>
+                    </div>) :
+                    <Slider><TechnologyCards /></Slider>}
                 </div>
-            </div>
-        </section>
+        </Section>
     );
 }

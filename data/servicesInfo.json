@@ -1,0 +1,22 @@
+{
+    "services": [
+        {
+            "id": "1",
+            "icon": "tooth",
+            "headerText": "Root Canal Treatment",
+            "summaryText": "Root canal treatment (endodontics) is a dental procedure used to treat infection at the centre of a tooth."
+        },
+        {
+            "id": "2",
+            "icon": "implant",
+            "headerText": "Dental Implants",
+            "summaryText": "A dental implant is an artificial tooth root that’s placed into your jaw to hold a prosthetic tooth or bridge."
+        },
+        {
+            "id": "3",
+            "icon": "smile",
+            "headerText": "Cosmetic Dentist",
+            "summaryText": "Cosmetic dentistry is the branch of dentistry that focuses on improving the appearance of your smile."
+        }
+    ]
+}

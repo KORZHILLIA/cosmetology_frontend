@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import Card from "../shared/Card/Card";
 
 import Tooth from '@/public/assets/svg/tooth.svg';
@@ -18,7 +20,15 @@ export default function TechnologyCards() {
         }
     };
 
-    const elements = technologyCards.cards.map(card => <div key={card.headerText} className="keen-slider__slide flex"><Card key={card.headerText} Icon={getIcon(card.icon)} headerText={card.headerText} infoText={card.infoText} linkLabel={card.linkLabel} linkAddress={card.linkAddress} /></div>);
+    const elements = technologyCards.cards.map(card => {
+        return (
+            <div key={card.headerText} className="keen-slider__slide flex items-stretch px-1">
+                <Link href='/services'>
+                    <Card key={card.headerText} Icon={getIcon(card.icon)} headerText={card.headerText} infoText={card.infoText}
+                        linkLabel={card.linkLabel} linkAddress={card.linkAddress} styles="h-[100%]" />
+                </Link>
+            </div>);
+    });
 
     return elements;
 }

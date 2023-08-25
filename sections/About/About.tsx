@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import Section from "@/components/shared/Section/Section";
 import SectionHeader from "@/components/shared/SectionHeader/SectionHeader";
 import SectionSubheader from "@/components/shared/SectionSubheader/SectionSubheader";
 import Paragraph from "@/components/shared/Paragraph/Paragraph";
@@ -8,8 +9,7 @@ import aboutImg from '@/public/assets/img/aboutImg.jpg';
 
 export default function About() {
     return (
-        <section className="py-3">
-            <div className="container">
+        <Section styles="py-3" >
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between lg:gap-x-3">
                 <div className="lg:w-[60%]">
                     <SectionHeader text="Our Mission" isUnderline />
@@ -21,7 +21,6 @@ export default function About() {
                 <Image className="object-cover" src={aboutImg} fill sizes='100vw' priority alt='' />
                 </div>
             </div>
-        </div>
-        </section>
+        </Section>
         );
 }

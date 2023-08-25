@@ -19,7 +19,7 @@ export default function NotSignedBtns({ onClick, btnArr }: NotSignedBtnsProps) {
 
     const elements = btnArr.map(btn => {
         const isPathNameEqualToBtnAddress = pathName === btn.address;
-        return (<li key={btn.id}><Button type='button' text={btn.text} onClick={() => { onClick(); router.push(btn.address) }}
+        return (<li className="translate-x-[8px] md:translate-x-0" key={btn.id}><Button type='button' text={btn.text} onClick={() => { onClick(); router.push(btn.address) }}
             styles={`py-3 px-2 text-sm ${isPathNameEqualToBtnAddress ? 'text-semiPale' : 'text-white'} font-semibold`} bgColor={isPathNameEqualToBtnAddress ? 'bg-transparent' : ''} /></li>)
     });
     

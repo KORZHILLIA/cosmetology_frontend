@@ -1,6 +1,11 @@
-import { Literata } from 'next/font/google';
+import { Literata, Wix_Madefor_Display } from 'next/font/google';
 
 export const literata = Literata({
-  subsets: ['cyrillic'],
+  subsets: ['cyrillic', 'latin'],
+  display: 'swap',
+});
+
+export const wix = Wix_Madefor_Display({
+  subsets: ['cyrillic', 'latin'],
   display: 'swap',
 });
