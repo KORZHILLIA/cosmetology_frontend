@@ -34,6 +34,20 @@ body {
   }
 }
 
+textarea::-webkit-scrollbar {
+  width: 5px;
+}
+
+textarea::-webkit-scrollbar-track {
+  background-color: #ef820f;
+  border-radius: 8px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: #cfcfcf;
+  border-radius: 8px;
+  border: none;
+}
 .rdp {
   --rdp-accent-color: #ef820f !important;
   @media screen and (min-width: 768px) {

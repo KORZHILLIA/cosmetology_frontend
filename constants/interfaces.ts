@@ -11,6 +11,14 @@ export interface ExtractedAxiosError {
 
 export type Role = null | 'user' | 'admin';
 
+export interface ContactFormInputs {
+  name: string;
+  email: string;
+  phone: string;
+  isTelegram: boolean;
+  messageToSend: string;
+}
+
 export type VisitCardType = 'admin' | 'clientGeneral' | 'clientPersonal';
 
 type Client = {

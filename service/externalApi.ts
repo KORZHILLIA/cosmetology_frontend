@@ -3,6 +3,7 @@ import axios from 'axios';
 import type { SignupFormInputs } from '@/components/forms/SignupForm/SignupForm';
 import type { SigninFormInputs } from '@/components/forms/SigninForm/SigninForm';
 import type {
+  ContactFormInputs,
   SignoutBody,
   NewDatesByAdminBody,
   DeleteDateByAdminBody,
@@ -102,4 +103,25 @@ export const postConfirm = async (role: Role, userEmail: string, date: Date) => 
   });
   setToken(data?.accessToken);
   return status;
+};
+
+export const sendToTelegram = async (formData: ContactFormInputs) => {
+  const token = process.env.NEXT_PUBLIC_TELEGRAM_TOKEN;
+  const chat_id = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID;
+  const url = `https://api.telegram.org/bot${token}/sendMessage`;
+
+  const { name, phone, email, messageToSend } = formData;
+
+  const text = `
+  <b>Name: ${name}</b>
+  <b>Phone: ${phone}</b>
+  <b>${email ? email : null}</b>
+  <b>${messageToSend}</b>`;
+
+  const { data, status } = await axios.post(url, {
+    chat_id,
+    parse_mode: 'html',
+    text,
+  });
+  return { data, status };
 };

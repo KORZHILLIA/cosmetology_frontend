@@ -4,5 +4,5 @@ interface ParagraphProps {
 }
 
 export default function Paragraph({text, styles}: ParagraphProps) {
-    return (<p className={`mb-4 text-lg md:text-xl text-semiPale ${styles}`}>{text}</p>);
+    return (<p className={`mb-4 text-lg md:text-xl text-semiPale ${styles ? styles : ''}`}>{text}</p>);
 }
