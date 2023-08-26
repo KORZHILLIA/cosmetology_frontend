@@ -58,6 +58,13 @@ export interface AvailableVisitDate {
   expireAt: Date;
 }
 
+export type OfficeDescription = {
+  id: number;
+  icon: string;
+  headerText: string;
+  infoText: string;
+};
+
 export interface ReduxUserState {
   role: Role;
   name: string;

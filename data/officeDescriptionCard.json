@@ -1,0 +1,28 @@
+{
+    "cards": [
+        {
+            "id": 1,
+            "icon": "location",
+            "headerText": "Office Address",
+            "infoText": "1441 Morris Ave, Union, NJ 07083"
+        },
+        {
+            "id": 2,
+            "icon": "telephone",
+            "headerText": "Phone Number",
+            "infoText": "+380(67) 662-12-20"
+        },
+        {
+            "id": 3,
+            "icon": "email",
+            "headerText": "E-mail",
+            "infoText": "prombazis@ukr.net"
+        },
+        {
+            "id": 4,
+            "icon": "telegram",
+            "headerText": "Telegram",
+            "infoText": "@Korzh_Tetiana"
+        }
+    ]
+}

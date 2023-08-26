@@ -15,17 +15,18 @@ import { SP } from 'next/dist/shared/lib/utils';
 
 export default function ContactForm() {
     const [loading, setLoading] = useState<boolean>(false);
-    const { handleSubmit, register, control, formState: { errors } } = useForm<ContactFormInputs>({ mode: 'onSubmit' });
+    const { handleSubmit, register, control, reset, resetField, formState: { errors } } = useForm<ContactFormInputs>({ mode: 'onSubmit' });
 
     const formSubmit = async (formData: ContactFormInputs) => {
         setLoading(true);
         const { status } = await sendToTelegram(formData);
         setLoading(false);
-        console.log(status);
+        reset();
+        resetField('phone');
     };
     
     return (<>
-        <form className='max-w-[414px] mx-auto pt-6 lg:p-10 lg:border lg:border-brand lg:rounded-lg flex flex-col gap-y-1' onSubmit={handleSubmit(formSubmit)}>
+        <form className='w-full md:max-w-[440px] mx-auto lg:m-0 pt-6 lg:p-10 lg:border lg:border-brand lg:rounded-lg flex flex-col lg:order-1 gap-y-1' onSubmit={handleSubmit(formSubmit)}>
             <Input label='Name' type='text' register={register('name', {
                 required: 'Required',
                 validate: {
@@ -52,7 +53,7 @@ export default function ContactForm() {
                         }
                     }
                 })} error={errors.messageToSend?.message} />
-            <Button type='submit' text='Send' centered styles='w-[240px] py-[14px] px-[12px] font-semibold text-white text-lg' />
+            <Button type='submit' text='Send' centered styles='w-[270px] py-[14px] px-[12px] font-semibold text-white text-lg' />
         </form>
         {loading && <Spinner />}
         </>
