@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-export { sendToTelegram } from '@/service/externalApi';
+import { sendToTelegram } from '@/service/externalApi';
 
 import type { ContactFormInputs } from '@/constants/interfaces';
 import { emailRegexp } from '@/constants/regexp';
@@ -9,17 +10,21 @@ import Input from '@/components/shared/Input/Input';
 import MaskedInput from '@/components/shared/MaskedInput/MaskedInput';
 import TextArea from '@/components/shared/TextArea/TextArea';
 import Button from '@/components/shared/Button/Button';
-import { sendToTelegram } from '@/service/externalApi';
+import Spinner from '@/components/shared/Spinner/Spinner';
+import { SP } from 'next/dist/shared/lib/utils';
 
 export default function ContactForm() {
+    const [loading, setLoading] = useState<boolean>(false);
     const { handleSubmit, register, control, formState: { errors } } = useForm<ContactFormInputs>({ mode: 'onSubmit' });
 
     const formSubmit = async (formData: ContactFormInputs) => {
-        const { data, status } = await sendToTelegram(formData);
+        setLoading(true);
+        const { status } = await sendToTelegram(formData);
+        setLoading(false);
         console.log(status);
     };
     
-    return (
+    return (<>
         <form className='max-w-[414px] mx-auto pt-6 lg:p-10 lg:border lg:border-brand lg:rounded-lg flex flex-col gap-y-1' onSubmit={handleSubmit(formSubmit)}>
             <Input label='Name' type='text' register={register('name', {
                 required: 'Required',
@@ -49,5 +54,7 @@ export default function ContactForm() {
                 })} error={errors.messageToSend?.message} />
             <Button type='submit' text='Send' centered styles='w-[240px] py-[14px] px-[12px] font-semibold text-white text-lg' />
         </form>
+        {loading && <Spinner />}
+        </>
     );
 }
