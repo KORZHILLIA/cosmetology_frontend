@@ -11,13 +11,20 @@ import MaskedInput from '@/components/shared/MaskedInput/MaskedInput';
 import TextArea from '@/components/shared/TextArea/TextArea';
 import Button from '@/components/shared/Button/Button';
 import Spinner from '@/components/shared/Spinner/Spinner';
-import { SP } from 'next/dist/shared/lib/utils';
 
 export default function ContactForm() {
     const [loading, setLoading] = useState<boolean>(false);
-    const { handleSubmit, register, control, reset, resetField, formState: { errors } } = useForm<ContactFormInputs>({ mode: 'onSubmit' });
+    const { handleSubmit, register, control, getValues, reset, resetField, setError, formState: { errors } } = useForm<ContactFormInputs>({ mode: 'onSubmit' });
 
     const formSubmit = async (formData: ContactFormInputs) => {
+        const phoneValue = getValues('phone');
+        if (!phoneValue) {
+            setError('phone', { type: 'custom', message: 'Required' });
+            return;
+        } else if (phoneValue?.includes('_')) {
+            setError('phone', { type: 'custom', message: 'Please fill completely' });
+            return;
+        }
         setLoading(true);
         const { status } = await sendToTelegram(formData);
         setLoading(false);
@@ -36,11 +43,13 @@ export default function ContactForm() {
                 }
             })} error={errors.name?.message} />
             <Input label='Email' type='text' register={register('email', {
-                required: false,
                 validate: {
-                    testValue: (value: string) => {
+                    testValue: (value: string | undefined) => {
                         const regexp = emailRegexp;
+                        if (value) {
                             return regexp.test(value) || 'Please follow format';
+                        }
+                        return true;
                     }
                 }
             })} error={errors.email?.message} />

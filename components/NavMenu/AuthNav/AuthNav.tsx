@@ -1,3 +1,5 @@
+import { Skeleton } from "@mui/material";
+
 import useAppSelector from "@/hooks/useAppSelector";
 import { getAuth } from "@/redux/auth/auth-selectors";
 
@@ -21,5 +23,5 @@ export default function AuthNav({ onClick, notSignedArr, adminArr, userArr }: Au
 
     const {isSigned,  loading} = useAppSelector(getAuth);
     
-    return (!isSigned && loading ? null : (!isSigned ? <NotSignedBtns onClick={onClick} btnArr={notSignedArr} /> : <SignedElements onClick={onClick} adminArr={adminArr} userArr={userArr} />));
+    return (!isSigned && loading ? <Skeleton sx={{backgroundColor: '#cfcfcf'}} variant="rounded" width={172} height={38} animation='wave' /> : (!isSigned ? <NotSignedBtns onClick={onClick} btnArr={notSignedArr} /> : <SignedElements onClick={onClick} adminArr={adminArr} userArr={userArr} />));
 }

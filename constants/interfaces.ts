@@ -13,7 +13,7 @@ export type Role = null | 'user' | 'admin';
 
 export interface ContactFormInputs {
   name: string;
-  email: string;
+  email?: string;
   phone: string;
   isTelegram: boolean;
   messageToSend: string;
