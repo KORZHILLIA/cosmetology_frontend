@@ -10,11 +10,13 @@ export default function GetInTouch() {
         <Section styles="md:text-center">
             <SectionHeader text="Get in touch" isUnderline />
             <Paragraph text='Book an Appointment to treat your teeth right now.' />
-            <div className="flex flex-col lg:flex-row lg:justify-between gap-y-12">
+            <div className="flex flex-col lg:flex-row lg:justify-center gap-y-12 lg:gap-x-12">
                 <ContactForm />
-                <OfficeDescription />
+                <div className="flex flex-col gap-y-5">
+                    <Map />
+                    <OfficeDescription />
+                </div>
             </div>
-                <Map />
         </Section>
     );
 }

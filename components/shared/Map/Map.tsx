@@ -1,34 +1,37 @@
 import { useState, useCallback } from 'react';
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
+import { useMediaQuery } from '@mui/material';
+
+import googleMapOptions from '@/constants/googleMapOptions';
 
 import Spinner from '../Spinner/Spinner';
-// import defaultOptions from './defaultOptions';
 
 export default function Map() {
-const GOOGLE_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API as string;
+    const GOOGLE_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API as string;
+    
+    const isTablet = useMediaQuery('(min-width: 768px)');
     
 const containerStyle = {
-    width: '280px',
-    height: '218px',
-    borderBottomLeftRadius: '8px',
-    borderBottomRightRadius: '8px',
-    };
+    width: isTablet ? '440px' : '100%',
+    height: '485px',
+    margin: '0 auto',
+    border: '2px solid #1376F8',
+    borderRadius: '8px',
+    };    
     
 const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: GOOGLE_KEY,
 });
     const center = {
-  lat: 38.745,
-  lng: 45.523
+  lat: 46.973489,
+  lng: 31.981475
     };
     
-  const [map, setMap] = useState(null);
+  const [_, setMap] = useState(null);
 
   const onLoad = useCallback(
     (map: any) => {
-      const bounds = new window.google.maps.LatLngBounds(center);
-      map.fitBounds(bounds);
       setMap(map);
     },
     [center]
@@ -37,15 +40,15 @@ const { isLoaded } = useJsApiLoader({
   const onUnmount = useCallback(() => setMap(null), []);
 
   return isLoaded ? (
-    <GoogleMap
+      <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={3}
+      zoom={18}
       onLoad={onLoad}
       onUnmount={onUnmount}
-    //   options={defaultOptions}
+      options={googleMapOptions}
     >
-      {/* <DefaultMarker position={center} /> */}
+      <MarkerF position={center} />
     </GoogleMap>
   ) : (
     <Spinner />

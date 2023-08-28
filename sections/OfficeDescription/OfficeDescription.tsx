@@ -26,5 +26,5 @@ export default function OfficeDescription() {
             return <OfficeDescriptionCard key={card.id} Icon={Icon} headerText={card.headerText} infoText={card.infoText} />
         });
     
-        return (<ul className="w-full md:max-w-[440px] mx-auto lg:m-0 flex flex-col gap-y-5">{elements}</ul>);
+        return (<ul className="w-full md:max-w-[440px] lg:min-w-[440px] mx-auto lg:m-0 flex flex-col gap-y-5">{elements}</ul>);
 }

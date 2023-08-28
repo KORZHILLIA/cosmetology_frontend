@@ -33,7 +33,7 @@ export default function ContactForm() {
     };
     
     return (<>
-        <form className='w-full md:max-w-[440px] mx-auto lg:m-0 pt-6 lg:p-10 lg:border lg:border-brand lg:rounded-lg flex flex-col lg:order-1 gap-y-1' onSubmit={handleSubmit(formSubmit)}>
+        <form className='w-full md:max-w-[440px] lg:min-w-[440px] mx-auto lg:m-0 pt-6 lg:p-6 lg:border lg:border-brand lg:rounded-lg flex flex-col lg:order-1 gap-y-1' onSubmit={handleSubmit(formSubmit)}>
             <Input label='Name' type='text' register={register('name', {
                 required: 'Required',
                 validate: {
