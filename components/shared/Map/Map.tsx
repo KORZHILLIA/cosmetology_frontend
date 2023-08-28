@@ -5,7 +5,7 @@ import Spinner from '../Spinner/Spinner';
 // import defaultOptions from './defaultOptions';
 
 export default function Map() {
-const GOOGLE_KEY = process.env.GOOGLE_MAPS_API as string;
+const GOOGLE_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API as string;
     
 const containerStyle = {
     width: '280px',
