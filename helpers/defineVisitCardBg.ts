@@ -4,11 +4,6 @@ const defineVisitCardBg = (cardType: VisitCardType, isClient: boolean, isConfirm
   switch (cardType) {
     case 'admin':
       return isClient ? (isConfirmed ? 'bg-emerald-300' : 'bg-slate-400') : 'bg-slate-300';
-    // return isClient && !isConfirmed
-    //   ? 'bg-emerald-300'
-    //   : isClient && isConfirmed
-    //   ? 'bg-sky-800'
-    //   : 'bg-slate-300';
     case 'clientGeneral':
       return 'bg-emerald-300';
     case 'clientPersonal':

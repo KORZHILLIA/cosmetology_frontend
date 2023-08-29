@@ -1,8 +1,11 @@
+import { useEffect } from 'react';
+
 import useAppSelector from "@/hooks/useAppSelector";
 import useAppDispatch from "@/hooks/useAppDispatch";
 
 import { getAuth } from '@/redux/auth/auth-selectors';
 import { refuseDateByUser } from "@/redux/auth/auth-operations";
+import {getAllAvailableVisitDates} from '@/redux/dates/dates-operations';
 
 import extractDateParameters from "@/helpers/extractDateParameters";
 import prepareDateForVisitCard from "@/helpers/prepareDateForVisitCard";
@@ -16,6 +19,10 @@ export default function FutureVisits() {
     const { role, futureVisitDates, loading } = useAppSelector(getAuth);
 
     const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(getAllAvailableVisitDates());
+    }, []);
 
     const onRefuseBtnClick = async (dateID: string, role: Role) => {
         await dispatch(refuseDateByUser({ dateID, role }));

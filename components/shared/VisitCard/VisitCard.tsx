@@ -20,7 +20,9 @@ export default function VisitCard({ visit, cardType, role, btnFunc }: VisitCardP
     const cardBg = defineVisitCardBg(cardType, isClient, isConfirmed);
     const { date, time } = prepareDateForVisitCard(visit.visitDate);
     const { btnText, btnBgColor } = defineBtnPropsForVisitCard(cardType, isClient);
-    return (<li key={visit._id} className={`p-3 flex justify-between items-center gap-x-6 ${cardBg} rounded-lg`}>
+    return (<li key={visit._id} className={`p-3 flex justify-between items-center gap-x-6
+    ${cardBg}
+    rounded-lg`}>
             <div className='flex flex-col align-start text-lg text-white font-semibold'>
             <span>{date}</span>
             <span>{time}</span>
@@ -32,3 +34,5 @@ export default function VisitCard({ visit, cardType, role, btnFunc }: VisitCardP
         
     </li>);
 }
+
+// ${cardType === 'admin' ? (isClient ? (isConfirmed ? 'bg-emerald-300' : 'bg-slate-400') : 'bg-slate-300') : (cardType === 'clientPersonal' ? (isConfirmed ? 'bg-emerald-300' : 'bg-yellow-300') : 'bg-emerald-300')}
