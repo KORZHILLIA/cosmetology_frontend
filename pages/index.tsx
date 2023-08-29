@@ -13,7 +13,7 @@ import Spinner from '@/components/shared/Spinner/Spinner';
 
 export default function Home() {
 
-  const {isSigned, accessToken, loading} = useAppSelector(getAuth);
+  const {isSigned, accessToken} = useAppSelector(getAuth);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -28,6 +28,5 @@ export default function Home() {
       <About />
       <Technologies />
       <Welcome />
-      {loading && <Spinner />}
     </>);
 }

@@ -2,6 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 import extractAxiosError from '@/helpers/extractAxiosError';
+import notificate from '@/helpers/notificate';
+
 import {
   addNewDates,
   getAllDates,
@@ -26,6 +28,7 @@ export const addNewDatesByAdmin = createAsyncThunk(
     } catch (error) {
       const axiosError = error as AxiosError;
       const { status, message } = extractAxiosError(axiosError);
+      notificate('error', message);
       return rejectWithValue({ status, message });
     }
   }
@@ -40,6 +43,7 @@ export const getAllAvailableVisitDates = createAsyncThunk(
     } catch (error) {
       const axiosError = error as AxiosError;
       const { status, message } = extractAxiosError(axiosError);
+      notificate('error', message);
       return rejectWithValue({ status, message });
     }
   }
@@ -50,11 +54,12 @@ export const deleteVisitDateByAdmin = createAsyncThunk(
   async (dateInfo: DeleteDateByAdminBody, { rejectWithValue }) => {
     try {
       const data = await deleteDate(dateInfo);
-      alert(data.message);
+      notificate('success', data.message);
       return data.id;
     } catch (error) {
       const axiosError = error as AxiosError;
       const { status, message } = extractAxiosError(axiosError);
+      notificate('error', message);
       return rejectWithValue({ status, message });
     }
   }
@@ -64,12 +69,15 @@ export const reserveVisitDateByUser = createAsyncThunk(
   'dates/reserve',
   async (dateInfo: ReserveDateByUserBody, { rejectWithValue }) => {
     try {
-      const { userId, reservedVisitDateID, futureVisitDates, pastVisitDates } = await reserveDate(dateInfo);
-      alert('Successfully reserved. Wait for confirmation');
+      const { userId, reservedVisitDateID, futureVisitDates, pastVisitDates } = await reserveDate(
+        dateInfo
+      );
+      notificate('success', 'Successfully reserved. Wait for confirmation');
       return { userId, reservedVisitDateID, futureVisitDates, pastVisitDates };
     } catch (error) {
       const axiosError = error as AxiosError;
       const { status, message } = extractAxiosError(axiosError);
+      notificate('error', message);
       return rejectWithValue({ status, message });
     }
   }
@@ -81,11 +89,12 @@ export const confirmVisitDateByAdmin = createAsyncThunk(
     try {
       const { data, status } = await confirmDate(dateInfo);
       const { dateId, message } = data;
-      alert(message);
+      notificate('success', message);
       return { status, dateId };
     } catch (error) {
       const axiosError = error as AxiosError;
       const { status, message } = extractAxiosError(axiosError);
+      notificate('error', message);
       return rejectWithValue({ status, message });
     }
   }

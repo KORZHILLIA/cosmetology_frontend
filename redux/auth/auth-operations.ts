@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 import extractAxiosError from '@/helpers/extractAxiosError';
+import notificate from '@/helpers/notificate';
 import { signup, signin, getCurrent, signout, refuseDate } from '@/service/externalApi';
 
 import type { SignupFormInputs } from '@/components/forms/SignupForm/SignupForm';
@@ -13,11 +14,12 @@ export const signupNewUser = createAsyncThunk(
   async (userData: SignupFormInputs, { rejectWithValue }) => {
     try {
       const { data, status } = await signup(userData);
-      alert(data.message);
+      notificate('success', data.message);
       return status === 201;
     } catch (error) {
       const axiosError = error as AxiosError;
       const { status, message } = extractAxiosError(axiosError);
+      notificate('error', message);
       return rejectWithValue({ status, message });
     }
   }
@@ -33,9 +35,10 @@ export const signinUser = createAsyncThunk(
     } catch (error) {
       const axiosError = error as AxiosError;
       if (axiosError.response?.status === 400) {
-        alert('Wrong password');
+        notificate('warning', 'Wrong passsword');
       }
       const { status, message } = extractAxiosError(axiosError);
+      notificate('error', message);
       return rejectWithValue({ status, message });
     }
   }
@@ -51,6 +54,7 @@ export const getCurrentUser = createAsyncThunk(
     } catch (error) {
       const axiosError = error as AxiosError;
       const { status, message } = extractAxiosError(axiosError);
+      notificate('error', message);
       return rejectWithValue({ status, message });
     }
   }
@@ -66,6 +70,7 @@ export const signoutUser = createAsyncThunk(
     } catch (error) {
       const axiosError = error as AxiosError;
       const { status, message } = extractAxiosError(axiosError);
+      notificate('error', message);
       return rejectWithValue({ status, message });
     }
   }
@@ -81,6 +86,7 @@ export const refuseDateByUser = createAsyncThunk(
     } catch (error) {
       const axiosError = error as AxiosError;
       const { status, message } = extractAxiosError(axiosError);
+      notificate('error', message);
       return rejectWithValue({ status, message });
     }
   }
