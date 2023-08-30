@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
+import { wix } from '@/public/fonts/fonts';
+
 import useAppDispatch from '@/hooks/useAppDispatch';
 import decodeString from '@/helpers/decodeSring';
 
@@ -37,7 +39,7 @@ export default function SigninForm() {
         }
     }, [router]);
 
-    return (<form className='max-w-[414px] mx-auto pt-6 flex flex-col gap-y-1' onSubmit={handleSubmit(formSubmit)}>
+    return (<form className='max-w-[414px] mx-auto flex flex-col gap-y-1' onSubmit={handleSubmit(formSubmit)}>
         <Input label='Email' type='text' register={register('email', {
             required: 'Required',
             validate: {
@@ -50,6 +52,6 @@ export default function SigninForm() {
         <Input label='Password' type='password' register={register('password', {
             required: 'Required',
         })} error={errors.password?.message} />
-        <Button type='submit' text='Sign in' styles='py-[14px] px-[12px] font-semibold text-white text-sm' />
+        <Button type='submit' text='Sign in' styles={`${wix.className} py-[14px] px-[12px] font-semibold text-white text-lg lg:text-xl`} />
     </form>);
 }

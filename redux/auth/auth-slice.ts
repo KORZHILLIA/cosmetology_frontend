@@ -5,6 +5,7 @@ import { HYDRATE } from 'next-redux-wrapper';
 
 import {
   signupNewUser,
+  signupOuterUser,
   signinUser,
   getCurrentUser,
   signoutUser,
@@ -84,6 +85,36 @@ const authSlice = createSlice({
         state.accessToken = accessToken;
       })
       .addCase(signinUser.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload as ExtractedAxiosError;
+      })
+      .addCase(signupOuterUser.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(signupOuterUser.fulfilled, (state, { payload }) => {
+        const {
+          role,
+          name,
+          email,
+          isVerified,
+          isSigned,
+          accessToken,
+          futureVisitDates,
+          pastVisitDates,
+        } = payload;
+        state.loading = false;
+        state.error = null;
+        state.role = role;
+        state.name = name;
+        state.email = email;
+        state.isVerified = isVerified;
+        state.isSigned = isSigned;
+        state.futureVisitDates = futureVisitDates;
+        state.pastVisitDates = pastVisitDates;
+        state.accessToken = accessToken;
+      })
+      .addCase(signupOuterUser.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload as ExtractedAxiosError;
       })

@@ -5,6 +5,7 @@ import type { SigninFormInputs } from '@/components/forms/SigninForm/SigninForm'
 import type {
   ContactFormInputs,
   SignoutBody,
+  SignupOuterBody,
   NewDatesByAdminBody,
   DeleteDateByAdminBody,
   ReserveDateByUserBody,
@@ -39,9 +40,13 @@ export const signin = async (userData: SigninFormInputs) => {
 
 export const getCurrent = async (accessToken: string) => {
   setToken(accessToken);
-  const { data } = await instance('/users/current');
-  setToken(data?.accessToken);
-  return data;
+  try {
+    const { data } = await instance('/users/current');
+    setToken(data?.accessToken);
+    return data;
+  } catch {
+    return;
+  }
 };
 
 export const signout = async (email: SignoutBody) => {
@@ -115,7 +120,7 @@ export const sendToTelegram = async (formData: ContactFormInputs) => {
   const text = `
   <b>Name: ${name}</b>
   <b>Phone: ${phone}</b>
-  <b>${email ? email : null}</b>
+  <b>${email ? email : ''}</b>  
   <b>${messageToSend}</b>`;
 
   const { data, status } = await axios.post(url, {
@@ -124,4 +129,10 @@ export const sendToTelegram = async (formData: ContactFormInputs) => {
     text,
   });
   return { data, status };
+};
+
+export const outerSignup = async (userData: SignupOuterBody) => {
+  const { data } = await instance.post('/users/signupouter', userData);
+  setToken(data?.accessToken);
+  return data;
 };

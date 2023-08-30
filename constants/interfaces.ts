@@ -90,6 +90,11 @@ export interface SignoutBody {
   email: string;
 }
 
+export interface SignupOuterBody {
+  name: string;
+  email: string;
+}
+
 export interface NewDatesByAdminBody {
   role: Role;
   dates: number[];

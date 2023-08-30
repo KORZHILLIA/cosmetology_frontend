@@ -8,12 +8,6 @@ export const authOptions = {
       clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET as string,
     }),
   ],
-  callbacks: {
-    async signIn({ user, account, profile, email, credentials }: any) {
-      console.log(account);
-      return true;
-    },
-  },
 };
 
 export default NextAuth(authOptions);

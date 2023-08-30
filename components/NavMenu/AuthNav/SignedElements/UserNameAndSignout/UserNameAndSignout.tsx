@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
+import { useSession, signOut } from 'next-auth/react';
 import { Popover } from '@mui/material';
 
 import useAppDispatch from "@/hooks/useAppDispatch";
@@ -22,6 +23,8 @@ interface UserNameAndSignoutProps {
 export default function UserNameAndSignout({ userName, userEmail, linkAddress, linkLabel, onClick}: UserNameAndSignoutProps) {
     const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
 
+    const { data: session } = useSession();
+
     const onSelectorClick = (event: React.MouseEvent<HTMLDivElement>) => {
         if (window.innerWidth < 768) {
             return;
@@ -39,6 +42,9 @@ export default function UserNameAndSignout({ userName, userEmail, linkAddress, l
     const dispatch = useAppDispatch();
 
     const onSignoutClick = () => {
+        if (session) {
+            setTimeout(() => signOut(), 1000);
+        }
         dispatch(signoutUser({ email: userEmail }));
         onClick();
     };

@@ -25,7 +25,7 @@ export default function SignupForm() {
         reset();
     };
 
-    return (<form className='max-w-[414px] mx-auto pt-6 flex flex-col gap-y-1' onSubmit={handleSubmit(formSubmit)}>
+    return (<form className='max-w-[414px] mx-auto flex flex-col gap-y-1' onSubmit={handleSubmit(formSubmit)}>
         <Input label='Name' type='text' register={register('name', {
             required: 'Required',
             validate: {

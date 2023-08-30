@@ -11,27 +11,16 @@ import RootLayout from '@/components/layouts/RootLayout/RootLayout';
 import '@/styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <RootLayout>
-          <Component {...pageProps} />
-        </RootLayout>
-        <ToastContainer />
+          <SessionProvider session={session}>
+            <RootLayout>
+              <Component {...pageProps} />
+            </RootLayout>
+            <ToastContainer />
+          </SessionProvider>
       </PersistGate>
     </Provider>);
 };
-
-// export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
-//   return (
-//     <Provider store={store}>
-//       <PersistGate loading={null} persistor={persistor}>
-//         <RootLayout>
-//           <SessionProvider session={session}>
-//             <Component {...pageProps} />
-//           </SessionProvider>
-//         </RootLayout>
-//       </PersistGate>
-//     </Provider>);
-// };
