@@ -1,11 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 import useAppSelector from "@/hooks/useAppSelector";
 import useAppDispatch from "@/hooks/useAppDispatch";
 
 import { getAuth } from '@/redux/auth/auth-selectors';
-import { refuseDateByUser } from "@/redux/auth/auth-operations";
-import {getAllAvailableVisitDates} from '@/redux/dates/dates-operations';
+import { refuseDateByUser, getCurrentUser } from "@/redux/auth/auth-operations";
 
 import extractDateParameters from "@/helpers/extractDateParameters";
 import prepareDateForVisitCard from "@/helpers/prepareDateForVisitCard";
@@ -16,12 +15,12 @@ import Button from "@/components/shared/Button/Button";
 import Spinner from "@/components/shared/Spinner/Spinner";
 
 export default function FutureVisits() {
-    const { role, futureVisitDates, loading } = useAppSelector(getAuth);
+    const { accessToken, role, futureVisitDates, loading } = useAppSelector(getAuth);
 
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(getAllAvailableVisitDates());
+        dispatch(getCurrentUser(accessToken));
     }, []);
 
     const onRefuseBtnClick = async (dateID: string, role: Role) => {
