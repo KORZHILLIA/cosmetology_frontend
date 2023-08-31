@@ -2,8 +2,6 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
-import { wix } from '@/public/fonts/fonts';
-
 import useAppDispatch from '@/hooks/useAppDispatch';
 import decodeString from '@/helpers/decodeSring';
 
@@ -13,6 +11,8 @@ import { signinUser } from '@/redux/auth/auth-operations';
 import Input from '@/components/shared/Input/Input';
 import Checkbox from '@/components/shared/Checkbox/Checkbox';
 import Button from '@/components/shared/Button/Button';
+
+import { wix } from '@/public/fonts/fonts';
 
 export interface SigninFormInputs {
     email: string;

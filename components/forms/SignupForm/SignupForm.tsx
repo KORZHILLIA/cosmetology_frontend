@@ -8,6 +8,8 @@ import { signupNewUser } from '@/redux/auth/auth-operations';
 import Input from '@/components/shared/Input/Input';
 import Button from '@/components/shared/Button/Button';
 
+import { wix } from '@/public/fonts/fonts';
+
 export interface SignupFormInputs {
     name: string;
     email: string;
@@ -50,6 +52,6 @@ export default function SignupForm() {
                 }
             }
         })} error={errors.password?.message} />
-        <Button type='submit' text='Sign up' styles='py-[14px] px-[12px] font-semibold text-white text-sm' />
+        <Button type='submit' text='Sign up' styles={`${wix.className} py-[14px] px-[12px] font-semibold text-white text-lg lg:text-xl`} />
     </form>);
 }

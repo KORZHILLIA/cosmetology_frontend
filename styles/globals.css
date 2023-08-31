@@ -83,3 +83,15 @@ div[id='pastvisitdates-popover'] .MuiPopover-paper {
   transform: translate(-12px, 13px) !important;
   background-color: rgb(148 163 184) !important;
 }
+
+div[id='nav-tabs'] .Mui-selected {
+  color: #ef820f;
+}
+
+div[id='nav-tabs'] .MuiTouchRipple-root {
+  border-radius: 8px;
+}
+
+div[id='nav-tabs'] .MuiTabs-indicator {
+  background-color: #ef820f;
+}
