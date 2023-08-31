@@ -8,9 +8,6 @@ const prepareVisitDatesToAdd = (date: Date, timesArr: string[]) => {
       new Date(`${initialYear}-${initialMonth}-${initialDay} ${time}:00`).toUTCString()
     ).getTime()
   );
-  // const prepareVisitDates = timesArr.map(time => {
-  //   return new Date(`${initialYear}-${initialMonth}-${initialDay} ${time}:00`).toUTCString();
-  // });
   return prepareVisitDates;
 };
 
