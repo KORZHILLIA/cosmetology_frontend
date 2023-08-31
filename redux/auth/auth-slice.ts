@@ -145,6 +145,10 @@ const authSlice = createSlice({
         state.accessToken = accessToken;
       })
       .addCase(getCurrentUser.rejected, (state, { payload }) => {
+        const { status } = payload as ExtractedAxiosError;
+        if (status === 401) {
+          return { ...initialState, error: payload as ExtractedAxiosError };
+        }
         state.loading = false;
         state.error = payload as ExtractedAxiosError;
       })
@@ -156,9 +160,9 @@ const authSlice = createSlice({
         return initialState;
       })
       .addCase(signoutUser.rejected, (state, { payload }) => {
-        const { status, message } = payload as ExtractedAxiosError;
+        const { status } = payload as ExtractedAxiosError;
         if (status === 401) {
-          return { ...initialState, error: { status, message } };
+          return { ...initialState, error: payload as ExtractedAxiosError };
         }
         state.loading = false;
         state.error = payload as ExtractedAxiosError;
@@ -192,6 +196,10 @@ const authSlice = createSlice({
         state.availableVisitDates = [...state.availableVisitDates, ...payload];
       })
       .addCase(addNewDatesByAdmin.rejected, (state, { payload }) => {
+        const { status } = payload as ExtractedAxiosError;
+        if (status === 401) {
+          return { ...initialState, error: payload as ExtractedAxiosError };
+        }
         state.loading = false;
         state.error = payload as ExtractedAxiosError;
       })
@@ -223,6 +231,10 @@ const authSlice = createSlice({
         return state;
       })
       .addCase(deleteVisitDateByAdmin.rejected, (state, { payload }) => {
+        const { status } = payload as ExtractedAxiosError;
+        if (status === 401) {
+          return { ...initialState, error: payload as ExtractedAxiosError };
+        }
         state.loading = false;
         state.error = payload as ExtractedAxiosError;
       })
@@ -242,9 +254,9 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(reserveVisitDateByUser.rejected, (state, { payload }) => {
-        const { status, message } = payload as ExtractedAxiosError;
+        const { status } = payload as ExtractedAxiosError;
         if (status === 401) {
-          return { ...initialState, error: { status, message } };
+          return { ...initialState, error: payload as ExtractedAxiosError };
         }
         state.loading = false;
         state.error = payload as ExtractedAxiosError;
@@ -262,6 +274,10 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(confirmVisitDateByAdmin.rejected, (state, { payload }) => {
+        const { status } = payload as ExtractedAxiosError;
+        if (status === 401) {
+          return { ...initialState, error: payload as ExtractedAxiosError };
+        }
         state.loading = false;
         state.error = payload as ExtractedAxiosError;
       });

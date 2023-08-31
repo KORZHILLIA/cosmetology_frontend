@@ -40,13 +40,9 @@ export const signin = async (userData: SigninFormInputs) => {
 
 export const getCurrent = async (accessToken: string) => {
   setToken(accessToken);
-  try {
-    const { data } = await instance('/users/current');
-    setToken(data?.accessToken);
-    return data;
-  } catch {
-    return;
-  }
+  const { data } = await instance('/users/current');
+  setToken(data?.accessToken);
+  return data;
 };
 
 export const signout = async (email: SignoutBody) => {

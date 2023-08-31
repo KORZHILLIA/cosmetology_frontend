@@ -28,7 +28,6 @@ export function withUserAuth (Component: NextComponentType) {
                 return;
             }
             if (error?.status === 401 || !accessToken) {
-                console.log('withUser works');
                 router.replace('/auth/signin');
                 return;
             }
@@ -48,32 +47,8 @@ export function withUserAuth (Component: NextComponentType) {
                 return;
             }
         }, [loading]);
-        
-        // useEffect(() => {
-        //     console.log('start');
-        //     if (isSigned && isUser) {
-        //         console.log('user, ok');
-        //         return;
-        //     }
-        //     if (userError?.status === 401 || datesError?.status === 401 || !accessToken) {
-        //         console.log('no autorized');
-        //         router.replace('/auth/signin');
-        //         return;
-        //     }
-
-        //     dispatch(getCurrentUser(accessToken));
-
-        //     if (isSigned && isAdmin) {
-        //         console.log('admin');
-        //         router.replace('/ctrlroom');
-        //         return;
-        //     }
-        //     console.log(isSigned);
-        //     router.replace('/auth/signin');
-        // }, []);
 
         return (isSigned && isUser ? <Component /> : (isSigned && isAdmin ?  <AdminPage /> : (!isSigned && loading ? <Spinner /> : <SigninPage />)));
-        // return (isSigned && isUser ? <Component /> : (isSigned && isAdmin ?  <AdminPage /> : <SigninPage />));
     }
     return WithUserAuth;
 };

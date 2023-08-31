@@ -11,11 +11,13 @@ import { emailRegexp } from '@/constants/regexp';
 import { signinUser } from '@/redux/auth/auth-operations';
 
 import Input from '@/components/shared/Input/Input';
+import Checkbox from '@/components/shared/Checkbox/Checkbox';
 import Button from '@/components/shared/Button/Button';
 
 export interface SigninFormInputs {
     email: string;
     password: string;
+    isRemember: boolean;
 }
 
 export default function SigninForm() {
@@ -52,6 +54,7 @@ export default function SigninForm() {
         <Input label='Password' type='password' register={register('password', {
             required: 'Required',
         })} error={errors.password?.message} />
+        <Checkbox label='Remember me' register={register('isRemember')} styles='mb-2' />
         <Button type='submit' text='Sign in' styles={`${wix.className} py-[14px] px-[12px] font-semibold text-white text-lg lg:text-xl`} />
     </form>);
 }
