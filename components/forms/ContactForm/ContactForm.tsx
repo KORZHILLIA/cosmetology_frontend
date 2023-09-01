@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import useFormPersist from 'react-hook-form-persist';
 
 import { sendToTelegram } from '@/service/externalApi';
+import notificate from '@/helpers/notificate';
 
 import type { ContactFormInputs } from '@/constants/interfaces';
 import { emailRegexp } from '@/constants/regexp';
@@ -14,7 +16,18 @@ import Spinner from '@/components/shared/Spinner/Spinner';
 
 export default function ContactForm() {
     const [loading, setLoading] = useState<boolean>(false);
-    const { handleSubmit, register, control, getValues, reset, resetField, setError, formState: { errors } } = useForm<ContactFormInputs>({ mode: 'onSubmit' });
+    
+    const { handleSubmit, register, control, getValues, watch, setValue, reset, resetField, setError, formState: { errors } } = useForm<ContactFormInputs>({ mode: 'onSubmit' });
+
+    const STORAGE_KEY = 'contactForm';
+
+    const isBrowser = typeof window != 'undefined';
+
+  useFormPersist(STORAGE_KEY, {
+    watch,
+    setValue,
+    storage: isBrowser ? sessionStorage : undefined,
+  });
 
     const formSubmit = async (formData: ContactFormInputs) => {
         const phoneValue = getValues('phone');
@@ -28,8 +41,14 @@ export default function ContactForm() {
         setLoading(true);
         const { status } = await sendToTelegram(formData);
         setLoading(false);
-        reset();
-        resetField('phone');
+        if (status === 200) {
+            notificate('success', 'Message successfully sent');
+            reset();
+            resetField('phone');
+            sessionStorage.removeItem(STORAGE_KEY);
+        } else {
+            notificate('error', 'Something wrong, try later');
+        }
     };
     
     return (<>
@@ -38,20 +57,25 @@ export default function ContactForm() {
                 required: 'Required',
                 validate: {
                     testValue: (value: string) => {
-                        return value.length <= 20 || 'Name too long';
+                        return value.trim().length <= 20 || 'Name too long';
+                    },
+                    isOnlySpaces: (value: string) => {
+                        return value.trim().length !== 0 || 'Not even try';
                     }
-                }
+                },
+                setValueAs: (value: string) => value.trim(),
             })} error={errors.name?.message} />
             <Input label='Email' type='text' register={register('email', {
                 validate: {
                     testValue: (value: string | undefined) => {
                         const regexp = emailRegexp;
                         if (value) {
-                            return regexp.test(value) || 'Please follow format';
+                            return regexp.test(value.trim()) || 'Please follow format';
                         }
                         return true;
                     }
-                }
+                },
+                setValueAs: (value: string) => value.trim(),
             })} error={errors.email?.message} />
             <MaskedInput type='tel' label='Phone' control={control} mask='+380 (99) 999-99-99' />
             <TextArea label='Message' register={register('messageToSend', {
@@ -60,7 +84,8 @@ export default function ContactForm() {
                     testValue: (value: string) => {
                         return (value.length >= 10 && value.length <= 200) || 'From 10 to 200 characters'
                         }
-                    }
+                },
+                setValueAs: (value: string) => value.trim(),
                 })} error={errors.messageToSend?.message} />
             <Button type='submit' text='Send' centered styles='w-[270px] py-[14px] px-[12px] font-semibold text-white text-lg' />
         </form>

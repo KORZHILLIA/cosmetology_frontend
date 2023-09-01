@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import useFormPersist from 'react-hook-form-persist';
 
 import useAppDispatch from '@/hooks/useAppDispatch';
 
@@ -20,11 +21,22 @@ export default function SignupForm() {
 
     const dispatch = useAppDispatch();
 
-    const { handleSubmit, register, reset, formState: { errors } } = useForm<SignupFormInputs>({ mode: 'onSubmit' });    
+    const { handleSubmit, register, watch, setValue, reset, formState: { errors } } = useForm<SignupFormInputs>({ mode: 'onSubmit' });
+    
+    const STORAGE_KEY = 'signupForm';
+
+    const isBrowser = typeof window != 'undefined';
+
+    useFormPersist(STORAGE_KEY, {
+    watch,
+    setValue,
+    storage: isBrowser ? sessionStorage : undefined,
+  });
     
     const formSubmit = async (formData: SignupFormInputs) => {
         dispatch(signupNewUser(formData));
         reset();
+        sessionStorage.removeItem(STORAGE_KEY);
     };
 
     return (<form className='max-w-[414px] mx-auto flex flex-col gap-y-1' onSubmit={handleSubmit(formSubmit)}>
@@ -33,8 +45,8 @@ export default function SignupForm() {
             validate: {
                 testValue: (value: string) => {
                     return nameRegexp.test(value) || 'Please follow format';
-                }
-            }
+                },
+            },
         })} error={errors.name?.message} />
         <Input label='Email' type='text' register={register('email', {
             required: 'Required',

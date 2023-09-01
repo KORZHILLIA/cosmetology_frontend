@@ -47,7 +47,7 @@ export function ClientsPage() {
                 setError(message);
                 if (status === 401) {
                     if (session) {
-                        signOut({ callbackUrl: 'http://localhost:3000/auth/signin' });
+                        signOut({ callbackUrl: '/auth/signin' });
                     } else {
                         router.replace('/auth/signin');
                     }

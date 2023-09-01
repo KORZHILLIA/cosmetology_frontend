@@ -21,7 +21,7 @@ export default function Checkbox({ label, register, styles }: CheckboxProps) {
 
     return (
         <label className={`${wix.className} flex items-center gap-x-1 text-sm md:text-lg leading-none cursor-pointer ${styles}`} onChange={onLabelClick} >
-            <Icon className='w-[14px] md:w-[18px] h-[14px] md:h-[18px] fill-brand' />
+            <Icon className='w-[20px] md:w-[24px] h-[20px] md:h-[24px] fill-brand' />
             <span className=''>{label}</span>
             <input className='invisible' type='checkbox' {...register} checked={isChecked} />
         </label>

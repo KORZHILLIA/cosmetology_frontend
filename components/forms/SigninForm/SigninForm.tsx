@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import useFormPersist from 'react-hook-form-persist';
 
 import useAppDispatch from '@/hooks/useAppDispatch';
 import decodeString from '@/helpers/decodeSring';
@@ -24,11 +25,22 @@ export default function SigninForm() {
 
     const dispatch = useAppDispatch();
 
-    const { handleSubmit, register, reset, setValue, formState: { errors } } = useForm<SigninFormInputs>({ mode: 'onSubmit' });    
+    const { handleSubmit, register, reset, watch, setValue, formState: { errors } } = useForm<SigninFormInputs>({ mode: 'onSubmit' });    
+
+    const STORAGE_KEY = 'signinForm';
+
+    const isBrowser = typeof window != 'undefined';
+
+    useFormPersist(STORAGE_KEY, {
+    watch,
+    setValue,
+    storage: isBrowser ? sessionStorage : undefined,
+  });
     
     const formSubmit = async (formData: SigninFormInputs) => {
         dispatch(signinUser(formData));
         reset();
+        sessionStorage.removeItem(STORAGE_KEY);
     };
 
     const router = useRouter();
@@ -49,7 +61,7 @@ export default function SigninForm() {
                     const regexp = emailRegexp;
                     return regexp.test(value) || 'Please follow format';
                 }
-            }
+            },
         })} error={errors.email?.message} />
         <Input label='Password' type='password' register={register('password', {
             required: 'Required',
