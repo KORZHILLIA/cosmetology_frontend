@@ -9,6 +9,10 @@ import { signupNewUser } from '@/redux/auth/auth-operations';
 import Input from '@/components/shared/Input/Input';
 import Button from '@/components/shared/Button/Button';
 
+import User from '@/public/assets/svg/user.svg';
+import Envelope from '@/public/assets/svg/envelope.svg';
+import Lock from '@/public/assets/svg/lock.svg';
+
 import { wix } from '@/public/fonts/fonts';
 
 export interface SignupFormInputs {
@@ -40,7 +44,7 @@ export default function SignupForm() {
     };
 
     return (<form className='max-w-[414px] mx-auto flex flex-col gap-y-1' onSubmit={handleSubmit(formSubmit)}>
-        <Input label='Name' type='text' register={register('name', {
+        <Input label='Name' type='text' Icon={User} register={register('name', {
             required: 'Required',
             validate: {
                 testValue: (value: string) => {
@@ -48,7 +52,7 @@ export default function SignupForm() {
                 },
             },
         })} error={errors.name?.message} />
-        <Input label='Email' type='text' register={register('email', {
+        <Input label='Email' type='text' Icon={Envelope} register={register('email', {
             required: 'Required',
             validate: {
                 testValue: (value: string) => {
@@ -56,7 +60,7 @@ export default function SignupForm() {
                 }
             }
         })} error={errors.email?.message} />
-        <Input label='Password' type='password' register={register('password', {
+        <Input label='Password' type='password' Icon={Lock} isEye register={register('password', {
             required: 'Required',
             validate: {
                 testValue: (value: string) => {

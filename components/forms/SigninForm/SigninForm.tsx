@@ -13,6 +13,9 @@ import Input from '@/components/shared/Input/Input';
 import Checkbox from '@/components/shared/Checkbox/Checkbox';
 import Button from '@/components/shared/Button/Button';
 
+import Envelope from '@/public/assets/svg/envelope.svg';
+import Lock from '@/public/assets/svg/lock.svg';
+
 import { wix } from '@/public/fonts/fonts';
 
 export interface SigninFormInputs {
@@ -54,7 +57,7 @@ export default function SigninForm() {
     }, [router]);
 
     return (<form className='max-w-[414px] mx-auto flex flex-col gap-y-1' onSubmit={handleSubmit(formSubmit)}>
-        <Input label='Email' type='text' register={register('email', {
+        <Input label='Email' type='text' Icon={Envelope} register={register('email', {
             required: 'Required',
             validate: {
                 testValue: (value: string) => {
@@ -63,7 +66,7 @@ export default function SigninForm() {
                 }
             },
         })} error={errors.email?.message} />
-        <Input label='Password' type='password' register={register('password', {
+        <Input label='Password' type='password' Icon={Lock} isEye register={register('password', {
             required: 'Required',
         })} error={errors.password?.message} />
         <Checkbox label='Remember me' register={register('isRemember')} styles='mb-2' />
