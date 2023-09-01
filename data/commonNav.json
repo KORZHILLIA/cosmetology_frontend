@@ -1,16 +1,19 @@
 {
     "links": [
         {
-            "linkLabel": "Home",
-            "linkAddress": "/"
+            "id": "home",
+            "text": "Home",
+            "address": "/"
         },
         {
-            "linkLabel": "Services",
-            "linkAddress": "/services"
+            "id": "services",
+            "text": "Services",
+            "address": "/services"
         },
         {
-            "linkLabel": "Contacts",
-            "linkAddress": "/contacts"
+            "id": "contacts",
+            "text": "Contacts",
+            "address": "/contacts"
         }
     ]
 }

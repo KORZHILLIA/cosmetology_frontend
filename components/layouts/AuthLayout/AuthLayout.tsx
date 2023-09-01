@@ -27,10 +27,9 @@ export default function AuthLayout({ children }: LayoutProps) {
 
     const isSignup = router.pathname.includes('signup');
 
-    useEffect(() => {
-        
+    useEffect(() => {        
         if (session) {
-            if (error?.status === 401) {
+            if (error?.status === 401 || error?.status === 409) {
             signOut({redirect: false});
             return;
         }

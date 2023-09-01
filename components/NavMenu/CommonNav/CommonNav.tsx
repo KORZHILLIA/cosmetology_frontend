@@ -1,19 +1,21 @@
-import { useRouter } from 'next/router';
-import { useMediaQuery } from '@mui/material';
+import type { NextRouter } from 'next/dist/client/router';
 
-import commonNav from '@/data/commonNav.json';
+import type { NavInstance } from '@/constants/interfaces';
 
-export default function CommonNav() {
-    const router = useRouter();
-    const pathName = router.pathname;
 
-    const isNotMobile = useMediaQuery('(min-width: 768px)');
+interface CommonNavProps {
+    linksArr: NavInstance[];
+    router: NextRouter;
+    pathName: string;
+    onClick: () => void;
+}
 
-    const mobileElements = commonNav.links.map(link => {
-        const isPathEqualToAdress = link.linkAddress === pathName;
+export default function CommonNav({linksArr, router, pathName, onClick}: CommonNavProps) {
+    const mobileElements = linksArr.map(link => {
+        const isPathEqualToAdress = link.address === pathName;
         return (
-            <li key={link.linkAddress} className={`w-full py-3 px-2 ${isPathEqualToAdress ? 'text-brand bg-orange-50 border-l-2 border-l-brand' : 'bg-transparent'} cursor-pointer`} onClick={() => router.push(link.linkAddress)}>
-                <span>{link.linkLabel}</span>
+            <li key={link.address} className={`w-full py-3 px-2 ${isPathEqualToAdress ? 'text-brand bg-orange-50 border-l-2 border-l-brand' : 'bg-transparent'} cursor-pointer`} onClick={() => { router.push(link.address); onClick(); }}>
+                <span>{link.text}</span>
             </li>
         );
     });

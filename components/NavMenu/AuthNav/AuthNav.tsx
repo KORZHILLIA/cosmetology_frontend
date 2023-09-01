@@ -3,14 +3,11 @@ import { Skeleton } from "@mui/material";
 import useAppSelector from "@/hooks/useAppSelector";
 import { getAuth } from "@/redux/auth/auth-selectors";
 
+import type { NavInstance } from '@/constants/interfaces';
+
 import NotSignedBtns from "./NotSignedBtns/NotSignedBtns";
 import SignedElements from "./SignedElements/SignedElements";
 
-interface NavInstance {
-    id: string;
-    text: string;
-    address: string;
-}
 
 interface AuthNavProps {
     onClick: () => void;

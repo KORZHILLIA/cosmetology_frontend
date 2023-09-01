@@ -4,6 +4,12 @@ export interface LayoutProps {
   children: ReactNode;
 }
 
+export interface NavInstance {
+  id: string;
+  text: string;
+  address: string;
+}
+
 export interface ExtractedAxiosError {
   status: number;
   message: string;

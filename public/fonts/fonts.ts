@@ -8,4 +8,5 @@ export const literata = Literata({
 export const wix = Wix_Madefor_Display({
   subsets: ['cyrillic', 'latin'],
   display: 'swap',
+  variable: '--font-wix',
 });
