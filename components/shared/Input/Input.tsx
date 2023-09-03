@@ -17,6 +17,7 @@ error?: string;
 
 export default function Input({ type, label, Icon, isEye, register, error }: InputProps) {
     const [isTextType, setIsTextType] = useState<boolean>(false);
+
     const onEyeClick = () => setIsTextType(state => !state);
 
     return <label className={`${wix.className} group relative pb-6 flex flex-col justify-start items-start last-of-type:mb-4`}>

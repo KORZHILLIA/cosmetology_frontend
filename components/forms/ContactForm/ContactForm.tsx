@@ -4,6 +4,7 @@ import useFormPersist from 'react-hook-form-persist';
 
 import { sendToTelegram } from '@/service/externalApi';
 import notificate from '@/helpers/notificate';
+import defineTelephoneInputTextPaleness from '@/helpers/defineTelephoneInputTextPaleness';
 
 import type { ContactFormInputs } from '@/constants/interfaces';
 import { emailRegexp, formatChars } from '@/constants/regexp';
@@ -91,8 +92,8 @@ export default function ContactForm() {
                 },
                 setValueAs: (value: string) => value.trim(),
             })} error={errors.email?.message} />
-            <MaskedInput name='telegram' type='text' label='Telegram' control={control} mask='@CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC' formatChars={formatChars} maskChar='' />
-            <MaskedInput name='phone' type='tel' label='Phone' control={control} mask='+380 (99) 999-99-99' maskChar='_' />
+            <MaskedInput name='telegram' type='text' label='Telegram' control={control} mask='@CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC' formatChars={formatChars} maskChar='' textPaleness={(value: string) => value?.length > 1} />
+            <MaskedInput name='phone' type='tel' label='Phone' control={control} mask='+380 (99) 999-99-99' maskChar='_' textPaleness={defineTelephoneInputTextPaleness} />
             <TextArea label='Message' register={register('messageToSend', {
                     required: 'Required',
                 validate: {

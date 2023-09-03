@@ -4,25 +4,33 @@
             "id": 1,
             "icon": "location",
             "headerText": "Office Address",
-            "infoText": "1441 Morris Ave, Union, NJ 07083"
+            "infoText": "1441 Morris Ave, Union, NJ 07083",
+            "isLink": false,
+            "href": ""
         },
         {
             "id": 2,
             "icon": "telephone",
             "headerText": "Phone Number",
-            "infoText": "+380(67) 662-12-20"
+            "infoText": "+380(67) 662-12-20",
+            "isLink": true,
+            "href": "tel:+380676621220"
         },
         {
             "id": 3,
             "icon": "email",
             "headerText": "E-mail",
-            "infoText": "prombazis@ukr.net"
+            "infoText": "prombazis@ukr.net",
+            "isLink": true,
+            "href": "mailto:prombazis@ukr.net"
         },
         {
             "id": 4,
             "icon": "telegram",
             "headerText": "Telegram",
-            "infoText": "@Korzh_Tetiana"
+            "infoText": "@Korzh_Tetiana",
+            "isLink": true,
+            "href": "https://t.me/Korzh_Tetiana"
         }
     ]
 }

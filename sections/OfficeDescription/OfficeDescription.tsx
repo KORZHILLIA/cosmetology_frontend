@@ -23,7 +23,7 @@ export default function OfficeDescription() {
         
         const elements = officeDescription.cards.map(card => {
             const Icon = getIcon(card.icon);
-            return <OfficeDescriptionCard key={card.id} Icon={Icon} headerText={card.headerText} infoText={card.infoText} />
+            return <OfficeDescriptionCard key={card.id} Icon={Icon} headerText={card.headerText} infoText={card.infoText} isLink={card.isLink} href={card.href} />
         });
     
         return (<ul className="w-full md:max-w-[440px] lg:min-w-[440px] mx-auto lg:m-0 flex flex-col gap-y-5">{elements}</ul>);

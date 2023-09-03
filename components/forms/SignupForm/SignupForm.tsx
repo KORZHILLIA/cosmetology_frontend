@@ -2,12 +2,16 @@ import { useForm } from 'react-hook-form';
 import useFormPersist from 'react-hook-form-persist';
 
 import useAppDispatch from '@/hooks/useAppDispatch';
+import useAppSelector from '@/hooks/useAppSelector';
 
 import { nameRegexp, emailRegexp, passwordRegexp } from '@/constants/regexp';
 import { signupNewUser } from '@/redux/auth/auth-operations';
+import { getAuth } from '@/redux/auth/auth-selectors';
 
 import Input from '@/components/shared/Input/Input';
+import PasswordInput from './PasswordInput/PasswordInput';
 import Button from '@/components/shared/Button/Button';
+import Spinner from '@/components/shared/Spinner/Spinner';
 
 import User from '@/public/assets/svg/user.svg';
 import Envelope from '@/public/assets/svg/envelope.svg';
@@ -25,7 +29,9 @@ export default function SignupForm() {
 
     const dispatch = useAppDispatch();
 
-    const { handleSubmit, register, watch, setValue, reset, formState: { errors } } = useForm<SignupFormInputs>({ mode: 'onSubmit' });
+    const { loading } = useAppSelector(getAuth);
+
+    const { handleSubmit, register, watch, setValue, reset, control, formState: { errors } } = useForm<SignupFormInputs>({ mode: 'onSubmit' });
     
     const STORAGE_KEY = 'signupForm';
 
@@ -60,14 +66,16 @@ export default function SignupForm() {
                 }
             }
         })} error={errors.email?.message} />
-        <Input label='Password' type='password' Icon={Lock} isEye register={register('password', {
+        <PasswordInput control={control} />
+        {/* <Input label='Password' type='password' Icon={Lock} isEye register={register('password', {
             required: 'Required',
             validate: {
                 testValue: (value: string) => {
                     return passwordRegexp.test(value) || 'Please follow format';
                 }
             }
-        })} error={errors.password?.message} />
+        })} error={errors.password?.message} /> */}
         <Button type='submit' text='Sign up' styles={`${wix.className} py-[14px] px-[12px] font-semibold text-white text-lg lg:text-xl`} />
+        {loading && <Spinner />}
     </form>);
 }

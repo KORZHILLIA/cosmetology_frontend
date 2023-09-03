@@ -37,6 +37,22 @@ const initialState: ReduxUserState = {
   availableVisitDates: [],
 };
 
+interface RejectedAction extends Action {
+  payload: any;
+}
+
+interface PendingAction extends Action {
+  state: ReduxUserState;
+}
+
+function isRejectedAction(action: AnyAction): action is RejectedAction {
+  return action.type.endsWith('rejected');
+}
+
+function isPendingAction(action: AnyAction): action is PendingAction {
+  return action.type.endsWith('pending');
+}
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -46,10 +62,6 @@ const authSlice = createSlice({
       .addCase(HYDRATE, (state, action: any) => {
         return { ...state, ...action.payload.auth };
       })
-      .addCase(signupNewUser.pending, state => {
-        state.loading = true;
-        state.error = null;
-      })
       .addCase(signupNewUser.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.isEmailSent = payload;
@@ -57,10 +69,6 @@ const authSlice = createSlice({
       .addCase(signupNewUser.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload as ExtractedAxiosError;
-      })
-      .addCase(signinUser.pending, state => {
-        state.loading = true;
-        state.error = null;
       })
       .addCase(signinUser.fulfilled, (state, { payload }) => {
         const {
@@ -88,10 +96,6 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = payload as ExtractedAxiosError;
       })
-      .addCase(signupOuterUser.pending, state => {
-        state.loading = true;
-        state.error = null;
-      })
       .addCase(signupOuterUser.fulfilled, (state, { payload }) => {
         const {
           role,
@@ -118,10 +122,6 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = payload as ExtractedAxiosError;
       })
-      .addCase(getCurrentUser.pending, state => {
-        state.loading = true;
-        state.error = null;
-      })
       .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
         const {
           role,
@@ -144,32 +144,8 @@ const authSlice = createSlice({
         state.pastVisitDates = pastVisitDates;
         state.accessToken = accessToken;
       })
-      .addCase(getCurrentUser.rejected, (state, { payload }) => {
-        const { status } = payload as ExtractedAxiosError;
-        if (status === 401) {
-          return { ...initialState, error: payload as ExtractedAxiosError };
-        }
-        state.loading = false;
-        state.error = payload as ExtractedAxiosError;
-      })
-      .addCase(signoutUser.pending, state => {
-        state.loading = true;
-        state.error = null;
-      })
       .addCase(signoutUser.fulfilled, () => {
         return initialState;
-      })
-      .addCase(signoutUser.rejected, (state, { payload }) => {
-        const { status } = payload as ExtractedAxiosError;
-        if (status === 401) {
-          return { ...initialState, error: payload as ExtractedAxiosError };
-        }
-        state.loading = false;
-        state.error = payload as ExtractedAxiosError;
-      })
-      .addCase(refuseDateByUser.pending, state => {
-        state.loading = true;
-        state.error = null;
       })
       .addCase(refuseDateByUser.fulfilled, (state, { payload }) => {
         const { futureVisitDates, pastVisitDates } = payload;
@@ -178,69 +154,21 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = null;
       })
-      .addCase(refuseDateByUser.rejected, (state, { payload }) => {
-        const { status, message } = payload as ExtractedAxiosError;
-        if (status === 401) {
-          return { ...initialState, error: { status, message } };
-        }
-        state.loading = false;
-        state.error = payload as ExtractedAxiosError;
-      })
-      .addCase(addNewDatesByAdmin.pending, state => {
-        state.loading = true;
-        state.error = null;
-      })
       .addCase(addNewDatesByAdmin.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.error = null;
         state.availableVisitDates = [...state.availableVisitDates, ...payload];
-      })
-      .addCase(addNewDatesByAdmin.rejected, (state, { payload }) => {
-        const { status } = payload as ExtractedAxiosError;
-        if (status === 401) {
-          return { ...initialState, error: payload as ExtractedAxiosError };
-        }
-        state.loading = false;
-        state.error = payload as ExtractedAxiosError;
-      })
-      .addCase(getAllAvailableVisitDates.pending, state => {
-        state.loading = true;
-        state.error = null;
       })
       .addCase(getAllAvailableVisitDates.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.error = null;
         state.availableVisitDates = payload;
       })
-      .addCase(getAllAvailableVisitDates.rejected, (state, { payload }) => {
-        const { status } = payload as ExtractedAxiosError;
-        if (status === 401) {
-          return { ...initialState, error: payload as ExtractedAxiosError };
-        }
-        state.loading = false;
-        state.error = payload as ExtractedAxiosError;
-      })
-      .addCase(deleteVisitDateByAdmin.pending, state => {
-        state.loading = true;
-        state.error = null;
-      })
       .addCase(deleteVisitDateByAdmin.fulfilled, (state, { payload }) => {
         state.loading = false;
         const requiredIdx = state.availableVisitDates.findIndex(visit => visit._id === payload);
         state.availableVisitDates.splice(requiredIdx, 1);
         return state;
-      })
-      .addCase(deleteVisitDateByAdmin.rejected, (state, { payload }) => {
-        const { status } = payload as ExtractedAxiosError;
-        if (status === 401) {
-          return { ...initialState, error: payload as ExtractedAxiosError };
-        }
-        state.loading = false;
-        state.error = payload as ExtractedAxiosError;
-      })
-      .addCase(reserveVisitDateByUser.pending, state => {
-        state.loading = true;
-        state.error = null;
       })
       .addCase(reserveVisitDateByUser.fulfilled, (state, { payload }) => {
         const { userId, reservedVisitDateID, futureVisitDates, pastVisitDates } = payload;
@@ -253,18 +181,6 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = null;
       })
-      .addCase(reserveVisitDateByUser.rejected, (state, { payload }) => {
-        const { status } = payload as ExtractedAxiosError;
-        if (status === 401) {
-          return { ...initialState, error: payload as ExtractedAxiosError };
-        }
-        state.loading = false;
-        state.error = payload as ExtractedAxiosError;
-      })
-      .addCase(confirmVisitDateByAdmin.pending, state => {
-        state.loading = true;
-        state.error = null;
-      })
       .addCase(confirmVisitDateByAdmin.fulfilled, (state, { payload }) => {
         const { status, dateId } = payload;
         const requiredIdx = state.availableVisitDates.findIndex(visit => visit._id === dateId);
@@ -273,13 +189,17 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = null;
       })
-      .addCase(confirmVisitDateByAdmin.rejected, (state, { payload }) => {
+      .addMatcher(isRejectedAction, (state, { payload }) => {
         const { status } = payload as ExtractedAxiosError;
         if (status === 401) {
           return { ...initialState, error: payload as ExtractedAxiosError };
         }
         state.loading = false;
         state.error = payload as ExtractedAxiosError;
+      })
+      .addMatcher(isPendingAction, state => {
+        state.loading = true;
+        state.error = null;
       });
   },
 });
