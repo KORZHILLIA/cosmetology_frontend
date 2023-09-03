@@ -43,7 +43,8 @@ export default function UserNameAndSignout({ userName, userEmail, linkAddress, l
 
     const onSignoutClick = () => {
         if (session) {
-            setTimeout(() => signOut(), 1000);
+            // setTimeout(() => signOut({redirect: false}), 1000);
+            signOut({redirect: false})
         }
         dispatch(signoutUser({ email: userEmail }));
         onClick();

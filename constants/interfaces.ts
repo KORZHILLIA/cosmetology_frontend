@@ -21,7 +21,7 @@ export interface ContactFormInputs {
   name: string;
   email?: string;
   phone: string;
-  isTelegram: boolean;
+  telegram?: string;
   messageToSend: string;
 }
 

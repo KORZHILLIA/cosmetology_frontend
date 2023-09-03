@@ -79,9 +79,11 @@ div[id='logout-popover'] .MuiPopover-paper {
 }
 
 div[id='pastvisitdates-popover'] .MuiPopover-paper {
+  max-height: 300px;
   padding: 12px;
   transform: translate(-12px, 13px) !important;
   background-color: rgb(148 163 184) !important;
+  overflow-y: auto;
 }
 
 div[id='nav-tabs'] .Mui-selected,

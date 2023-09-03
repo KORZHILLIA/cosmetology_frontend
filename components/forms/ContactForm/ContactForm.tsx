@@ -6,13 +6,18 @@ import { sendToTelegram } from '@/service/externalApi';
 import notificate from '@/helpers/notificate';
 
 import type { ContactFormInputs } from '@/constants/interfaces';
-import { emailRegexp } from '@/constants/regexp';
+import { emailRegexp, formatChars } from '@/constants/regexp';
 
 import Input from '@/components/shared/Input/Input';
 import MaskedInput from '@/components/shared/MaskedInput/MaskedInput';
 import TextArea from '@/components/shared/TextArea/TextArea';
 import Button from '@/components/shared/Button/Button';
 import Spinner from '@/components/shared/Spinner/Spinner';
+
+import User from '@/public/assets/svg/user.svg';
+import Envelope from '@/public/assets/svg/envelope.svg';
+
+import { wix } from '@/public/fonts/fonts';
 
 export default function ContactForm() {
     const [loading, setLoading] = useState<boolean>(false);
@@ -31,11 +36,20 @@ export default function ContactForm() {
 
     const formSubmit = async (formData: ContactFormInputs) => {
         const phoneValue = getValues('phone');
-        if (!phoneValue) {
+        const telegramValue = getValues('telegram');
+        const noPhoneValue = !phoneValue;
+        const isPhoneValueNotComplete = phoneValue?.includes('_');
+        const isTelegramValueShort = telegramValue && telegramValue?.length < 6;
+        if (noPhoneValue || isPhoneValueNotComplete || isTelegramValueShort) {
+            if (noPhoneValue) {
             setError('phone', { type: 'custom', message: 'Required' });
-            return;
-        } else if (phoneValue?.includes('_')) {
+        }
+            if (isPhoneValueNotComplete) {
             setError('phone', { type: 'custom', message: 'Please fill completely' });
+        }
+            if (isTelegramValueShort) {
+            setError('telegram', { type: 'custom', message: 'From 5 to 32 characters' });
+        }
             return;
         }
         setLoading(true);
@@ -53,7 +67,7 @@ export default function ContactForm() {
     
     return (<>
         <form className='w-full md:max-w-[440px] lg:min-w-[440px] mx-auto lg:m-0 pt-6 lg:p-6 lg:border lg:border-brand lg:rounded-lg flex flex-col lg:order-1 gap-y-1' onSubmit={handleSubmit(formSubmit)}>
-            <Input label='Name' type='text' register={register('name', {
+            <Input label='Name' type='text' Icon={User} register={register('name', {
                 required: 'Required',
                 validate: {
                     testValue: (value: string) => {
@@ -65,7 +79,7 @@ export default function ContactForm() {
                 },
                 setValueAs: (value: string) => value.trim(),
             })} error={errors.name?.message} />
-            <Input label='Email' type='text' register={register('email', {
+            <Input label='Email' type='text' Icon={Envelope} register={register('email', {
                 validate: {
                     testValue: (value: string | undefined) => {
                         const regexp = emailRegexp;
@@ -77,7 +91,8 @@ export default function ContactForm() {
                 },
                 setValueAs: (value: string) => value.trim(),
             })} error={errors.email?.message} />
-            <MaskedInput type='tel' label='Phone' control={control} mask='+380 (99) 999-99-99' />
+            <MaskedInput name='telegram' type='text' label='Telegram' control={control} mask='@CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC' formatChars={formatChars} maskChar='' />
+            <MaskedInput name='phone' type='tel' label='Phone' control={control} mask='+380 (99) 999-99-99' maskChar='_' />
             <TextArea label='Message' register={register('messageToSend', {
                     required: 'Required',
                 validate: {
@@ -87,7 +102,7 @@ export default function ContactForm() {
                 },
                 setValueAs: (value: string) => value.trim(),
                 })} error={errors.messageToSend?.message} />
-            <Button type='submit' text='Send' centered styles='w-[270px] py-[14px] px-[12px] font-semibold text-white text-lg' />
+            <Button type='submit' text='Send' centered styles={`${wix.className} w-[270px] py-[14px] px-[12px] font-semibold text-white text-lg lg:text-xl`} />
         </form>
         {loading && <Spinner />}
         </>

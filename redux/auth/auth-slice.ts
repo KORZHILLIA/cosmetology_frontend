@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, Action, AnyAction } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { HYDRATE } from 'next-redux-wrapper';
@@ -213,9 +213,9 @@ const authSlice = createSlice({
         state.availableVisitDates = payload;
       })
       .addCase(getAllAvailableVisitDates.rejected, (state, { payload }) => {
-        const { status, message } = payload as ExtractedAxiosError;
+        const { status } = payload as ExtractedAxiosError;
         if (status === 401) {
-          return { ...initialState, error: { status, message } };
+          return { ...initialState, error: payload as ExtractedAxiosError };
         }
         state.loading = false;
         state.error = payload as ExtractedAxiosError;

@@ -1,12 +1,15 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { Popover } from '@mui/material';
 import { AxiosError } from 'axios';
+import {useSession, signOut} from 'next-auth/react'
 
 import useAppSelector from '@/hooks/useAppSelector';
 
 import { getAuth } from '@/redux/auth/auth-selectors';
 import { postConfirm } from '@/service/externalApi';
 import extractAxiosError from '@/helpers/extractAxiosError';
+import notificate from '@/helpers/notificate';
 
 import type { PastVisitDate, Role } from "@/constants/interfaces";
 
@@ -25,6 +28,10 @@ export default function PastVisitDates({ clientEmail, dates, refreshFunc }: Past
     const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<null | string>(null);
+
+    const session = useSession();
+
+    const router = useRouter();
 
     const { role } = useAppSelector(getAuth);
 
@@ -45,15 +52,22 @@ export default function PastVisitDates({ clientEmail, dates, refreshFunc }: Past
                 refreshFunc();
             }
         } catch (error) {
-            const { message } = extractAxiosError(error as AxiosError);
+            const { status, message } = extractAxiosError(error as AxiosError);
             setError(message);
+            if (status === 401) {
+                if (session) {
+                    signOut({ callbackUrl: '/auth/signin' });
+                } else {
+                    router.replace('/auth/signin');
+                }
+            }
         }
     }
 
     const open = Boolean(anchorEl);
     const id = open ? 'pastvisitdates-popover' : undefined;
     
-    const elements = dates?.filter(date => new Date().toLocaleString() > new Date(date.date).toLocaleString() ).map((date, idx) => <li key={idx} className={`p-2 ${date.postConfirmed ? 'bg-green-400' : 'bg-green-200'}`}>
+    const elements = dates?.filter(date => new Date().toISOString() > new Date(date.date).toISOString() ).map((date, idx) => <li key={idx} className={`p-2 ${date.postConfirmed ? 'bg-green-400' : 'bg-green-200'}`}>
         <div className='flex items-center gap-x-4'>
             <span>{new Date(date.date).toLocaleString()}</span>
             {!date.postConfirmed && <Button type='button' text='Confirm' styles='p-3' bgColor='bg-slate-100' onClick={() => onConfirmBtnClick(role, clientEmail, date.date)} />}
@@ -70,6 +84,7 @@ export default function PastVisitDates({ clientEmail, dates, refreshFunc }: Past
                 {elements.length ? <ul className='flex flex-col gap-y-2'>{elements}</ul> : <p className='text-lg text-white'>No past dates yet</p>}
             </Popover>
             {loading && <Spinner />}
+            {error && notificate('error', error)}
         </div>
     );
  }
