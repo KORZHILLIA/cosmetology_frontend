@@ -17,6 +17,8 @@ export interface ExtractedAxiosError {
 
 export type Role = null | 'user' | 'admin';
 
+export type ToastKind = 'success' | 'error' | 'warning';
+
 export interface ContactFormInputs {
   name: string;
   email?: string;

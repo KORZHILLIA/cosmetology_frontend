@@ -31,7 +31,7 @@ export default function SignupForm() {
 
     const { loading } = useAppSelector(getAuth);
 
-    const { handleSubmit, register, watch, setValue, getValues, setError, reset, control, formState: { errors } } = useForm<SignupFormInputs>({ mode: 'onSubmit' });
+    const { handleSubmit, register, watch, setValue, getValues, reset, control, formState: { errors } } = useForm<SignupFormInputs>({ mode: 'onSubmit' });
     
     const STORAGE_KEY = 'signupForm';
 
@@ -72,14 +72,6 @@ export default function SignupForm() {
             }
         })} error={errors.email?.message} />
         <PasswordInput control={control} />
-        {/* <Input label='Password' type='password' Icon={Lock} isEye register={register('password', {
-            required: 'Required',
-            validate: {
-                testValue: (value: string) => {
-                    return passwordRegexp.test(value) || 'Please follow format';
-                }
-            }
-        })} error={errors.password?.message} /> */}
         <Button type='submit' text='Sign up' styles={`${wix.className} py-[14px] px-[12px] font-semibold text-white text-lg lg:text-xl`} />
         {loading && <Spinner />}
     </form>);
