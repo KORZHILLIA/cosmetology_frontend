@@ -31,7 +31,7 @@ export default function SignupForm() {
 
     const { loading } = useAppSelector(getAuth);
 
-    const { handleSubmit, register, watch, setValue, reset, control, formState: { errors } } = useForm<SignupFormInputs>({ mode: 'onSubmit' });
+    const { handleSubmit, register, watch, setValue, getValues, setError, reset, control, formState: { errors } } = useForm<SignupFormInputs>({ mode: 'onSubmit' });
     
     const STORAGE_KEY = 'signupForm';
 
@@ -44,6 +44,11 @@ export default function SignupForm() {
   });
     
     const formSubmit = async (formData: SignupFormInputs) => {
+        const passwordValue = getValues('password');
+        const isPasswordValid = passwordRegexp.test(passwordValue);
+        if (!isPasswordValid) {
+            return;
+        }
         dispatch(signupNewUser(formData));
         reset();
         sessionStorage.removeItem(STORAGE_KEY);

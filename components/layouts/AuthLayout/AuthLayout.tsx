@@ -29,7 +29,6 @@ export default function AuthLayout({ children }: LayoutProps) {
 
     useEffect(() => {
         if (session) {
-            console.log(session);
             if (error?.status === 401 || error?.status === 409) {
             signOut({redirect: false});
             return;
