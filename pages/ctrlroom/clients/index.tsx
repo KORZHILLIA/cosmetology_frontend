@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import { useSession, signOut } from 'next-auth/react';
 
 import { withAdminAuth } from "@/hocs/withAdminAuth";
@@ -61,12 +62,18 @@ export function ClientsPage() {
     }, []);
 
     return (
+        <>
+            <Head>
+                <title>My clients</title>
+            </Head>
         <AdminLayout>
             <p>Clients</p>
             <ClientsCards refreshFunc={ fetchClients} clients={clients as ClientInfo[]} />
             {loading && <Spinner />}
             {error && notificate('error', error)}
-        </AdminLayout>);
+            </AdminLayout>
+            </>
+            );
 };
 
 export default withAdminAuth(ClientsPage);

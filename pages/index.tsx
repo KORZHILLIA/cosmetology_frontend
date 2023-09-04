@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import Head from 'next/head';
 
 import useAppDispatch from '@/hooks/useAppDispatch';
 import useAppSelector from '@/hooks/useAppSelector';
@@ -24,6 +25,9 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <title>Home</title>
+      </Head>
       <About />
       <Technologies />
       <Welcome />

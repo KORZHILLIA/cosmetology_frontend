@@ -23,7 +23,8 @@ export default function Notification({ kind, label }: NotificationProps) {
         }
     }
 
-    const {Icon, color, bgColor} = getIcon();
+    const { Icon, color, bgColor } = getIcon();
+    
     return (
         <div className={`${bgColor} flex justify-start items-center gap-x-4`}>
             <Icon className={`w-12 h-12 ${color}`} />

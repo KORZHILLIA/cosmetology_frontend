@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import type { NextRouter } from 'next/dist/client/router';
 import type { NavInstance } from '@/constants/interfaces';
@@ -20,26 +20,35 @@ export default function CommonNavTabs({linksArr, pathName, router}: CommonNavTab
     if (initialValue === -1) {
         isRouterPathMatches = false;
     }
-    const [value, setValue] = useState<number>(isRouterPathMatches ? initialValue : 0);
 
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    const [value, setValue] = useState<number>(isRouterPathMatches ? initialValue : 0);
+    
+    useEffect(() => {
+            if (router.pathname === '/' && value !== 0) {
+                setValue(0);
+            }
+    }, [router.pathname]
+    );
+
+    const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
         router.push(linksArr[newValue].address);
     };
 
-    const setRouterPathMatchesAsTrue = () => {
+    const setRouterPathMatchesAsTrue = (idx: number) => {
+        if (isRouterPathMatches) {
+            return;
+        }
         if (!isRouterPathMatches) {
             isRouterPathMatches = true;
-            router.push(linksArr[value].address);
+            router.push(linksArr[idx].address);
         }
     }
-    
-    const elements = commonNav.links.map(link => <Tab key={link.text} label={link.text} />)
+    const elements = commonNav.links.map((link, idx) => <Tab key={link.text} label={link.text} onClick={() => setRouterPathMatchesAsTrue(idx)} />);
+
     return (
-        <div onClick={setRouterPathMatchesAsTrue}>
             <Tabs id={isRouterPathMatches ? "nav-tabs" : "nav-tabs-no-indicator"} value={value} onChange={handleChange}>
               {elements}
             </Tabs>
-        </div>
         );
 }

@@ -130,3 +130,8 @@ div[id='nav-tabs-no-indicator'] .MuiTabs-indicator {
   color: white !important;
   opacity: 1 !important;
 }
+
+.Toastify__close-button > svg {
+  width: 28px !important;
+  height: 28px !important;
+}

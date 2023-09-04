@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 import useAppSelector from '@/hooks/useAppSelector';
 import { getAuth } from '@/redux/auth/auth-selectors';
@@ -16,7 +17,14 @@ export default function SigninPage() {
             router.replace(role === 'user' ? '/cabinet' : '/ctrlroom');}
     }, [isSigned]);
 
-    return <AuthLayout>
-        <SigninForm />
-    </AuthLayout>;
+    return (
+        <>
+            <Head>
+                <title>Signin page</title>
+            </Head>
+            <AuthLayout>
+              <SigninForm />
+            </AuthLayout>
+        </>
+    );
 }

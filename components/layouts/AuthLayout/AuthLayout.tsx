@@ -23,12 +23,13 @@ export default function AuthLayout({ children }: LayoutProps) {
 
     const dispatch = useAppDispatch();
 
-    const { error } = useAppSelector(getAuth);
+    const { error, loading } = useAppSelector(getAuth);
 
     const isSignup = router.pathname.includes('signup');
 
     useEffect(() => {
         if (session) {
+            console.log(session);
             if (error?.status === 401 || error?.status === 409) {
             signOut({redirect: false});
             return;
@@ -36,7 +37,7 @@ export default function AuthLayout({ children }: LayoutProps) {
             const { user } = session;
             dispatch(signupOuterUser({ name: user?.name as string, email: user?.email as string }));
         }
-    }, [session]);
+    }, [session, loading]);
 
     return <div className="container pt-[10vh] pb-6 md:flex items-center gap-x-14 lg:gap-x-20 xl:gap-x-32">
         <div className="hidden md:block relative w-1/2 md:h-[500px] rounded-lg overflow-hidden">
