@@ -14,6 +14,16 @@
             "id": "contacts",
             "text": "Contacts",
             "address": "/contacts"
+        },
+        {
+            "id": "admin",
+            "text": "Cabinet",
+            "address": "/cabinet"
+        },
+        {
+            "id": "user",
+            "text": "Control Room",
+            "address": "/ctrlroom"
         }
     ]
 }

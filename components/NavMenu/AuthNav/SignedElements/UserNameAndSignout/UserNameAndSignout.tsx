@@ -56,7 +56,7 @@ export default function UserNameAndSignout({ userName, userEmail, linkAddress, l
                 <span className='md:hidden block text-brand' onClick={onSignoutClick}>Signout</span>
             <Selector className="hidden md:block md:w-[20px] md:h-[20px] md:translate-y-[3px] fill-semiPale" />
         </div>
-            <Link href={linkAddress} className='hidden md:block md:pl-3 md:border-l border-l-zinc-800 text-semiPale'>{linkLabel}</Link>
+            {/* <Link href={linkAddress} className='hidden md:block md:pl-3 md:border-l border-l-zinc-800 text-semiPale'>{linkLabel}</Link> */}
         <Popover className='hidden md:block' id={id} open={open} anchorEl={anchorEl} onClose={handleClose}
         transformOrigin={{vertical: 'top', horizontal: 'left'}} anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}>
             <p className={`p-2 flex items-center gap-x-3  ${literata.className} bg-orange-50 rounded-lg cursor-pointer`} onClick={onSignoutClick}>
