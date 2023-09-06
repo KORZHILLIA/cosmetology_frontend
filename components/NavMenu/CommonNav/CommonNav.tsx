@@ -14,7 +14,7 @@ export default function CommonNav({linksArr, router, pathName, onClick}: CommonN
     const mobileElements = linksArr.map(link => {
         const isPathEqualToAdress = link.address === pathName;
         return (
-            <li key={link.address} className={`w-full py-3 px-2 ${isPathEqualToAdress ? 'text-brand bg-orange-50 border-l-2 border-l-brand' : 'bg-transparent'} cursor-pointer`} onClick={() => { router.push(link.address); onClick(); }}>
+            <li key={link.address} className={`w-full py-3 px-2 ${isPathEqualToAdress ? 'text-brand bg-orange-50 dark:bg-slate-500 border-l-2 border-l-brand' : 'bg-transparent'} cursor-pointer`} onClick={() => { router.push(link.address); onClick(); }}>
                 <span>{link.text}</span>
             </li>
         );

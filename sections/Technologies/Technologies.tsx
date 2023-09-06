@@ -14,12 +14,12 @@ export default function Technologies() {
     const isTablet = useMediaQuery('(min-width: 768px)');
     
     return (
-        <Section styles="py-3 bg-white">
+        <Section styles="py-3 bg-white dark:bg-[#3a3c3c]">
                 <SectionHeader text="Latest Technology" styles='md:text-center' />
                 <Paragraph styles="md:text-center lg:mx-auto lg:mb-[60px] lg:max-w-[700px]" text="Thanks to major technological advancements, dentistry allows treating the most complex cases with less time and more efficiency." />
                 <div className="lg:flex lg:justify-between">
                     <div className="relative w-full lg:w-[340px] xl:w-[400px] h-[362px] lg:h-[396px] mb-[40px] lg:mb-0 ">
-                        <Image className="object-cover" src={technologyImg} fill sizes='100vw' priority alt='' />
+                        <Image className="object-cover" src={technologyImg} fill sizes='(max-width: 480px) 100vw, (max-width: 767px) 57vw, (max-width: 1000px) 71vw, (max-width: 1280px) 37vw, 40vw' priority alt='' />
                     </div>
                     <div className="pb-[60px] lg:w-[60%]">
                         <SectionSubheader text="The Future of Dentistry is Digital:" />
@@ -28,7 +28,7 @@ export default function Technologies() {
                         <Paragraph text="Artificial intelligence is laying the groundwork for the future of the dental industry. Dental robots can now perform functions such as filling cavities and cleaning or extracting teeth." />
                     </div>
                 </div>                
-                <div className="p-[30px] bg-header rounded-lg">
+                <div className="p-[30px] bg-header dark:bg-neutral-800 rounded-lg">
                     {isTablet ? (<div className="grid md:gap-2 lg:gap-3 md:grid-rows-3 xl:grid-cols-3 xl:grid-rows-1 md:max-w-[600px] xl:max-w-full md:mx-auto">
                         <TechnologyCards />
                     </div>) :

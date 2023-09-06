@@ -7,5 +7,5 @@ interface SectionSubheaderProps {
 }
 
 export default function SectionSubheader({text, isCentered, styles}: SectionSubheaderProps) {
-    return (<h3 className={`mb-4 ${isCentered && 'mx-auto'} text-header text-2xl ${styles ? styles : ''}`}>{text}</h3>);
+    return (<h3 className={`mb-4 ${isCentered ? 'mx-auto' : ''} text-header dark:text-slate-200 text-2xl ${styles ? styles : ''}`}>{text}</h3>);
 }

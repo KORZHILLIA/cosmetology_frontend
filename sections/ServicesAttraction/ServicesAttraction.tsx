@@ -22,7 +22,7 @@ export default function ServicesAttraction() {
                 </Link>
             </div>
             <div className="hidden md:block relative md:w-full h-auto lg:h-[500px] xl:h-[600px] rounded-lg overflow-hidden">
-                <Image className="object-cover" src={attractImg} fill sizes='100vw' priority alt='' />
+                <Image className="object-cover" src={attractImg} fill sizes='(max-width: 767px) 0vw, (max-width: 1000px) 34vw, 35vw' priority alt='' />
             </div>
         </Section>
     );

@@ -33,8 +33,8 @@ export default function NavMenu({ isVisible, toggleFunc }: NavMenuProps) {
 
     return (
         <nav className={`${wix.className} ${isVisible ? 'right-0' : '-right-[100%]'} fixed md:static top-0 w-screen md:w-full h-screen md:h-auto flex justify-end md:justify-center md:items-center z-20 md:z-0 transition-all duration-100 md:transition-none`}>
-            <div onClick={toggleFunc} className='w-1/2 h-screen bg-slate-100/90 md:hidden'></div>
-            <div className='w-1/2 md:w-full h-full md:flex md:justify-around md:items-center py-14 md:p-0 bg-orange-100'>
+            <div onClick={toggleFunc} className='w-1/2 h-screen bg-slate-100/90 dark:bg-neutral-800/90 md:hidden'></div>
+            <div className='w-1/2 md:w-full h-full md:flex md:justify-around md:items-center py-14 md:p-0 bg-orange-100 dark:bg-neutral-700 md:dark:bg-neutral-800'>
                 <AuthNav onClick={toggleFunc} notSignedArr={authNav.authBtns} adminArr={authNav.adminNav} userArr={authNav.userNav} />
                 {isNotMobile ? <CommonNavTabs linksArr={signedLinksArr} router={router} pathName={pathName} /> : <CommonNav linksArr={commonLinksArr} router={router} pathName={pathName} onClick={toggleFunc} />}
             </div>

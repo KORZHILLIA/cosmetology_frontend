@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
 import { Popover } from '@mui/material';
 
@@ -7,7 +6,7 @@ import useAppDispatch from "@/hooks/useAppDispatch";
 
 import { signoutUser } from '@/redux/auth/auth-operations';
 
-import { literata } from '@/public/fonts/fonts';
+import { wix } from '@/public/fonts/fonts';
 
 import Selector from '@/public/assets/svg/selector.svg';
 import Signout from '@/public/assets/svg/signout.svg';
@@ -20,7 +19,7 @@ interface UserNameAndSignoutProps {
     onClick: () => void;
 }
 
-export default function UserNameAndSignout({ userName, userEmail, linkAddress, linkLabel, onClick}: UserNameAndSignoutProps) {
+export default function UserNameAndSignout({ userName, userEmail, onClick}: UserNameAndSignoutProps) {
     const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
 
     const { data: session } = useSession();
@@ -43,25 +42,23 @@ export default function UserNameAndSignout({ userName, userEmail, linkAddress, l
 
     const onSignoutClick = () => {
         if (session) {
-            // setTimeout(() => signOut({redirect: false}), 1000);
             signOut({redirect: false})
         }
         dispatch(signoutUser({ email: userEmail }));
         onClick();
     };
 
-        return (<div className="flex items-center md:gap-x-3 mb-3 md:mb-0 p-2 md:p-3 translate-x-[8px] md:translate-x-0 bg-orange-50">
+        return (<div className="flex items-center md:gap-x-3 mb-3 md:mb-0 p-2 md:p-3 translate-x-[8px] md:translate-x-0 bg-orange-50 dark:bg-neutral-600">
         <div className="flex items-center gap-x-2 text-semiPale md:cursor-pointer" onClick={onSelectorClick}>
-            <p className='pr-2 md:pr-0 border-r border-r-zinc-800 md:border-0'>{userName}</p>
+            <p className='pr-2 md:pr-0 border-r border-r-zinc-800 dark:border-r-slate-200 md:border-0 dark:text-white'>{userName}</p>
                 <span className='md:hidden block text-brand' onClick={onSignoutClick}>Signout</span>
-            <Selector className="hidden md:block md:w-[20px] md:h-[20px] md:translate-y-[3px] fill-semiPale" />
+            <Selector className="hidden md:block md:w-[20px] md:h-[20px] md:translate-y-[3px] fill-semiPale dark:fill-white" />
         </div>
-            {/* <Link href={linkAddress} className='hidden md:block md:pl-3 md:border-l border-l-zinc-800 text-semiPale'>{linkLabel}</Link> */}
         <Popover className='hidden md:block' id={id} open={open} anchorEl={anchorEl} onClose={handleClose}
         transformOrigin={{vertical: 'top', horizontal: 'left'}} anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}>
-            <p className={`p-2 flex items-center gap-x-3  ${literata.className} bg-orange-50 rounded-lg cursor-pointer`} onClick={onSignoutClick}>
-                <Signout className="w-[32px] h-[32px] fill-semiPale" />
-                <span className='text-xl text-semiPale font-medium'>Signout</span>
+            <p className={`p-2 flex items-center gap-x-3  ${wix.className} bg-orange-50 dark:bg-neutral-600 rounded-lg cursor-pointer`} onClick={onSignoutClick}>
+                <Signout className="w-[32px] h-[32px] fill-semiPale dark:fill-white" />
+                <span className='text-xl text-semiPale dark:text-white font-medium'>Signout</span>
             </p>
             </Popover>
     </div>);

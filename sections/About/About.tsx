@@ -18,7 +18,7 @@ export default function About() {
                 <Paragraph text='We work hard to stay up to date with the most advanced techniques and technologies to ensure that our patients receive the best care possible. Our office utilizes 3D CBCT radiographs to allow for guided surgical and endodontic protocols. This enables these procedures to performed digitally before they are performed surgically to ensure optimal results. 3D imaging also is utilized for the analysis of airway growth and development. We also use the best 3D optical scanner for all of our dental restoration and Invisalign impressions. Dr Williams is a strong advocate for using microsurgical techniques, this means less discomfort and faster healing times.' />
                 </div>
                 <div className="relative w-full lg:w-[35%] h-[517px] lg:h-[600px] rounded-lg overflow-hidden">
-                <Image className="object-cover" src={aboutImg} fill sizes='100vw' priority alt='' />
+                <Image className="object-cover" src={aboutImg} fill sizes='(max-width: 480px) 100vw, (max-width: 767px) 57vw, (max-width: 1000px) 71vw, 31vw' priority alt='' />
                 </div>
             </div>
         </Section>

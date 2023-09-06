@@ -32,6 +32,10 @@ body {
   @media screen and (min-width: 768px) {
     padding-top: 100px;
   }
+
+  @media (prefers-color-scheme: dark) {
+    background-image: linear-gradient(to bottom, #3a3c3c, #3a3c3c);
+  }
 }
 
 textarea::-webkit-scrollbar {
@@ -76,6 +80,10 @@ textarea::-webkit-scrollbar-thumb {
 div[id='logout-popover'] .MuiPopover-paper {
   transform: translate(-12px, 13px) !important;
   background-color: rgb(255 247 237) !important;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: rgb(82, 82, 82) !important;
+  }
 }
 
 div[id='pastvisitdates-popover'] .MuiPopover-paper {
@@ -91,6 +99,10 @@ div[id='nav-tabs'] .MuiButtonBase-root,
 div[id='nav-tabs-no-indicator'] .Mui-selected,
 div[id='nav-tabs-no-indicator'] .MuiButtonBase-root {
   font-family: var(--font-wix);
+
+  @media (prefers-color-scheme: dark) {
+    color: white;
+  }
 }
 
 div[id='nav-tabs'] .Mui-selected {

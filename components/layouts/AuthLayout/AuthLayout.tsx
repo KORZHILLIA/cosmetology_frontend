@@ -42,7 +42,7 @@ export default function AuthLayout({ children }: LayoutProps) {
 
     return <div className="container pt-[10vh] pb-6 md:flex items-center gap-x-14 lg:gap-x-20 xl:gap-x-32">
         <div className="hidden md:block relative w-1/2 md:h-[500px] rounded-lg overflow-hidden">
-            <Image className="object-cover" src={authImg} fill sizes='100vw' priority alt='' />
+            <Image className="object-cover" src={authImg} fill sizes='(max-width: 767px) 0vw, (max-width: 1000px) 29vw, (max-width: 1280px) 34vw, 40vw' priority alt='' />
         </div>
         <div>
             <h1 className="mb-2.5 text-4xl font-semibold text-center">{isSignup ? 'Create An Account' : 'Welcome Back'}</h1>
