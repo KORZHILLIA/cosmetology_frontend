@@ -16,6 +16,8 @@ import AuthLayoutBottomLink from "@/components/shared/AuthLayoutBottomLink/AuthL
 
 import authImg from '@/public/assets/img/authImg.jpg';
 
+import { wix } from "@/public/fonts/fonts";
+
 export default function AuthLayout({ children }: LayoutProps) {
     const { data: session } = useSession();
 
@@ -46,9 +48,9 @@ export default function AuthLayout({ children }: LayoutProps) {
             <h1 className="mb-2.5 text-4xl font-semibold text-center">{isSignup ? 'Create An Account' : 'Welcome Back'}</h1>
             <p className="mb-7 text-lg text-center text-semiPale">Discover a better way of spandings with KorzhBeauty.</p>
             {!session && <GoogleBtn />}
-            <span className="relative block p-2 text-center text-lg bg-transparent
+            <span className={`${wix.className} relative block p-2 text-center text-lg bg-transparent
             before:content-[''] before:absolute before:top-[24px] before:left-0 before:w-[calc(50%-20px)] before:h-[0.5px] before:bg-semiPale
-            after:content-[''] after:absolute after:top-[24px] after:right-0 after:w-[calc(50%-20px)] after:h-[0.5px] after:bg-semiPale"
+            after:content-[''] after:absolute after:top-[24px] after:right-0 after:w-[calc(50%-20px)] after:h-[0.5px] after:bg-semiPale`}
             >Or</span>
             {children}
             <AuthLayoutBottomLink />

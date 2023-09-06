@@ -12,9 +12,10 @@ import { wix } from '@/public/fonts/fonts';
 
 interface PasswordInputProps {
     control: Control<any>;
+    styles?: string;
 }
 
-export default function PasswordInput({control}: PasswordInputProps) {
+export default function PasswordInput({control, styles}: PasswordInputProps) {
     const [isTextType, setIsTextType] = useState<boolean>(false);
 
     const onEyeClick = () => setIsTextType(state => !state);
@@ -28,7 +29,7 @@ export default function PasswordInput({control}: PasswordInputProps) {
                 fieldState: {error}
             }) => {
                 return (
-                    <label className={`${wix.className} group relative pb-4 flex flex-col justify-start items-start last-of-type:mb-4`}>
+                    <label className={`${wix.className} group relative pb-4 flex flex-col justify-start items-start last-of-type:mb-4 ${styles}`}>
                         <span className={`${wix.className} mb-1 ${error? 'text-error' : 'text-semiPale'} text-xl font-semibold`}>Password</span>
                         <input ref={ref} onChange={onChange} type={isTextType ? 'text' : 'password'} className={`${wix.className} w-full p-2 pl-8 pr-[34px] md:pl-10 rounded-lg text-semiPale text-lg leading-none border focus:border-[1.5px] ${error ? 'border-[1.5px] border-error' : 'border-pale'} bg-white focus:bg-white autofill:shadow-[inset_0_0_0_1000px_rgb(255,255,255)] focus:autofill:shadow-[inset_0_0_0_1000px_rgb(255,255,255)] ${error ? 'shadow-[0_1px_5px_0_#f2513731]' : 'shadow-[0_2px_4px_#00000031]'} outline-0 focus:border-brand focus:shadow-[0_4px_6px_#ef820f31] md:text-2xl`} />
                         <Lock className='absolute top-[44px] md:top-[48px] left-[8px] w-[16px] md:w-[20px] h-[16px] md:h-[20px] fill-pale group-focus-within:fill-brand' />

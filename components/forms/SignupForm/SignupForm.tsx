@@ -9,13 +9,12 @@ import { signupNewUser } from '@/redux/auth/auth-operations';
 import { getAuth } from '@/redux/auth/auth-selectors';
 
 import Input from '@/components/shared/Input/Input';
-import PasswordInput from './PasswordInput/PasswordInput';
+import PasswordInput from '@/components/shared/PasswordInput/PasswordInput';
 import Button from '@/components/shared/Button/Button';
 import Spinner from '@/components/shared/Spinner/Spinner';
 
 import User from '@/public/assets/svg/user.svg';
 import Envelope from '@/public/assets/svg/envelope.svg';
-import Lock from '@/public/assets/svg/lock.svg';
 
 import { wix } from '@/public/fonts/fonts';
 

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import useFormPersist from 'react-hook-form-persist';
 
@@ -75,7 +76,10 @@ export default function SigninForm() {
         <Input label='Password' type='password' Icon={Lock} isEye register={register('password', {
             required: 'Required',
         })} error={errors.password?.message} />
-        <Checkbox label='Remember me' register={register('isRemember')} styles='mb-2' />
+        <div className='mb-2 flex justify-between'>
+            <Checkbox label='Remember me' register={register('isRemember')} />
+            <Link className={`${wix.className} text-sm md:text-lg leading-none underline underline-offset-2 decoration-[0.5px]`} href={'/auth/forgotpassword'}>Forgot password?</Link>
+        </div>
         <Button type='submit' text='Sign in' styles={`${wix.className} py-[14px] px-[12px] font-semibold text-white text-lg lg:text-xl`} />
         {loading && <Spinner />}
     </form>);

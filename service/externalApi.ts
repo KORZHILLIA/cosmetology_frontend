@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import type { SignupFormInputs } from '@/components/forms/SignupForm/SignupForm';
 import type { SigninFormInputs } from '@/components/forms/SigninForm/SigninForm';
+import type { ForgotPasswordFormInputs } from '@/components/forms/ForgotPasswordForm/ForgotPasswordForm';
 import type {
   ContactFormInputs,
   SignoutBody,
@@ -131,4 +132,15 @@ export const outerSignup = async (userData: SignupOuterBody) => {
   const { data } = await instance.post('/users/signupouter', userData);
   setToken(data?.accessToken);
   return data;
+};
+
+export const askChangePassword = async (userEmail: string) => {
+  const { data, status } = await instance(`/users/forgotpassword/${userEmail}`);
+  return { data, status };
+};
+
+export const updatePassword = async (userData: ForgotPasswordFormInputs) => {
+  const { email, password } = userData;
+  const { data, status } = await instance.patch(`/users/newpassword/${email}`, { password });
+  return { data, status };
 };
