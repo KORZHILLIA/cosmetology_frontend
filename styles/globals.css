@@ -63,6 +63,12 @@ textarea::-webkit-scrollbar-thumb {
   justify-content: center;
 }
 
+.rdp-nav_button:hover {
+  @media (prefers-color-scheme: dark) {
+    background-color: rgb(148 163 184) !important;
+  }
+}
+
 .rdp-caption_label {
   text-transform: capitalize;
   z-index: 0 !important;
@@ -74,6 +80,12 @@ textarea::-webkit-scrollbar-thumb {
 .rdp-cell {
   @media screen and (min-width: 768px) {
     font-size: 22px !important;
+  }
+}
+
+.rdp-button:hover {
+  @media (prefers-color-scheme: dark) {
+    background-color: rgb(148 163 184) !important;
   }
 }
 
@@ -119,6 +131,10 @@ div[id='nav-tabs'] .MuiTabs-indicator {
 
 div[id='nav-tabs-no-indicator'] .Mui-selected {
   color: rgba(0, 0, 0, 0.6);
+
+  @media (prefers-color-scheme: dark) {
+    color: white;
+  }
 }
 
 div[id='nav-tabs-no-indicator'] .MuiTabs-indicator {
@@ -146,4 +162,24 @@ div[id='nav-tabs-no-indicator'] .MuiTabs-indicator {
 .Toastify__close-button > svg {
   width: 28px !important;
   height: 28px !important;
+}
+
+div[id='service-accordion'],
+div[id='faq-accordion'] {
+  @media (prefers-color-scheme: dark) {
+    background-color: rgb(39, 39, 39);
+  }
+}
+
+div[id='service-accordion-selected'],
+div[id='faq-accordion-selected'] {
+  @media (prefers-color-scheme: dark) {
+    background-color: rgb(96, 95, 95);
+  }
+}
+
+div[id='faq-accordion'] {
+  @media (prefers-color-scheme: dark) {
+    background-color: transparent;
+  }
 }

@@ -34,9 +34,6 @@ const config: Config = {
         header: '#011632',
         blue: '#1376F8',
       },
-      fontFamily: {
-        literata: ['literata'],
-      },
     },
   },
   plugins: [],

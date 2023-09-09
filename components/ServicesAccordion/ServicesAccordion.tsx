@@ -38,17 +38,17 @@ export default function ServicesAccordion() {
         const isRequiredPanel = expanded === `panel${service.id}`;
         const Icon = getIcon(service.icon);
         return (
-            <Accordion key={service.id} sx={{backgroundColor: isRequiredPanel ? 'rgb(255, 247, 237)' : '', borderRadius: '8px', marginBottom: '10px', overflow: 'hidden'}} expanded={isRequiredPanel} onChange={handleChange(`panel${service.id}`)}>
+            <Accordion key={service.id} id={`${isRequiredPanel ? 'service-accordion-selected' : 'service-accordion'}`} sx={{backgroundColor: isRequiredPanel ? 'rgb(255, 247, 237)' : '', borderRadius: '8px', marginBottom: '10px', overflow: 'hidden'}} expanded={isRequiredPanel} onChange={handleChange(`panel${service.id}`)}>
                     <AccordionSummary expandIcon={<Selector className='w-[16px] h-[16px] fill-brand' />} aria-controls={`panel${service.id}bh-content`} id={`panel${service.id}bh-header`}>
                         <div className='w-full flex flex-col md:flex-row md:gap-x-6 items-center'>
-                            <div className={`mb-2 md:mb-0 p-2 flex justify-center items-center ${isRequiredPanel ? 'bg-slate-200' : 'bg-slate-100'} rounded-full`}>
+                            <div className={`mb-2 md:mb-0 p-2 flex justify-center items-center ${isRequiredPanel ? 'bg-slate-200 dark:bg-slate-400' : 'bg-slate-100 dark:bg-slate-300'} rounded-full`}>
                                 <Icon className='w-[48px] h-[48px] fill-brand' />
                             </div>
-                        <p className='text-center md:text-xl xl:text-2xl'>{service.headerText}</p>
+                        <p className='text-center md:text-xl xl:text-2xl dark:text-pale'>{service.headerText}</p>
                         </div>
                     </AccordionSummary>
                 <AccordionDetails sx={accordionDetailsStyles}>
-                    <p className={`${wix.className}`}>{service.summaryText}</p>
+                    <p className={`${wix.className} dark:text-pale`}>{service.summaryText}</p>
                     </AccordionDetails>
                 </Accordion>
         );

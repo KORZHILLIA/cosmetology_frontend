@@ -78,7 +78,7 @@ export default function SigninForm() {
         })} error={errors.password?.message} />
         <div className='mb-2 flex justify-between'>
             <Checkbox label='Remember me' register={register('isRemember')} />
-            <Link className={`${wix.className} text-sm md:text-lg leading-none underline underline-offset-2 decoration-[0.5px]`} href={'/auth/forgotpassword'}>Forgot password?</Link>
+            <Link className={`${wix.className} text-sm md:text-lg dark:text-pale leading-none underline underline-offset-2 decoration-[0.5px]`} href={'/auth/forgotpassword'}>Forgot password?</Link>
         </div>
         <Button type='submit' text='Sign in' styles={`${wix.className} py-[14px] px-[12px] font-semibold text-white text-lg lg:text-xl`} />
         {loading && <Spinner />}

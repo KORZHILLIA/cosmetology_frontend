@@ -2,15 +2,19 @@ import { useState, useCallback } from 'react';
 import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
 import { useMediaQuery } from '@mui/material';
 
-import googleMapOptions from '@/constants/googleMapOptions';
+import {googleMapOptions, darkGoogleMapOptions} from '@/constants/googleMapOptions';
 
 import Spinner from '../Spinner/Spinner';
 
 export default function Map() {
     const GOOGLE_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API as string;
     
-    const isTablet = useMediaQuery('(min-width: 768px)');
-    
+  const isTablet = useMediaQuery('(min-width: 768px)');
+  
+  const isColorSchemasSupported = !(window.matchMedia('(prefers-color-scheme: dark)').media === 'not all');
+  const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const finalGoogleMapOptions = (isColorSchemasSupported && isDarkMode) ? darkGoogleMapOptions : googleMapOptions;
+
 const containerStyle = {
     width: isTablet ? '440px' : '100%',
     height: '485px',
@@ -46,7 +50,7 @@ const { isLoaded } = useJsApiLoader({
       zoom={18}
       onLoad={onLoad}
       onUnmount={onUnmount}
-      options={googleMapOptions}
+      options={finalGoogleMapOptions}
     >
       <MarkerF position={center} />
     </GoogleMap>

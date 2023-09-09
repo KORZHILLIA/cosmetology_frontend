@@ -20,7 +20,7 @@ export default function Checkbox({ label, register, styles }: CheckboxProps) {
     const Icon = isChecked ? CheckboxChecked : CheckboxUnchecked;
 
     return (
-        <label className={`${wix.className} flex items-center gap-x-1 text-sm md:text-lg leading-none cursor-pointer ${styles}`} onChange={onLabelClick} >
+        <label className={`${wix.className} flex items-center gap-x-1 text-sm md:text-lg leading-none dark:text-pale cursor-pointer ${styles}`} onChange={onLabelClick} >
             <Icon className='w-[20px] md:w-[24px] h-[20px] md:h-[24px] fill-brand' />
             <span>{label}</span>
             <input className='invisible' type='checkbox' {...register} checked={isChecked} />

@@ -46,11 +46,11 @@ export default function AuthLayout({ children }: LayoutProps) {
         </div>
         <div>
             <h1 className="mb-2.5 text-4xl font-semibold text-center">{isSignup ? 'Create An Account' : 'Welcome Back'}</h1>
-            <p className="mb-7 text-lg text-center text-semiPale">Discover a better way of spandings with KorzhBeauty.</p>
+            <p className="mb-7 text-lg text-center text-semiPale dark:text-slate-200">Discover a better way of spandings with KorzhBeauty.</p>
             {!session && <GoogleBtn />}
             <span className={`${wix.className} relative block p-2 text-center text-lg bg-transparent
-            before:content-[''] before:absolute before:top-[24px] before:left-0 before:w-[calc(50%-20px)] before:h-[0.5px] before:bg-semiPale
-            after:content-[''] after:absolute after:top-[24px] after:right-0 after:w-[calc(50%-20px)] after:h-[0.5px] after:bg-semiPale`}
+            before:content-[''] before:absolute before:top-[24px] before:left-0 before:w-[calc(50%-20px)] before:h-[0.5px] before:bg-semiPale before:dark:bg-pale
+            after:content-[''] after:absolute after:top-[24px] after:right-0 after:w-[calc(50%-20px)] after:h-[0.5px] after:bg-semiPale after:dark:bg-pale`}
             >Or</span>
             {children}
             <AuthLayoutBottomLink />

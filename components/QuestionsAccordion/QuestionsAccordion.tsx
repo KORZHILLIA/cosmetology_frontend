@@ -23,19 +23,19 @@ export default function QuestionsAccordion() {
         const isRequiredPanel = expanded === `panel${service.id}`;
         const Icon = isRequiredPanel ? Minus : Plus;
         return (
-            <Accordion key={service.id} sx={{backgroundColor: isRequiredPanel ? '#1376F8' : 'transparent', border: 'none', boxShadow: 'none', borderRadius: '8px', marginBottom: '10px', overflow: 'hidden'}} expanded={isRequiredPanel} onChange={handleChange(`panel${service.id}`)}>
-                <AccordionSummary sx={{width: '95%', margin: '0 auto', padding: '8px', borderBottom: '1px solid #cfcfcf'}} expandIcon={<Icon className={`w-[16px] h-[16px] ${isRequiredPanel ? 'stroke-white' : 'fill-header'}`} />} aria-controls={`panel${service.id}bh-content`} id={`panel${service.id}bh-header`}>
-                    <p className={`${isRequiredPanel ? 'text-white' : 'text-header'} md:text-xl xl:text-2xl`}>{service.headerText}</p>
+            <Accordion key={service.id} id={`${isRequiredPanel ? 'faq-accordion-selected' : 'faq-accordion'}`} sx={{backgroundColor: isRequiredPanel ? '#1376F8' : 'transparent', border: 'none', boxShadow: 'none', borderRadius: '8px', marginBottom: '10px', overflow: 'hidden'}} expanded={isRequiredPanel} onChange={handleChange(`panel${service.id}`)}>
+                <AccordionSummary sx={{width: '95%', margin: '0 auto', padding: '8px', borderBottom: '1px solid #cfcfcf'}} expandIcon={<Icon className={`w-[16px] h-[16px] ${isRequiredPanel ? 'stroke-white dark:stroke-pale' : 'fill-header dark:fill-pale'}`} />} aria-controls={`panel${service.id}bh-content`} id={`panel${service.id}bh-header`}>
+                    <p className={`${isRequiredPanel ? 'text-white dark:text-pale' : 'text-header dark:text-pale'} md:text-xl xl:text-2xl`}>{service.headerText}</p>
                 </AccordionSummary>
                 <AccordionDetails sx={accordionDetailsStyles}>
-                    <p className={`${wix.className} text-white`}>{service.summaryText}</p>
+                    <p className={`${wix.className} text-white dark:text-pale`}>{service.summaryText}</p>
                     </AccordionDetails>
                 </Accordion>
         );
     });
 
     return (
-        <div className='lg:max-w-[630px] lg:mx-auto bg-white'>
+        <div className='lg:max-w-[630px] lg:mx-auto bg-white dark:bg-transparent'>
             {elements}
         </div>
     );

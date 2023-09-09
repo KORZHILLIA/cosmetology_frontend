@@ -13,7 +13,9 @@ interface CommonNavTabsProps {
 }
 
 export default function CommonNavTabs({ linksArr, pathName, router }: CommonNavTabsProps) {
-    const initialValue = linksArr.findIndex(link => link.address === pathName);
+    const initialValue = linksArr.findIndex(link => {
+        return link.address === pathName || pathName.split('/').filter(word => word).some(word => word === link.address.slice(1));
+    });
 
     const lastLinksArrIdx = linksArr.length;
 

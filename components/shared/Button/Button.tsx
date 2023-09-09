@@ -1,7 +1,7 @@
 interface ButtonProps {
   type: 'button' | 'submit';
   text: string;
-    centered?: boolean;
+  centered?: boolean;
   bgColor?: string;
   styles: string;
   onClick?: () => void;

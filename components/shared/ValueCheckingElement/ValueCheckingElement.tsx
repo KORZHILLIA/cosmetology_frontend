@@ -10,7 +10,7 @@ export default function ValueCheckingElement({ checkFunction, label }: ValueChec
     return (
         <div className='flex justify-start gap-x-2'>
                 {checkFunction() ? <Checkmark className='w-6 h-6 fill-green-400' /> : <Cross className='w-6 h-6 stroke-[#f25137] stroke-2' />}
-                <span>{label}</span>
+                <span className='dark:text-pale'>{label}</span>
             </div>
     );
 }

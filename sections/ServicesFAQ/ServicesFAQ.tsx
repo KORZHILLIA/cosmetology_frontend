@@ -5,7 +5,7 @@ import QuestionsAccordion from "@/components/QuestionsAccordion/QuestionsAccordi
 
 export default function ServicesFAQ() {
     return (
-        <Section styles="py-3 bg-white">
+        <Section styles="py-3 bg-white dark:bg-[#3a3c3c]">
             <SectionHeader styles="md:text-center" text="Frequently Ask Question" />
             <Paragraph styles="md:text-center" text="We use only the best quality materials on the market in order to provide the best products to our patients." />
             <QuestionsAccordion />
