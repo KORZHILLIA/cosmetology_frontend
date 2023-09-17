@@ -6,6 +6,8 @@ import {googleMapOptions, darkGoogleMapOptions} from '@/constants/googleMapOptio
 
 import Spinner from '../Spinner/Spinner';
 
+import Logo from '@/public/assets/svg/logo.svg';
+
 export default function Map() {
     const GOOGLE_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API as string;
     
@@ -19,7 +21,7 @@ const containerStyle = {
     width: isTablet ? '440px' : '100%',
     height: '485px',
     margin: '0 auto',
-    border: '2px solid #1376F8',
+    border: '2px solid #ef820f',
     borderRadius: '8px',
     };    
     
@@ -52,7 +54,7 @@ const { isLoaded } = useJsApiLoader({
       onUnmount={onUnmount}
       options={finalGoogleMapOptions}
     >
-      <MarkerF position={center} />
+      <MarkerF position={center} options={{icon: Logo}} />
     </GoogleMap>
   ) : (
     <Spinner />

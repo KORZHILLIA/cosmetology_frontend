@@ -1,0 +1,16 @@
+{
+    "nameLabel": "Ім'я",
+    "emailLabel": "E-mail",
+    "telegramLabel": "Telegram",
+    "phoneLabel": "Телефон",
+    "messageLabel": "Повідомлення",
+    "buttonLabel": "Надіслати",
+    "requiredLabel": "Обов'язкове поле",
+    "phoneErrorLabel": "Заповніть до кінця",
+    "emailErrorLabel": "Дотримуйтесь формату електронної пошти",
+    "telegramErrorLabel": "Від 5 до 32 символів",
+    "successSendLabel": "Повідомлення успішно відправлено",
+    "errorSendLabel": "Упс, щось пішло не так. Спробуйте пізніше",
+    "nameTooLongLabel": "До 20 символів",
+    "onlySpacesLabel": "Навіть не намагайтесь"
+}

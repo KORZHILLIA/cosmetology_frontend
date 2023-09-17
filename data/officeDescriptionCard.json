@@ -3,15 +3,15 @@
         {
             "id": 1,
             "icon": "location",
-            "headerText": "Office Address",
-            "infoText": "1441 Morris Ave, Union, NJ 07083",
+            "headerText": "Адреса",
+            "infoText": "54006 м. Миколаїв, вул. Потьомкінська, 29/1",
             "isLink": false,
             "href": ""
         },
         {
             "id": 2,
             "icon": "telephone",
-            "headerText": "Phone Number",
+            "headerText": "Телефон",
             "infoText": "+380(67) 662-12-20",
             "isLink": true,
             "href": "tel:+380676621220"
@@ -31,6 +31,14 @@
             "infoText": "@Korzh_Tetiana",
             "isLink": true,
             "href": "https://t.me/Korzh_Tetiana"
+        },
+        {
+            "id": 5,
+            "icon": "instagram",
+            "headerText": "Instagram",
+            "infoText": "@korzh._beauty",
+            "isLink": true,
+            "href": "https://www.instagram.com/korzh._beauty/"
         }
     ]
 }

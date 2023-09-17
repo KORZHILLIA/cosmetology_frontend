@@ -18,6 +18,8 @@ import Spinner from '@/components/shared/Spinner/Spinner';
 import User from '@/public/assets/svg/user.svg';
 import Envelope from '@/public/assets/svg/envelope.svg';
 
+import contactForm from '@/data/contactsForm.json';
+
 import { wix } from '@/public/fonts/fonts';
 
 export default function ContactForm() {
@@ -43,13 +45,13 @@ export default function ContactForm() {
         const isTelegramValueShort = telegramValue && telegramValue?.length < 6;
         if (noPhoneValue || isPhoneValueNotComplete || isTelegramValueShort) {
             if (noPhoneValue) {
-            setError('phone', { type: 'custom', message: 'Required' });
+            setError('phone', { type: 'custom', message: contactForm.requiredLabel });
         }
             if (isPhoneValueNotComplete) {
-            setError('phone', { type: 'custom', message: 'Please fill completely' });
+            setError('phone', { type: 'custom', message: contactForm.phoneErrorLabel });
         }
             if (isTelegramValueShort) {
-            setError('telegram', { type: 'custom', message: 'From 5 to 32 characters' });
+            setError('telegram', { type: 'custom', message: contactForm.telegramErrorLabel });
         }
             return;
         }
@@ -57,45 +59,45 @@ export default function ContactForm() {
         const { status } = await sendToTelegram(formData);
         setLoading(false);
         if (status === 200) {
-            notificate('success', 'Message successfully sent');
+            notificate('success', contactForm.successSendLabel);
             reset();
             resetField('phone');
             sessionStorage.removeItem(STORAGE_KEY);
         } else {
-            notificate('error', 'Something wrong, try later');
+            notificate('error', contactForm.errorSendLabel);
         }
     };
     
     return (<>
         <form className='w-full md:max-w-[440px] lg:min-w-[440px] mx-auto lg:m-0 pt-6 lg:p-6 lg:border lg:border-brand lg:rounded-lg flex flex-col lg:order-1 gap-y-1' onSubmit={handleSubmit(formSubmit)}>
-            <Input label='Name' type='text' Icon={User} register={register('name', {
-                required: 'Required',
+            <Input label={contactForm.nameLabel} type='text' Icon={User} register={register('name', {
+                required: contactForm.requiredLabel,
                 validate: {
                     testValue: (value: string) => {
-                        return value.trim().length <= 20 || 'Name too long';
+                        return value.trim().length <= 20 || contactForm.nameTooLongLabel;
                     },
                     isOnlySpaces: (value: string) => {
-                        return value.trim().length !== 0 || 'Not even try';
+                        return value.trim().length !== 0 || contactForm.onlySpacesLabel;
                     }
                 },
                 setValueAs: (value: string) => value.trim(),
             })} error={errors.name?.message} />
-            <Input label='Email' type='text' Icon={Envelope} register={register('email', {
+            <Input label={contactForm.emailLabel} type='text' Icon={Envelope} register={register('email', {
                 validate: {
                     testValue: (value: string | undefined) => {
                         const regexp = emailRegexp;
                         if (value) {
-                            return regexp.test(value.trim()) || 'Please follow format';
+                            return regexp.test(value.trim()) || contactForm.emailErrorLabel;
                         }
                         return true;
                     }
                 },
                 setValueAs: (value: string) => value.trim(),
             })} error={errors.email?.message} />
-            <MaskedInput name='telegram' type='text' label='Telegram' control={control} mask='@CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC' formatChars={formatChars} maskChar='' textPaleness={(value: string) => value?.length > 1} />
-            <MaskedInput name='phone' type='tel' label='Phone' control={control} mask='+380 (99) 999-99-99' maskChar='_' textPaleness={defineTelephoneInputTextPaleness} />
-            <TextArea label='Message' register={register('messageToSend', {
-                    required: 'Required',
+            <MaskedInput name='telegram' type='text' label={contactForm.telegramLabel} control={control} mask='@CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC' formatChars={formatChars} maskChar='' textPaleness={(value: string) => value?.length > 1} />
+            <MaskedInput name='phone' type='tel' label={contactForm.phoneLabel} control={control} mask='+380 (99) 999-99-99' maskChar='_' textPaleness={defineTelephoneInputTextPaleness} />
+            <TextArea label={contactForm.messageLabel} register={register('messageToSend', {
+                    required: contactForm.requiredLabel,
                 validate: {
                     testValue: (value: string) => {
                         return (value.length >= 10 && value.length <= 200) || 'From 10 to 200 characters'
@@ -103,7 +105,7 @@ export default function ContactForm() {
                 },
                 setValueAs: (value: string) => value.trim(),
                 })} error={errors.messageToSend?.message} />
-            <Button type='submit' text='Send' centered styles={`${wix.className} w-[270px] py-[14px] px-[12px] font-semibold text-white text-lg lg:text-xl`} />
+            <Button type='submit' text={contactForm.buttonLabel} centered styles={`${wix.className} w-[270px] py-[14px] px-[12px] font-semibold text-white text-lg lg:text-xl`} />
         </form>
         {loading && <Spinner />}
         </>

@@ -112,12 +112,13 @@ export const sendToTelegram = async (formData: ContactFormInputs) => {
   const chat_id = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID;
   const url = `https://api.telegram.org/bot${token}/sendMessage`;
 
-  const { name, phone, email, messageToSend } = formData;
+  const { name, phone, email, telegram, messageToSend } = formData;
 
   const text = `
   <b>Name: ${name}</b>
   <b>Phone: ${phone}</b>
-  <b>${email ? email : ''}</b>  
+  <b>Email: ${email ? email : '-'}</b>
+  <b>Telegram: ${telegram ? telegram : '-'}</b> 
   <b>${messageToSend}</b>`;
 
   const { data, status } = await axios.post(url, {

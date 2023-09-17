@@ -6,6 +6,7 @@ import Location from '@/public/assets/svg/location.svg';
 import Telephone from '@/public/assets/svg/telephone.svg';
 import Email from '@/public/assets/svg/mail.svg';
 import Telegram from '@/public/assets/svg/telegram.svg';
+import Instagram from '@/public/assets/svg/instagram.svg';
 
 export default function OfficeDescription() {
     const getIcon = (iconName: string) => {
@@ -18,6 +19,8 @@ export default function OfficeDescription() {
                 return Email;
             case 'telegram':
                 return Telegram;
+            case 'instagram':
+                return Instagram;
         }
     };
         
