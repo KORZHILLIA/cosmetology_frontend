@@ -110,6 +110,8 @@ div[id='nav-tabs'] .Mui-selected,
 div[id='nav-tabs'] .MuiButtonBase-root,
 div[id='nav-tabs-no-indicator'] .Mui-selected,
 div[id='nav-tabs-no-indicator'] .MuiButtonBase-root {
+  max-width: 140px;
+  padding: 10px;
   font-family: var(--font-wix);
 
   @media (prefers-color-scheme: dark) {

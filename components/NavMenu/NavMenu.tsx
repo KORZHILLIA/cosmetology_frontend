@@ -24,7 +24,7 @@ interface NavMenuProps {
 export default function NavMenu({ isVisible, toggleFunc }: NavMenuProps) {
     const router = useRouter();
     const pathName = router.pathname;
-    const isNotMobile = useMediaQuery('(min-width: 768px)');
+    const isNotMobile = useMediaQuery('(min-width: 1000px)');
 
     const { role } = useAppSelector(getAuth);
 
@@ -32,15 +32,26 @@ export default function NavMenu({ isVisible, toggleFunc }: NavMenuProps) {
     const signedLinksArr = !role ? commonLinksArr : commonNav.links.filter(link => link.id !== role);
 
     return (
-        <nav className={`${wix.className} ${isVisible ? 'right-0' : '-right-[100%]'} fixed md:static top-0 w-screen md:w-full h-screen md:h-auto flex justify-end md:justify-center md:items-center z-20 md:z-0 transition-all duration-100 md:transition-none`}>
-            <div onClick={toggleFunc} className='w-1/2 h-screen bg-slate-100/90 dark:bg-neutral-800/90 md:hidden'></div>
-            <div className='w-1/2 md:w-full h-full md:flex md:justify-around md:items-center py-14 md:p-0 bg-orange-100 dark:bg-neutral-700 md:dark:bg-neutral-800'>
+        // <nav className={`${wix.className} ${isVisible ? 'right-0' : '-right-[100%]'} fixed md:static top-0 w-screen md:w-full h-screen md:h-auto flex justify-end md:justify-center md:items-center z-20 md:z-0 transition-all duration-100 md:transition-none`}>
+        //     <div onClick={toggleFunc} className='w-1/2 h-screen bg-slate-100/90 dark:bg-neutral-800/90 md:hidden'></div>
+        //     <div className='w-1/2 md:w-full h-full md:flex md:justify-around md:items-center py-14 md:p-0 bg-orange-100 dark:bg-neutral-700 md:dark:bg-neutral-800'>
+        //         <AuthNav onClick={toggleFunc} notSignedArr={authNav.authBtns} adminArr={authNav.adminNav} userArr={authNav.userNav} />
+        //         {isNotMobile ? <CommonNavTabs linksArr={signedLinksArr} router={router} pathName={pathName} /> : <CommonNav linksArr={commonLinksArr} router={router} pathName={pathName} onClick={toggleFunc} />}
+        //     </div>
+        //     <div onClick={toggleFunc} className='absolute md:hidden top-3 right-3 w-10 h-10 p-2 flex items-center justify-center'>
+        //         <Cross className='w-10 h-10 fill-brand cursor-pointer' />
+        //     </div>
+        // </nav>
+                <nav className={`${wix.className} ${isVisible ? 'right-0' : '-right-[100%]'} fixed lg:static top-0 w-screen lg:w-full h-screen lg:h-auto flex justify-end lg:justify-center lg:items-center z-20 lg:z-0 transition-all duration-100 lg:transition-none`}>
+            <div onClick={toggleFunc} className='w-1/2 h-screen bg-slate-100/90 dark:bg-neutral-800/90 lg:hidden'></div>
+            <div className='w-1/2 lg:w-full h-full lg:flex lg:justify-around lg:items-center py-14 lg:p-0 bg-orange-100 dark:bg-neutral-700 lg:dark:bg-neutral-800'>
                 <AuthNav onClick={toggleFunc} notSignedArr={authNav.authBtns} adminArr={authNav.adminNav} userArr={authNav.userNav} />
                 {isNotMobile ? <CommonNavTabs linksArr={signedLinksArr} router={router} pathName={pathName} /> : <CommonNav linksArr={commonLinksArr} router={router} pathName={pathName} onClick={toggleFunc} />}
             </div>
-            <div onClick={toggleFunc} className='absolute md:hidden top-3 right-3 w-10 h-10 p-2 flex items-center justify-center'>
+            <div onClick={toggleFunc} className='absolute lg:hidden top-3 right-3 w-10 h-10 p-2 flex items-center justify-center'>
                 <Cross className='w-10 h-10 fill-brand cursor-pointer' />
             </div>
         </nav>
+
     );
 }

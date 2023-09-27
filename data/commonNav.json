@@ -2,27 +2,37 @@
     "links": [
         {
             "id": "home",
-            "text": "Home",
+            "text": "Головна",
             "address": "/"
         },
         {
             "id": "services",
-            "text": "Services",
+            "text": "Послуги",
             "address": "/services"
         },
         {
+            "id": "shop",
+            "text": "Крамничка",
+            "address": "/shop"
+        },
+        {
+            "id": "articles",
+            "text": "Корисна косметологія",
+            "address": "/articles"
+        },
+        {
             "id": "contacts",
-            "text": "Contacts",
+            "text": "Контакти",
             "address": "/contacts"
         },
         {
             "id": "admin",
-            "text": "Cabinet",
+            "text": "Кабінет",
             "address": "/cabinet"
         },
         {
             "id": "user",
-            "text": "Control Room",
+            "text": "Управління",
             "address": "/ctrlroom"
         }
     ]

@@ -21,7 +21,10 @@ export default function CommonNav({linksArr, router, pathName, onClick}: CommonN
     });
 
     return (
-            <ul className='pt-6 md:pt-0 flex flex-col md:flex-row justify-start md:justify-center items-start md:items-center gap-y-1 md:gap-y-0 md:gap-x-8 text-base md:text-2xl'>
+            // <ul className='pt-6 md:pt-0 flex flex-col md:flex-row justify-start md:justify-center items-start md:items-center gap-y-1 md:gap-y-0 md:gap-x-8 text-base md:text-2xl'>
+            //   {mobileElements}
+        // </ul>
+        <ul className='pt-6 lg:pt-0 flex flex-col lg:flex-row justify-start lg:justify-center items-start lg:items-center gap-y-1 lg:gap-y-0 md:gap-x-8 text-base md:text-2xl'>
               {mobileElements}
             </ul>
     );
