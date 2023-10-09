@@ -13,7 +13,7 @@ export default function About() {
         <Section styles="py-3" >
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between lg:gap-x-3">
                 <div className="lg:w-[60%]">
-                    <SectionHeader text={about.headerText} isUnderline />
+                    <SectionHeader text={about.headerText} isUnderline styles="max-w-[222px] sm:max-w-none lg:max-xl:max-w-[357px]" />
                     <Paragraph text={about.mainText1} />
                     <h3 className="mb-4 text-header dark:text-slate-200 text-2xl">{about.mainText2_1}<span className="text-brand">* </span>{ about.mainText2_2}</h3>
                     <Paragraph text={about.mainText3} />
