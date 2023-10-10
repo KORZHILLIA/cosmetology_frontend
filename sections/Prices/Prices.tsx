@@ -6,8 +6,8 @@ export default function Prices() {
     const tableContent = prices.tableContent.map(item => {
         return (
             <tr>
-                <td className='p-2 bg-pale md:text-xl'>{item.service}</td>
-                <td className='p-2 text-center bg-slate-200 md:text-xl'>{item.price}</td>
+                <td className='p-2 bg-pale dark:bg-neutral-800 dark:text-stone-300 md:text-xl'>{item.service}</td>
+                <td className='p-2 text-center bg-slate-200 dark:bg-slate-600 dark:text-stone-300 md:text-xl'>{item.price}</td>
             </tr>
         );
     })
