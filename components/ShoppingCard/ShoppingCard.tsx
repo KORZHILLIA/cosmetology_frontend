@@ -24,9 +24,9 @@ export default function ShoppingCard({headerText, shortText, fullText, course, p
 
     const clickHandler = () => router.push('/contacts');
     
-    const images = imageLinks.map(image => {
+    const images = imageLinks.map((image, idx) => {
       return (
-        <div className="keen-slider__slide">
+        <div key={`${idx}`} className="keen-slider__slide">
           <Image src={image} alt={headerText} />
         </div>
       );
